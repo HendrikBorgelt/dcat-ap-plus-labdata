@@ -9597,7 +9597,7 @@ classes:
     class_uri: qudt:Quantity
 metamodel_version: 1.7.0
 source_file: dcat_p_lab.yaml
-source_file_date: '2025-12-10T13:45:38'
+source_file_date: '2025-12-10T13:50:20'
 source_file_size: 3671
-generation_date: '2025-12-10T13:48:44'
+generation_date: '2025-12-10T13:52:58'
 

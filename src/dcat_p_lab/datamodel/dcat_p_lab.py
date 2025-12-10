@@ -1,5 +1,5 @@
 # Auto generated from dcat_p_lab.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-10T13:45:45
+# Generation date: 2025-12-10T13:49:31
 # Schema: chem-dcat-ap
 #
 # id: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
@@ -246,10 +246,6 @@ class ChemicalSubstanceId(MaterialEntityId):
     pass
 
 
-class PolymerId(ChemicalSubstanceId):
-    pass
-
-
 class StartingMaterialId(ChemicalSubstanceId):
     pass
 
@@ -259,6 +255,10 @@ class ReagentId(ChemicalSubstanceId):
 
 
 class ChemicalProductId(ChemicalSubstanceId):
+    pass
+
+
+class PolymerId(ChemicalSubstanceId):
     pass
 
 
@@ -2307,119 +2307,6 @@ class TimeInstant(SupportiveEntity):
 
 
 @dataclass(repr=False)
-class InChIKey(QualitativeAttribute):
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000059"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000059"
-    class_name: ClassVar[str] = "InChIKey"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChIKey
-
-    value: str = None
-
-@dataclass(repr=False)
-class InChi(QualitativeAttribute):
-    """
-    A structure descriptor which conforms to the InChI format specification.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000113"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000113"
-    class_name: ClassVar[str] = "InChi"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChi
-
-    value: str = None
-
-@dataclass(repr=False)
-class MolecularFormula(QualitativeAttribute):
-    """
-    A structure descriptor which identifies each constituent element by its chemical symbol and indicates the number
-    of atoms of each element found in each discrete molecule of that compound.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000042"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000042"
-    class_name: ClassVar[str] = "MolecularFormula"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MolecularFormula
-
-    value: str = None
-
-@dataclass(repr=False)
-class IUPACName(QualitativeAttribute):
-    """
-    A systematic name which is formulated according to the rules and recommendations for chemical nomenclature set out
-    by the International Union of Pure and Applied Chemistry (IUPAC).
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000107"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000107"
-    class_name: ClassVar[str] = "IUPACName"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.IUPACName
-
-    value: str = None
-
-@dataclass(repr=False)
-class SMILES(QualitativeAttribute):
-    """
-    A structure descriptor that denotes a molecular structure as a graph and conforms to the SMILES format
-    specification.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000018"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000018"
-    class_name: ClassVar[str] = "SMILES"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.SMILES
-
-    value: str = None
-
-@dataclass(repr=False)
-class Concentration(QuantitativeAttribute):
-    """
-    A QuantitativeAttribute of a ChemicalSubstance that represents the amount of a constituent divided by the volume
-    of the mixture.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHMO["0002820"]
-    class_class_curie: ClassVar[str] = "CHMO:0002820"
-    class_name: ClassVar[str] = "Concentration"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Concentration
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
-class AmountOfSubstance(QuantitativeAttribute):
-    """
-    The total amount of substance used in a ChemicalReaction.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
-    class_class_curie: ClassVar[str] = "qudt:Quantity"
-    class_name: ClassVar[str] = "AmountOfSubstance"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AmountOfSubstance
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
-class PHValue(QuantitativeAttribute):
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = SIO["001089"]
-    class_class_curie: ClassVar[str] = "SIO:001089"
-    class_name: ClassVar[str] = "PHValue"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PHValue
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
 class ChemicalReaction(Activity):
     """
     A process that leads to the transformation of one set of chemical substances to another.
@@ -2511,11 +2398,11 @@ class DissolvingSubstance(AgenticEntity):
     has_volume: Optional[Union[Union[dict, "Volume"], list[Union[dict, "Volume"]]]] = empty_list()
     has_density: Optional[Union[Union[dict, "Density"], list[Union[dict, "Density"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
-    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
+    has_concentration: Optional[Union[Union[dict, "Concentration"], list[Union[dict, "Concentration"]]]] = empty_list()
+    has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
     composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, "ChemicalEntity"]], list[Union[dict, "ChemicalEntity"]]]] = empty_dict()
     has_molar_equivalent: Optional[Union[Union[dict, "MolarEquivalent"], list[Union[dict, "MolarEquivalent"]]]] = empty_list()
-    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
+    has_amount: Optional[Union[Union[dict, "AmountOfSubstance"], list[Union[dict, "AmountOfSubstance"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2614,10 +2501,10 @@ class Catalyst(AgenticEntity):
     has_volume: Optional[Union[Union[dict, "Volume"], list[Union[dict, "Volume"]]]] = empty_list()
     has_density: Optional[Union[Union[dict, "Density"], list[Union[dict, "Density"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
-    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
+    has_concentration: Optional[Union[Union[dict, "Concentration"], list[Union[dict, "Concentration"]]]] = empty_list()
+    has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
     composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, "ChemicalEntity"]], list[Union[dict, "ChemicalEntity"]]]] = empty_dict()
-    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
+    has_amount: Optional[Union[Union[dict, "AmountOfSubstance"], list[Union[dict, "AmountOfSubstance"]]]] = empty_list()
     has_percentage_of_total: Optional[Union[Union[dict, "PercentageOfTotal"], list[Union[dict, "PercentageOfTotal"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2792,6 +2679,119 @@ class PercentageOfTotal(QuantitativeAttribute):
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "PercentageOfTotal"
     class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PercentageOfTotal
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class InChIKey(QualitativeAttribute):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000059"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000059"
+    class_name: ClassVar[str] = "InChIKey"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChIKey
+
+    value: str = None
+
+@dataclass(repr=False)
+class InChi(QualitativeAttribute):
+    """
+    A structure descriptor which conforms to the InChI format specification.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000113"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000113"
+    class_name: ClassVar[str] = "InChi"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChi
+
+    value: str = None
+
+@dataclass(repr=False)
+class MolecularFormula(QualitativeAttribute):
+    """
+    A structure descriptor which identifies each constituent element by its chemical symbol and indicates the number
+    of atoms of each element found in each discrete molecule of that compound.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000042"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000042"
+    class_name: ClassVar[str] = "MolecularFormula"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MolecularFormula
+
+    value: str = None
+
+@dataclass(repr=False)
+class IUPACName(QualitativeAttribute):
+    """
+    A systematic name which is formulated according to the rules and recommendations for chemical nomenclature set out
+    by the International Union of Pure and Applied Chemistry (IUPAC).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000107"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000107"
+    class_name: ClassVar[str] = "IUPACName"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.IUPACName
+
+    value: str = None
+
+@dataclass(repr=False)
+class SMILES(QualitativeAttribute):
+    """
+    A structure descriptor that denotes a molecular structure as a graph and conforms to the SMILES format
+    specification.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000018"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000018"
+    class_name: ClassVar[str] = "SMILES"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.SMILES
+
+    value: str = None
+
+@dataclass(repr=False)
+class Concentration(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute of a ChemicalSubstance that represents the amount of a constituent divided by the volume
+    of the mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHMO["0002820"]
+    class_class_curie: ClassVar[str] = "CHMO:0002820"
+    class_name: ClassVar[str] = "Concentration"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Concentration
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class AmountOfSubstance(QuantitativeAttribute):
+    """
+    The total amount of substance used in a ChemicalReaction.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "AmountOfSubstance"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AmountOfSubstance
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class PHValue(QuantitativeAttribute):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SIO["001089"]
+    class_class_curie: ClassVar[str] = "SIO:001089"
+    class_name: ClassVar[str] = "PHValue"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PHValue
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3037,21 +3037,6 @@ class ChemicalSubstance(MaterialEntity):
 
 
 @dataclass(repr=False)
-class Polymer(ChemicalSubstance):
-    """
-    A ChemicalSubstance that is composed of macromolecules of different kinds and which may be differentiated by
-    composition, length, degree of branching etc..
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEBI["60027"]
-    class_class_curie: ClassVar[str] = "CHEBI:60027"
-    class_name: ClassVar[str] = "Polymer"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Polymer
-
-    id: Union[str, PolymerId] = None
-
-@dataclass(repr=False)
 class StartingMaterial(ChemicalSubstance):
     """
     A ChemicalSubstance with that has a starting material role in a synthesis.
@@ -3129,6 +3114,21 @@ class ChemicalProduct(ChemicalSubstance):
 
         super().__post_init__(**kwargs)
 
+
+@dataclass(repr=False)
+class Polymer(ChemicalSubstance):
+    """
+    A ChemicalSubstance that is composed of macromolecules of different kinds and which may be differentiated by
+    composition, length, degree of branching etc..
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEBI["60027"]
+    class_class_curie: ClassVar[str] = "CHEBI:60027"
+    class_name: ClassVar[str] = "Polymer"
+    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Polymer
+
+    id: Union[str, PolymerId] = None
 
 @dataclass(repr=False)
 class MaterialSample(EvaluatedEntity):
@@ -3827,36 +3827,6 @@ slots.version_notes = Slot(uri=ADMS.versionNotes, name="version_notes", curie=AD
 slots.was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="was_generated_by", curie=PROV.curie('wasGeneratedBy'),
                    model_uri=CHEMDCATAP.was_generated_by, domain=None, range=Optional[str])
 
-slots.composed_of = Slot(uri=BFO['0000051'], name="composed_of", curie=BFO.curie('0000051'),
-                   model_uri=CHEMDCATAP.composed_of, domain=None, range=Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]])
-
-slots.has_concentration = Slot(uri=SIO['000008'], name="has_concentration", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_concentration, domain=None, range=Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]])
-
-slots.has_amount = Slot(uri=SIO['000008'], name="has_amount", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_amount, domain=None, range=Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]])
-
-slots.has_ph_value = Slot(uri=SIO['000008'], name="has_ph_value", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_ph_value, domain=None, range=Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]])
-
-slots.inchi = Slot(uri=SIO['000008'], name="inchi", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.inchi, domain=None, range=Optional[Union[Union[dict, InChi], list[Union[dict, InChi]]]])
-
-slots.inchikey = Slot(uri=SIO['000008'], name="inchikey", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.inchikey, domain=None, range=Optional[Union[Union[dict, InChIKey], list[Union[dict, InChIKey]]]])
-
-slots.smiles = Slot(uri=SIO['000008'], name="smiles", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.smiles, domain=None, range=Optional[Union[Union[dict, SMILES], list[Union[dict, SMILES]]]])
-
-slots.molecular_formula = Slot(uri=SIO['000008'], name="molecular_formula", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.molecular_formula, domain=None, range=Optional[Union[Union[dict, MolecularFormula], list[Union[dict, MolecularFormula]]]])
-
-slots.iupac_name = Slot(uri=SIO['000008'], name="iupac_name", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.iupac_name, domain=None, range=Optional[Union[Union[dict, IUPACName], list[Union[dict, IUPACName]]]])
-
-slots.has_molar_mass = Slot(uri=SIO['000008'], name="has_molar_mass", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_molar_mass, domain=None, range=Optional[Union[Union[dict, MolarMass], list[Union[dict, MolarMass]]]])
-
 slots.used_starting_material = Slot(uri=RO['0004009'], name="used_starting_material", curie=RO.curie('0004009'),
                    model_uri=CHEMDCATAP.used_starting_material, domain=None, range=Optional[Union[dict[Union[str, StartingMaterialId], Union[dict, StartingMaterial]], list[Union[dict, StartingMaterial]]]])
 
@@ -3889,6 +3859,36 @@ slots.has_percentage_of_total = Slot(uri=SIO['000008'], name="has_percentage_of_
 
 slots.has_reaction_step = Slot(uri=BFO['0000051'], name="has_reaction_step", curie=BFO.curie('0000051'),
                    model_uri=CHEMDCATAP.has_reaction_step, domain=None, range=Optional[Union[str, ChemicalReactionId]])
+
+slots.composed_of = Slot(uri=BFO['0000051'], name="composed_of", curie=BFO.curie('0000051'),
+                   model_uri=CHEMDCATAP.composed_of, domain=None, range=Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]])
+
+slots.has_concentration = Slot(uri=SIO['000008'], name="has_concentration", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.has_concentration, domain=None, range=Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]])
+
+slots.has_amount = Slot(uri=SIO['000008'], name="has_amount", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.has_amount, domain=None, range=Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]])
+
+slots.has_ph_value = Slot(uri=SIO['000008'], name="has_ph_value", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.has_ph_value, domain=None, range=Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]])
+
+slots.inchi = Slot(uri=SIO['000008'], name="inchi", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.inchi, domain=None, range=Optional[Union[Union[dict, InChi], list[Union[dict, InChi]]]])
+
+slots.inchikey = Slot(uri=SIO['000008'], name="inchikey", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.inchikey, domain=None, range=Optional[Union[Union[dict, InChIKey], list[Union[dict, InChIKey]]]])
+
+slots.smiles = Slot(uri=SIO['000008'], name="smiles", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.smiles, domain=None, range=Optional[Union[Union[dict, SMILES], list[Union[dict, SMILES]]]])
+
+slots.molecular_formula = Slot(uri=SIO['000008'], name="molecular_formula", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.molecular_formula, domain=None, range=Optional[Union[Union[dict, MolecularFormula], list[Union[dict, MolecularFormula]]]])
+
+slots.iupac_name = Slot(uri=SIO['000008'], name="iupac_name", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.iupac_name, domain=None, range=Optional[Union[Union[dict, IUPACName], list[Union[dict, IUPACName]]]])
+
+slots.has_molar_mass = Slot(uri=SIO['000008'], name="has_molar_mass", curie=SIO.curie('000008'),
+                   model_uri=CHEMDCATAP.has_molar_mass, domain=None, range=Optional[Union[Union[dict, MolarMass], list[Union[dict, MolarMass]]]])
 
 slots.alternative_label = Slot(uri=SKOS.altLabel, name="alternative_label", curie=SKOS.curie('altLabel'),
                    model_uri=CHEMDCATAP.alternative_label, domain=None, range=Optional[str])
@@ -4421,9 +4421,6 @@ slots.Software_has_part = Slot(uri=DCTERMS.hasPart, name="Software_has_part", cu
 slots.Software_other_identifier = Slot(uri=ADMS.identifier, name="Software_other_identifier", curie=ADMS.curie('identifier'),
                    model_uri=CHEMDCATAP.Software_other_identifier, domain=Software, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
-slots.Atom_rdf_type = Slot(uri=RDF.type, name="Atom_rdf_type", curie=RDF.curie('type'),
-                   model_uri=CHEMDCATAP.Atom_rdf_type, domain=Atom, range=Union[dict, DefinedTerm])
-
 slots.ChemicalReaction_has_temperature = Slot(uri=SIO['000008'], name="ChemicalReaction_has_temperature", curie=SIO.curie('000008'),
                    model_uri=CHEMDCATAP.ChemicalReaction_has_temperature, domain=ChemicalReaction, range=Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]])
 
@@ -4432,6 +4429,9 @@ slots.ChemicalReaction_has_pressure = Slot(uri=SIO['000008'], name="ChemicalReac
 
 slots.ChemicalReaction_related_resource = Slot(uri=DCTERMS.relation, name="ChemicalReaction_related_resource", curie=DCTERMS.curie('relation'),
                    model_uri=CHEMDCATAP.ChemicalReaction_related_resource, domain=ChemicalReaction, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, Resource]], list[Union[dict, Resource]]]])
+
+slots.Atom_rdf_type = Slot(uri=RDF.type, name="Atom_rdf_type", curie=RDF.curie('type'),
+                   model_uri=CHEMDCATAP.Atom_rdf_type, domain=Atom, range=Union[dict, DefinedTerm])
 
 slots.MaterialEntity_has_part = Slot(uri=BFO['0000051'], name="MaterialEntity_has_part", curie=BFO.curie('0000051'),
                    model_uri=CHEMDCATAP.MaterialEntity_has_part, domain=MaterialEntity, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]])
