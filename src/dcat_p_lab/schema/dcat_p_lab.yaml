@@ -59,7 +59,6 @@ default_range: string
 imports:
   - linkml:types
   - dcatapplus:dcat_ap_plus
-  - chemical_entities_ap
   - chemical_reaction_ap
 
 classes:
