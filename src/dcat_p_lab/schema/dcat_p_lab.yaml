@@ -86,3 +86,40 @@ classes:
     is_a: Surrounding
     class_uri: ENVO:01001405
     description: A facility that provides controlled conditions in which scientific or technological research, experiments, and measurement may be performed.
+
+
+  LabSample:
+    is_a: MaterialSample
+    class_uri: OBI:0000747
+    description: see MaterialSample
+
+  MaterialCombinationProcess:
+    is_a: EvaluatedActivity
+    class_uri: OBI:0000652
+
+  StirringProcess:
+    is_a: EvaluatedActivity
+    class_uri: CHMO:0002774
+
+  TemperaturChangingProcess:
+    is_a: EvaluatedActivity
+    class_uri: CHMO:0002774
+
+  RestingProcess:
+    is_a: EvaluatedActivity
+    class_uri: OBI:0000045
+
+  SeparationProcess:
+    is_a: EvaluatedActivity
+    class_uri: OBI:0600014
+
+  WashingProcess:
+    is_a: EvaluatedActivity
+    class_uri: OBI:0000653
+
+  ProcessRepetitionStep:
+    is_a: EvaluatedActivity
+    class_uri: OBI:0000303
+
+
+  
