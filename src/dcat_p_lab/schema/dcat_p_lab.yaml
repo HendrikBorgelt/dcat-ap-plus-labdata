@@ -121,5 +121,221 @@ classes:
     is_a: EvaluatedActivity
     class_uri: OBI:0000303
 
+  QuantitativeAttribute:
+    name: QuantitativeAttribute
+    description: A quantifiable piece of information that is attributed to an Entity,
+      Activity or AgenticEntity.
+    in_subset:
+    - domain_agnostic_core
+    mixins:
+    - ClassifierMixin
+    slots:
+    - title
+    - description
+    - value
+    slot_usage:
+      value:
+        name: value
+        description: The slot to provide the literal value of the QuantitativeAttribute.
+        range: float
+        required: true
+    attributes:
+      has_quantity_type:
+        name: has_quantity_type
+        description: The type of quality that is quantifiable according to the QUDT
+          ontology.
+        slot_uri: qudt:hasQuantityKind
+        range: DefinedTerm
+        bindings:
+        - range: QUDTQuantityKindEnum
+          obligation_level: RECOMMENDED
+          binds_value_of: id
+          description: Binds the type of a quantifiable attribute to a QUDT Quantity
+            Kind instance from the QUDT Quantity Kind vocabulary.
+        required: true
+      unit:
+        name: unit
+        slot_uri: qudt:unit
+        range: DefinedTerm
+        bindings:
+        - range: QUDTUnitEnum
+          obligation_level: RECOMMENDED
+          binds_value_of: id
+          description: Restricts the allowable defined terms to the QUDT Unit vocabulary.
+        recommended: true
+    class_uri: qudt:Quantity
 
+Duration:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+pH_Value:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+StirringSpeed:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+Temperature:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+Pressure:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+Flowrate:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+Mass:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+Concentration:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: A physical quantity that quantitatively expresses the attribute of hotness or coldness.
+    close_mappings:
+      - PATO:0000146
+    #slot_usage:
+      #has_quantity_type:
+        #ifabsent: http://qudt.org/vocab/quantitykind/Temperature
+
+
+slots:
+  has_material:
+    name: has_material
+    slot_uri: test:test
+  added_dropwise:
+    name: added_dropwise
   
+  
+  has_quantity_type:
+    name: has_quantity_type
+    description: The type of quality that is quantifiable according to the QUDT
+      ontology.
+    slot_uri: qudt:hasQuantityKind
+    range: DefinedTerm
+    bindings:
+    - range: QUDTQuantityKindEnum
+      obligation_level: RECOMMENDED
+      binds_value_of: id
+      description: Binds the type of a quantifiable attribute to a QUDT Quantity
+        Kind instance from the QUDT Quantity Kind vocabulary.
+      required: true
+  has_duration:
+    name: has_duration
+    range: Duration
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Temperature
+    description: The slot to provide the Temperature of a MaterialEntity.
+  has_pH_value:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Temperature
+    description: The slot to provide the Temperature of a MaterialEntity.
+  has_stirringSpeed:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Temperature
+    description: The slot to provide the stirringspeed
+  has_temperature:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Temperature
+    description: The slot to provide the temperature
+  has_pressure:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Pressure
+    description: The slot to provide the pressure
+  has_flowrate:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Flowrate
+    description: The slot to provide the flowrate
+  has_mass:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Mass
+    description: The slot to provide the mass
+
+
+enums:
+  QUDTQuantityKindEnum:
+    name: QUDTQuantityKindEnum
+    implements:
+    - owl:NamedIndividual
+    description: Possible kinds of quantifiable attribute types provided as QUDT QualityKind
+      instances.
+    todos:
+    - 'Dynamic enums (https://linkml.io/linkml/schemas/enums.html#dynamic-enums) should
+      be used to constrain the range of the type slot instead of using the default
+      DefinedTerm as range. This will be done in profiles of this schema where we
+      define Activity subclasses, e.g. NMRSpectroscopy. seeAlso: https://github.com/linkml/linkml-model/blob/main/tests/input/examples/schema_definition-enum_bindings-1.yaml'
+    in_subset:
+    - domain_agnostic_core
+    reachable_from:
+      source_ontology: http://qudt.org/2.1/vocab/quantitykind
+      source_nodes:
+      - qudt:QuantityKind
+      relationship_types:
+      - rdf:type
+      is_direct: true
+  QUDTUnitEnum:
+    name: QUDTUnitEnum
+    implements:
+    - owl:NamedIndividual
+    description: Possible kinds of QUDT unit instances.
+    todos:
+    - 'Dynamic enums (https://linkml.io/linkml/schemas/enums.html#dynamic-enums) should
+      be used to constrain the range of the type slot instead of using the default
+      DefinedTerm as range. This will be done in profiles of this schema where we
+      define Activity subclasses, e.g. NMRSpectroscopy. seeAlso: https://github.com/linkml/linkml-model/blob/main/tests/input/examples/schema_definition-enum_bindings-1.yaml'
+    in_subset:
+    - domain_agnostic_core
+    reachable_from:
+      source_ontology: https://qudt.org/vocab/unit/
+      source_nodes:
+      - qudt:QuantityKind
+      relationship_types:
+      - rdf:type
+      is_direct: true
