@@ -1,0 +1,9 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/test/stir-001
+has_step_duration:
+- value: 2.0
+  has_quantity_type: http://qudt.org/vocab/quantitykind/Time
+  unit: https://qudt.org/vocab/unit/HR
+has_stirring_speed:
+- value: 500.0
+  has_quantity_type: http://qudt.org/vocab/quantitykind/AngularVelocity
+  unit: https://qudt.org/vocab/unit/REV-PER-MIN
