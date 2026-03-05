@@ -1,0 +1,21 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0011
+type: LabSynthesisActivity
+title: Synthesis Sequence 0011
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0011/step_001
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 100.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0011/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0011/step_002
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 12.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0011/step_001

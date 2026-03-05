@@ -1,0 +1,106 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006
+type: LabSynthesisActivity
+title: Synthesis Sequence 0006
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_002
+  type: AtmosphereSettingStep
+  has_atmosphere_type: inert
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/mat_003
+    type: MaterialSample
+    title: 1-Chlorodocosane
+    has_mass:
+      type: Mass
+      value: 2.5
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 7.1
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/mat_004
+    type: MaterialSample
+    title: N,N Dimethylformamide (DMF)
+    has_volume:
+      type: Volume
+      value: 32.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/mat_005
+    type: MaterialSample
+    title: (N,N Dimethylaminopropyl)trimethoxysilane
+    has_volume:
+      type: Volume
+      value: 1.6
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+    has_amount:
+      type: AmountOfSubstance
+      value: 7.1
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_006
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 120.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_007
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 48.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_008
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_009
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: evaporation
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_010
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/mat_010
+    type: MaterialSample
+    title: Hexane
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_009

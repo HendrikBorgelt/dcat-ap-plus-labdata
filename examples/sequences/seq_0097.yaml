@@ -1,0 +1,125 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097
+type: LabSynthesisActivity
+title: Synthesis Sequence 0097
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_002
+    type: MaterialSample
+    title: (NH4)2SiF6
+    has_mass:
+      type: Mass
+      value: 8.86
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_003
+    type: MaterialSample
+    title: TMAdamOH
+    has_mass:
+      type: Mass
+      value: 26.258
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_004
+    type: MaterialSample
+    title: Milli-Q water
+    has_mass:
+      type: Mass
+      value: 5.85
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_005
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_006
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_006
+    type: MaterialSample
+    title: EDA
+    has_mass:
+      type: Mass
+      value: 11.956
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_007
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_008
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_008
+    type: MaterialSample
+    title: tin(IV) chloride
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_009
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_010
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/mat_010
+    type: MaterialSample
+    title: Si-CHA seeds
+    has_mass:
+      type: Mass
+      value: 0.149
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_011
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 3.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0097/step_010

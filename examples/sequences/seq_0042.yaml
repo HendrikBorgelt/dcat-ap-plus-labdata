@@ -1,0 +1,147 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042
+type: LabSynthesisActivity
+title: Synthesis Sequence 0042
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_002
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/mat_003
+    type: MaterialSample
+    title: Manganese acetate
+    has_concentration:
+      type: Concentration
+      value: 99.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/mat_004
+    type: MaterialSample
+    title: TEOS
+    has_concentration:
+      type: Concentration
+      value: 98.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/mat_005
+    type: MaterialSample
+    title: TPAOH
+    has_concentration:
+      type: Concentration
+      value: 40.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_006
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 1.0
+    unit:
+      id: https://qudt.org/vocab/unit/DAY
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_007
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 175.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_008
+  type: AtmosphereSettingStep
+  has_atmosphere_type: autogeneous
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_009
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 1.0
+    unit:
+      id: https://qudt.org/vocab/unit/DAY
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_010
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: centrifugation
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_011
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/mat_011
+    type: MaterialSample
+    title: distilled water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_012
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 60.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_013
+  type: WaitingStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_014
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 500.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_015
+  type: AtmosphereSettingStep
+  has_atmosphere_type: air
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_016
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 5.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0042/step_015

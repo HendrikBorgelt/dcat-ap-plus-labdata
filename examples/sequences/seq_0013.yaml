@@ -1,0 +1,78 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013
+type: LabSynthesisActivity
+title: Synthesis Sequence 0013
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/mat_002
+    type: MaterialSample
+    title: Water
+    has_mass:
+      type: Mass
+      value: 94.5
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/mat_003
+    type: MaterialSample
+    title: Sodium Hydroxide
+    has_mass:
+      type: Mass
+      value: 8.4
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/mat_004
+    type: MaterialSample
+    title: Sodium Aluminum Oxide
+    has_mass:
+      type: Mass
+      value: 2.88
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_005
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 15.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_006
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/mat_006
+    type: MaterialSample
+    title: Aqueous colloidal silica sol
+    has_mass:
+      type: Mass
+      value: 22.5
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 40.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0013/step_005

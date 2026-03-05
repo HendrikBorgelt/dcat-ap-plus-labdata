@@ -1,0 +1,187 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008
+type: LabSynthesisActivity
+title: Synthesis Sequence 0008
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/mat_002
+    type: MaterialSample
+    title: Deionized Water
+    has_mass:
+      type: Mass
+      value: 80.79
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/mat_003
+    type: MaterialSample
+    title: TPAOH
+    has_mass:
+      type: Mass
+      value: 65.08
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 25.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/mat_004
+    type: MaterialSample
+    title: Tetraethyl Orthosilicate
+    has_mass:
+      type: Mass
+      value: 50.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_005
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 40.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  has_stirring_speed:
+    type: StirringSpeed
+    value: 500.0
+    unit:
+      id: https://qudt.org/vocab/unit/REV-PER-MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_006
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_007
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/mat_007
+    type: MaterialSample
+    title: T-butyl oxide
+    has_mass:
+      type: Mass
+      value: 2.04
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_008
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/mat_008
+    type: MaterialSample
+    title: Isopropyl alcohol
+    has_mass:
+      type: Mass
+      value: 12.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_009
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  has_stirring_speed:
+    type: StirringSpeed
+    value: 500.0
+    unit:
+      id: https://qudt.org/vocab/unit/REV-PER-MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_010
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 90.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_011
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_012
+  type: TemperatureChangeStep
+  temperature_target_type: COOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_013
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 100.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_014
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_015
+  type: GrindingStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_017
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 550.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_018
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_018
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0008/step_017

@@ -1,0 +1,218 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104
+type: LabSynthesisActivity
+title: Synthesis Sequence 0104
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_002
+    type: MaterialSample
+    title: Manganese(II) nitrate
+    has_mass:
+      type: Mass
+      value: 0.078
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 0.5
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_003
+    type: MaterialSample
+    title: Tetraethyl Orthosilicate (TEOS)
+    has_mass:
+      type: Mass
+      value: 10.42
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 50.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_004
+    type: MaterialSample
+    title: Deionized water
+    has_volume:
+      type: Volume
+      value: 30.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+    has_amount:
+      type: AmountOfSubstance
+      value: 942.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_005
+    type: MaterialSample
+    title: H2SO4
+    has_concentration:
+      type: Concentration
+      value: 15.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  has_ph_value:
+    type: PHValue
+    value: 1.0
+    unit:
+      id: https://qudt.org/vocab/unit/PH
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_006
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 20.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_007
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 12.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_008
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_008
+    type: MaterialSample
+    title: (Al)2(SO4)3·18H2O
+    has_mass:
+      type: Mass
+      value: 0.67
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_009
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_009
+    type: MaterialSample
+    title: Sodium hydroxide
+    has_concentration:
+      type: Concentration
+      value: 15.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  added_dropwise: true
+  has_ph_value:
+    type: PHValue
+    value: 10.0
+    unit:
+      id: https://qudt.org/vocab/unit/PH
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_010
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_011
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 180.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_012
+  type: AtmosphereSettingStep
+  has_atmosphere_type: autogeneous
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_013
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 72.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_014
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_015
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/mat_015
+    type: MaterialSample
+    title: Water
+    has_volume:
+      type: Volume
+      value: 300.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_016
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 80.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_017
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 12.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0104/step_016

@@ -1,0 +1,326 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045
+type: LabSynthesisActivity
+title: Synthesis Sequence 0045
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_001
+  type: SolutionPreparationStep
+  title: Solution I
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_002
+    type: MaterialSample
+    title: NaOH
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_003
+    type: MaterialSample
+    title: NaAlO2
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_004
+    type: MaterialSample
+    title: H2O
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_005
+  type: SolutionPreparationStep
+  title: Solution II
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_006
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_006
+    type: MaterialSample
+    title: Ludox
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_007
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_007
+    type: MaterialSample
+    title: Template
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_008
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_008
+    type: MaterialSample
+    title: H2O
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_009
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_010
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_010
+    type: MaterialSample
+    title: Solution II
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_011
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_011
+    type: MaterialSample
+    title: Solution I
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_012
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_012
+    type: MaterialSample
+    title: H2SO4
+  has_ph_value:
+    type: PHValue
+    value: 9.0
+    unit:
+      id: https://qudt.org/vocab/unit/PH
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_013
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_013
+    type: MaterialSample
+    title: MCS
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_014
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 4.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_015
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 180.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_016
+  type: AtmosphereSettingStep
+  has_atmosphere_type: autogeneous
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_017
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 48.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_016
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_018
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_018
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_017
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_019
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_019
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_019
+    type: MaterialSample
+    title: distilled water
+  uses_washing_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_018
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_020
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_020
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 105.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_019
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_021
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_021
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_020
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_022
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_022
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 550.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_021
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_023
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_023
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_022
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_024
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_024
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_023
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_025
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_025
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_025
+    type: MaterialSample
+    title: NH4Cl solution
+    has_volume:
+      type: Volume
+      value: 10.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+    has_concentration:
+      type: Concentration
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/mol L 1
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_024
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_026
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_026
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 80.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_025
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_027
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_027
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_027
+    type: MaterialSample
+    title: sample
+    has_mass:
+      type: Mass
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_026
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/repeat_001
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_028
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/repeat_001
+  type: RepetitionBlock
+  repetition_count: 3
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_028
+    type: StirringStep
+    has_step_duration:
+      type: Duration
+      value: 4.0
+      unit:
+        id: https://qudt.org/vocab/unit/HR
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_027
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_029
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_027
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_029
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_029
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/repeat_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_030
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_030
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/mat_030
+    type: MaterialSample
+    title: distilled water
+  uses_washing_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_029
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_031
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_031
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 105.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_030
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_032
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_032
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_031
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_033
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_033
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 550.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_032
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_034
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_034
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0045/step_033

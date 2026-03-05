@@ -1,0 +1,260 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098
+type: LabSynthesisActivity
+title: Synthesis Sequence 0098
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_001
+  type: SolutionPreparationStep
+  title: EuMOF solution
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_002
+    type: MaterialSample
+    title: EuMOF
+    has_mass:
+      type: Mass
+      value: 40.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliGM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_003
+    type: MaterialSample
+    title: Ethanol
+    has_volume:
+      type: Volume
+      value: 4.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_004
+  type: SolutionPreparationStep
+  title: PVP alcohol solution
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_005
+    type: MaterialSample
+    title: PVP
+    has_mass:
+      type: Mass
+      value: 80.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliGM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_006
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_006
+    type: MaterialSample
+    title: Ethanol
+    has_volume:
+      type: Volume
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_007
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_008
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_008
+    type: MaterialSample
+    title: EuMOF solution
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_009
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_009
+    type: MaterialSample
+    title: PVP alcohol solution
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_010
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_011
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 4.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_012
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: centrifugation
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_001
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_001
+  type: RepetitionBlock
+  repetition_count: 4
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_013
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_013
+      type: MaterialSample
+      title: Anhydrous ethanol
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_012
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_014
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_014
+  type: TemperatureChangeStep
+  temperature_target_type: HEAT
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_015
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_016
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_016
+    type: MaterialSample
+    title: products
+    has_mass:
+      type: Mass
+      value: 20.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliGM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_017
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_017
+    type: MaterialSample
+    title: Methanol
+    has_volume:
+      type: Volume
+      value: 10.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_016
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_018
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_018
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_018
+    type: MaterialSample
+    title: Zn(NO3)3·6H2O methanol solution
+    has_volume:
+      type: Volume
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+    has_concentration:
+      type: Concentration
+      value: 0.27
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_017
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_019
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_019
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 10.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_018
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_020
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_020
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_020
+    type: MaterialSample
+    title: 2-MI methanol solution
+    has_volume:
+      type: Volume
+      value: 3.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+    has_concentration:
+      type: Concentration
+      value: 0.65
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_019
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_021
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_021
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_020
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_022
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_022
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: centrifugation
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_021
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_002
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_023
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_002
+  type: RepetitionBlock
+  repetition_count: 4
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_023
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_023
+      type: MaterialSample
+      title: Anhydrous ethanol
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_022
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_024
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_022
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_024
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_024
+  type: TemperatureChangeStep
+  temperature_target_type: HEAT
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/repeat_002

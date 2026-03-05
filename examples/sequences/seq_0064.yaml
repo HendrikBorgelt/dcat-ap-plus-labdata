@@ -1,0 +1,96 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064
+type: LabSynthesisActivity
+title: Synthesis Sequence 0064
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/mat_002
+    type: MaterialSample
+    title: Hydrochloric acid
+    has_concentration:
+      type: Concentration
+      value: 0.1
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-L
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_003
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 323.0
+    unit:
+      id: https://qudt.org/vocab/unit/K
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_004
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 3.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_005
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: centrifugation
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_006
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/mat_006
+    type: MaterialSample
+    title: DI water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_007
+  type: TemperatureChangeStep
+  temperature_target_type: HEAT
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_008
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_009
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 823.0
+    unit:
+      id: https://qudt.org/vocab/unit/K
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_010
+  type: AtmosphereSettingStep
+  has_atmosphere_type: air
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_011
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0064/step_010

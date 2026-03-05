@@ -1,0 +1,120 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054
+type: LabSynthesisActivity
+title: Synthesis Sequence 0054
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/mat_002
+    type: MaterialSample
+    title: Tetrapropylammonium hydroxide
+    has_concentration:
+      type: Concentration
+      value: 40.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/mat_003
+    type: MaterialSample
+    title: deionized water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/mat_004
+    type: MaterialSample
+    title: tetraethylorthosilicate
+    has_concentration:
+      type: Concentration
+      value: 98.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_005
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_006
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_007
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/mat_007
+    type: MaterialSample
+    title: Pt/Al2O3 particles
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_008
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 100.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_009
+  type: AtmosphereSettingStep
+  has_atmosphere_type: autogeneous
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_010
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  has_stirring_speed:
+    type: StirringSpeed
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/REV-PER-MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_011
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_012
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_013
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/mat_013
+    type: MaterialSample
+    title: DI water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0054/step_012

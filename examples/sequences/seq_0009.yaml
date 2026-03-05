@@ -1,0 +1,98 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009
+type: LabSynthesisActivity
+title: Synthesis Sequence 0009
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/mat_002
+    type: MaterialSample
+    title: Sodium Hydroxide
+    has_mass:
+      type: Mass
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/mat_003
+    type: MaterialSample
+    title: Deionized Water
+    has_mass:
+      type: Mass
+      value: 10.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/mat_004
+    type: MaterialSample
+    title: Sodium aluminate
+    has_mass:
+      type: Mass
+      value: 0.418
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/mat_005
+    type: MaterialSample
+    title: Sodium metasilicate
+    has_mass:
+      type: Mass
+      value: 4.79
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  added_dropwise: true
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_006
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_007
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0009/step_006
