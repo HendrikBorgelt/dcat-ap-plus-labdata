@@ -1,0 +1,5 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/test/wait-002
+has_step_duration:
+- value: 30.0
+  has_quantity_type: http://qudt.org/vocab/quantitykind/Time
+  unit: https://qudt.org/vocab/unit/MIN

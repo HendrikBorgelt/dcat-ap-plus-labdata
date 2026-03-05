@@ -1,0 +1,2 @@
+# Missing required 'id' field — this should fail validation.
+temperature_target_type: COOL

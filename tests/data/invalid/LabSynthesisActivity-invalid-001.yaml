@@ -1,0 +1,2 @@
+# Missing required 'id' field — this should fail validation.
+title: Activity without a required id

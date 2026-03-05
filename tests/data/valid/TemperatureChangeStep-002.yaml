@@ -1,0 +1,5 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/test/temp-002
+has_target_temperature:
+- value: 65.0
+  has_quantity_type: http://qudt.org/vocab/quantitykind/Temperature
+  unit: https://qudt.org/vocab/unit/DEG_C
