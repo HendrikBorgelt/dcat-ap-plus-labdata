@@ -1,9 +1,10 @@
 # Auto generated from dcat_p_lab.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-10T13:49:31
-# Schema: chem-dcat-ap
+# Generation date: 2026-03-05T16:54:14
+# Schema: dcat-p-lab
 #
-# id: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
-# description: This is an extension of the DCAT Application Profile PLUS LinkML schema. It is intended to be used by NFDI4Chem & NFDI4Cat as a core that can further be extended in profiles/schemas to provide chemistry specific specific metadata for a dataset.
+# id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+# description: An extension of ChemDCAT-AP describing laboratory synthesis and sample
+#   preparation workflow metadata for ELN-style datasets.
 # license: CC-BY 4.0
 
 import dataclasses
@@ -56,17 +57,16 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Date, Decimal, Float, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import Decimal, URIorCURIE, XSDDate
+from linkml_runtime.linkml_model.types import Boolean, Date, Decimal, Float, Integer, String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, Decimal, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
-version = "0.0.0.post341.dev0+b70db99"
+version = "0.0.1"
 
 # Namespaces
 AFE = CurieNamespace('AFE', 'http://purl.allotrope.org/ontologies/equipment#AFE_')
 AFP = CurieNamespace('AFP', 'http://purl.allotrope.org/ontologies/process#AFP_')
 AFR = CurieNamespace('AFR', 'http://purl.allotrope.org/ontologies/result#AFR_')
-AFRL = CurieNamespace('AFRL', 'http://purl.allotrope.org/ontologies/role#AFRL_')
 AFX = CurieNamespace('AFX', 'http://purl.allotrope.org/ontologies/property#AFX_')
 BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 CHEBI = CurieNamespace('CHEBI', 'http://purl.obolibrary.org/obo/CHEBI_')
@@ -74,11 +74,9 @@ CHEMINF = CurieNamespace('CHEMINF', 'http://semanticscience.org/resource/CHEMINF
 CHMO = CurieNamespace('CHMO', 'http://purl.obolibrary.org/obo/CHMO_')
 EDAM = CurieNamespace('EDAM', 'http://edamontology.org/data_')
 ENVO = CurieNamespace('ENVO', 'http://purl.obolibrary.org/obo/ENVO_')
-FOODON = CurieNamespace('FOODON', 'http://purl.obolibrary.org/obo/FOODON_')
 IAO = CurieNamespace('IAO', 'http://purl.obolibrary.org/obo/IAO_')
 MOP = CurieNamespace('MOP', 'http://purl.obolibrary.org/obo/MOP_')
 NCIT = CurieNamespace('NCIT', 'http://purl.obolibrary.org/obo/NCIT_')
-NMR = CurieNamespace('NMR', 'http://nmrML.org/nmrCV#NMR:')
 OBI = CurieNamespace('OBI', 'http://purl.obolibrary.org/obo/OBI_')
 PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
 PROCO = CurieNamespace('PROCO', 'http://purl.obolibrary.org/obo/PROCO_')
@@ -86,20 +84,16 @@ REX = CurieNamespace('REX', 'http://purl.obolibrary.org/obo/REX_')
 RO = CurieNamespace('RO', 'http://purl.obolibrary.org/obo/RO_')
 RXNO = CurieNamespace('RXNO', 'http://purl.obolibrary.org/obo/RXNO_')
 SIO = CurieNamespace('SIO', 'http://semanticscience.org/resource/SIO_')
-T4FS = CurieNamespace('T4FS', 'http://purl.obolibrary.org/obo/T4FS_')
 VOC4CAT = CurieNamespace('VOC4CAT', 'https://w3id.org/nfdi4cat/voc4cat_')
 ADMS = CurieNamespace('adms', 'http://www.w3.org/ns/adms#')
-BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/vocab/')
-CHEMDCATAP = CurieNamespace('chemdcatap', 'https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/')
 DCAT = CurieNamespace('dcat', 'http://www.w3.org/ns/dcat#')
 DCATAP = CurieNamespace('dcatap', 'http://data.europa.eu/r5r/')
 DCATAP_PLUS = CurieNamespace('dcatap_plus', 'https://w3id.org/nfdi-de/dcat-ap-plus/')
 DCATAPPLUS = CurieNamespace('dcatapplus', 'https://nfdi-de.github.io/dcat-ap-plus/latest/schema/')
+DCATPLAB = CurieNamespace('dcatplab', 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
-DOI = CurieNamespace('doi', 'https://doi.org/')
 ELI = CurieNamespace('eli', 'http://data.europa.eu/eli/ontology#')
 EPOS = CurieNamespace('epos', 'https://www.epos-eu.org/epos-dcat-ap#')
-EX = CurieNamespace('ex', 'http://example.org/')
 FOAF = CurieNamespace('foaf', 'http://xmlns.com/foaf/0.1/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 LOCN = CurieNamespace('locn', 'http://www.w3.org/ns/locn#')
@@ -112,12 +106,11 @@ RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 SKOS = CurieNamespace('skos', 'http://www.w3.org/2004/02/skos/core#')
-SOSA = CurieNamespace('sosa', 'http://www.w3.org/ns/sosa/')
 SPDX = CurieNamespace('spdx', 'http://spdx.org/rdf/terms#')
 TIME = CurieNamespace('time', 'http://www.w3.org/2006/time#')
 VCARD = CurieNamespace('vcard', 'http://www.w3.org/2006/vcard/ns#')
 XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
-DEFAULT_ = CHEMDCATAP
+DEFAULT_ = DCATPLAB
 
 
 # Types
@@ -126,7 +119,7 @@ class Duration(str):
     type_class_uri = XSD["duration"]
     type_class_curie = "xsd:duration"
     type_name = "duration"
-    type_model_uri = CHEMDCATAP.Duration
+    type_model_uri = DCATPLAB.Duration
 
 
 class HexBinary(str):
@@ -134,7 +127,7 @@ class HexBinary(str):
     type_class_uri = XSD["hexBinary"]
     type_class_curie = "xsd:hexBinary"
     type_name = "hexBinary"
-    type_model_uri = CHEMDCATAP.HexBinary
+    type_model_uri = DCATPLAB.HexBinary
 
 
 class NonNegativeInteger(int):
@@ -142,7 +135,7 @@ class NonNegativeInteger(int):
     type_class_uri = XSD["nonNegativeInteger"]
     type_class_curie = "xsd:nonNegativeInteger"
     type_name = "nonNegativeInteger"
-    type_model_uri = CHEMDCATAP.NonNegativeInteger
+    type_model_uri = DCATPLAB.NonNegativeInteger
 
 
 # Class references
@@ -155,6 +148,10 @@ class AgenticEntityId(URIorCURIE):
 
 
 class DataGeneratingActivityId(ActivityId):
+    pass
+
+
+class LabSynthesisActivityId(DataGeneratingActivityId):
     pass
 
 
@@ -183,6 +180,50 @@ class EntityId(URIorCURIE):
 
 
 class EvaluatedActivityId(ActivityId):
+    pass
+
+
+class LabSynthesisStepId(EvaluatedActivityId):
+    pass
+
+
+class SolutionPreparationStepId(LabSynthesisStepId):
+    pass
+
+
+class MaterialAdditionStepId(LabSynthesisStepId):
+    pass
+
+
+class StirringStepId(LabSynthesisStepId):
+    pass
+
+
+class TemperatureChangeStepId(LabSynthesisStepId):
+    pass
+
+
+class AtmosphereSettingStepId(LabSynthesisStepId):
+    pass
+
+
+class WaitingStepId(LabSynthesisStepId):
+    pass
+
+
+class SeparationStepId(LabSynthesisStepId):
+    pass
+
+
+class WashingStepId(LabSynthesisStepId):
+    pass
+
+
+class GrindingStepId(LabSynthesisStepId):
+    pass
+
+
+class RepetitionBlockId(LabSynthesisStepId):
     pass
 
 
@@ -246,6 +287,10 @@ class ChemicalSubstanceId(MaterialEntityId):
     pass
 
 
+class PolymerId(ChemicalSubstanceId):
+    pass
+
+
 class StartingMaterialId(ChemicalSubstanceId):
     pass
 
@@ -258,19 +303,11 @@ class ChemicalProductId(ChemicalSubstanceId):
     pass
 
 
-class PolymerId(ChemicalSubstanceId):
-    pass
-
-
 class MaterialSampleId(EvaluatedEntityId):
     pass
 
 
-class SubstanceSampleId(MaterialSampleId):
-    pass
-
-
-class PolymerSampleId(SubstanceSampleId):
+class IntermediateSolutionId(MaterialSampleId):
     pass
 
 
@@ -284,7 +321,7 @@ class Activity(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Activity"]
     class_class_curie: ClassVar[str] = "prov:Activity"
     class_name: ClassVar[str] = "Activity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Activity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Activity
 
     id: Union[str, ActivityId] = None
     title: Optional[Union[str, list[str]]] = empty_list()
@@ -358,7 +395,7 @@ class Agent(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = FOAF["Agent"]
     class_class_curie: ClassVar[str] = "foaf:Agent"
     class_name: ClassVar[str] = "Agent"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Agent
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Agent
 
     name: Union[str, list[str]] = None
     type: Optional[Union[dict, "Concept"]] = None
@@ -386,7 +423,7 @@ class AgenticEntity(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Agent"]
     class_class_curie: ClassVar[str] = "prov:Agent"
     class_name: ClassVar[str] = "AgenticEntity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AgenticEntity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AgenticEntity
 
     id: Union[str, AgenticEntityId] = None
     title: Optional[str] = None
@@ -448,7 +485,7 @@ class Catalogue(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["Catalog"]
     class_class_curie: ClassVar[str] = "dcat:Catalog"
     class_name: ClassVar[str] = "Catalogue"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Catalogue
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Catalogue
 
     description: Union[str, list[str]] = None
     publisher: Union[dict, Agent] = None
@@ -555,7 +592,7 @@ class CatalogueRecord(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["CatalogRecord"]
     class_class_curie: ClassVar[str] = "dcat:CatalogRecord"
     class_name: ClassVar[str] = "CatalogueRecord"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.CatalogueRecord
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.CatalogueRecord
 
     modification_date: Union[str, XSDDate] = None
     primary_topic: Union[dict, Any] = None
@@ -611,7 +648,7 @@ class Checksum(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SPDX["Checksum"]
     class_class_curie: ClassVar[str] = "spdx:Checksum"
     class_name: ClassVar[str] = "Checksum"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Checksum
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Checksum
 
     algorithm: Union[dict, "ChecksumAlgorithm"] = None
     checksum_value: str = None
@@ -640,7 +677,7 @@ class ClassifierMixin(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCATAP_PLUS["ClassifierMixin"]
     class_class_curie: ClassVar[str] = "dcatap_plus:ClassifierMixin"
     class_name: ClassVar[str] = "ClassifierMixin"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ClassifierMixin
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ClassifierMixin
 
     type: Optional[Union[dict, "DefinedTerm"]] = None
     rdf_type: Optional[Union[dict, "DefinedTerm"]] = None
@@ -666,7 +703,7 @@ class DataGeneratingActivity(Activity):
     class_class_uri: ClassVar[URIRef] = PROV["Activity"]
     class_class_curie: ClassVar[str] = "prov:Activity"
     class_name: ClassVar[str] = "DataGeneratingActivity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DataGeneratingActivity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DataGeneratingActivity
 
     id: Union[str, DataGeneratingActivityId] = None
     evaluated_entity: Optional[Union[dict[Union[str, EvaluatedEntityId], Union[dict, "EvaluatedEntity"]], list[Union[dict, "EvaluatedEntity"]]]] = empty_dict()
@@ -694,6 +731,43 @@ class DataGeneratingActivity(Activity):
 
 
 @dataclass(repr=False)
+class LabSynthesisActivity(DataGeneratingActivity):
+    """
+    A DataGeneratingActivity that describes a laboratory synthesis or sample preparation workflow, consisting of an
+    ordered sequence of LabSynthesisSteps.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0000070"]
+    class_class_curie: ClassVar[str] = "OBI:0000070"
+    class_name: ClassVar[str] = "LabSynthesisActivity"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.LabSynthesisActivity
+
+    id: Union[str, LabSynthesisActivityId] = None
+    has_synthesis_step: Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, "LabSynthesisStep"]], list[Union[dict, "LabSynthesisStep"]]]] = empty_dict()
+    evaluated_entity: Optional[Union[dict[Union[str, MaterialSampleId], Union[dict, "MaterialSample"]], list[Union[dict, "MaterialSample"]]]] = empty_dict()
+    had_output_entity: Optional[Union[dict[Union[str, MaterialSampleId], Union[dict, "MaterialSample"]], list[Union[dict, "MaterialSample"]]]] = empty_dict()
+    occurred_in: Optional[Union[dict, "Laboratory"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, LabSynthesisActivityId):
+            self.id = LabSynthesisActivityId(self.id)
+
+        self._normalize_inlined_as_list(slot_name="has_synthesis_step", slot_type=LabSynthesisStep, key_name="id", keyed=True)
+
+        self._normalize_inlined_as_list(slot_name="evaluated_entity", slot_type=MaterialSample, key_name="id", keyed=True)
+
+        self._normalize_inlined_as_list(slot_name="had_output_entity", slot_type=MaterialSample, key_name="id", keyed=True)
+
+        if self.occurred_in is not None and not isinstance(self.occurred_in, Laboratory):
+            self.occurred_in = Laboratory(**as_dict(self.occurred_in))
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class DataAnalysis(DataGeneratingActivity):
     """
     An Activity that evaluates the data produced by another Activity.
@@ -703,7 +777,7 @@ class DataAnalysis(DataGeneratingActivity):
     class_class_uri: ClassVar[URIRef] = PROV["Activity"]
     class_class_curie: ClassVar[str] = "prov:Activity"
     class_name: ClassVar[str] = "DataAnalysis"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DataAnalysis
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DataAnalysis
 
     id: Union[str, DataAnalysisId] = None
     evaluated_entity: Optional[Union[dict[Union[str, AnalysisSourceDataId], Union[dict, "AnalysisSourceData"]], list[Union[dict, "AnalysisSourceData"]]]] = empty_dict()
@@ -729,7 +803,7 @@ class DataService(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["DataService"]
     class_class_curie: ClassVar[str] = "dcat:DataService"
     class_name: ClassVar[str] = "DataService"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DataService
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DataService
 
     endpoint_URL: Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]] = empty_dict()
     title: Union[str, list[str]] = None
@@ -816,7 +890,7 @@ class Dataset(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["Dataset"]
     class_class_curie: ClassVar[str] = "dcat:Dataset"
     class_name: ClassVar[str] = "Dataset"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Dataset
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Dataset
 
     id: Union[str, DatasetId] = None
     description: Union[str, list[str]] = None
@@ -1009,7 +1083,7 @@ class AnalysisDataset(Dataset):
     class_class_uri: ClassVar[URIRef] = DCAT["Dataset"]
     class_class_curie: ClassVar[str] = "dcat:Dataset"
     class_name: ClassVar[str] = "AnalysisDataset"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AnalysisDataset
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AnalysisDataset
 
     id: Union[str, AnalysisDatasetId] = None
     description: Union[str, list[str]] = None
@@ -1037,7 +1111,7 @@ class DatasetSeries(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["DatasetSeries"]
     class_class_curie: ClassVar[str] = "dcat:DatasetSeries"
     class_name: ClassVar[str] = "DatasetSeries"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DatasetSeries
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DatasetSeries
 
     description: Union[str, list[str]] = None
     title: Union[str, list[str]] = None
@@ -1103,7 +1177,7 @@ class DefinedTerm(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = SCHEMA["DefinedTerm"]
     class_class_curie: ClassVar[str] = "schema:DefinedTerm"
     class_name: ClassVar[str] = "DefinedTerm"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DefinedTerm
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DefinedTerm
 
     id: Union[str, DefinedTermId] = None
     title: Optional[str] = None
@@ -1135,7 +1209,7 @@ class Device(AgenticEntity):
     class_class_uri: ClassVar[URIRef] = PROV["Agent"]
     class_class_curie: ClassVar[str] = "prov:Agent"
     class_name: ClassVar[str] = "Device"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Device
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Device
 
     id: Union[str, DeviceId] = None
     has_part: Optional[Union[dict[Union[str, DeviceId], Union[dict, "Device"]], list[Union[dict, "Device"]]]] = empty_dict()
@@ -1166,7 +1240,7 @@ class Distribution(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["Distribution"]
     class_class_curie: ClassVar[str] = "dcat:Distribution"
     class_name: ClassVar[str] = "Distribution"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Distribution
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Distribution
 
     access_URL: Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]] = empty_dict()
     access_service: Optional[Union[Union[dict, DataService], list[Union[dict, DataService]]]] = empty_list()
@@ -1282,7 +1356,7 @@ class Entity(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Entity"]
     class_class_curie: ClassVar[str] = "prov:Entity"
     class_name: ClassVar[str] = "Entity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Entity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Entity
 
     id: Union[str, EntityId] = None
     title: Optional[str] = None
@@ -1342,7 +1416,7 @@ class EvaluatedActivity(Activity):
     class_class_uri: ClassVar[URIRef] = PROV["Activity"]
     class_class_curie: ClassVar[str] = "prov:Activity"
     class_name: ClassVar[str] = "EvaluatedActivity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.EvaluatedActivity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.EvaluatedActivity
 
     id: Union[str, EvaluatedActivityId] = None
     other_identifier: Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]] = empty_list()
@@ -1361,6 +1435,387 @@ class EvaluatedActivity(Activity):
 
 
 @dataclass(repr=False)
+class LabSynthesisStep(EvaluatedActivity):
+    """
+    An abstract base class for individual steps in a laboratory synthesis workflow.
+    Step ordering model:
+    - Backward pointer: had_input_activity (prov:wasInformedBy) — step B declares step A
+    as its predecessor. Range is narrowed to LabSynthesisStep via slot_usage.
+    - Forward pointer: has_successor_step (dcatplab:hasSuccessorStep) — step A points
+    forward to step B.
+    - RepetitionBlock: the step preceding the block has has_successor_step pointing to
+    BOTH the RepetitionBlock AND the first inner repeated step, enabling type-based
+    queries without traversing the wrapper. The last inner step's has_successor_step
+    points out of the block to the next non-repeated step.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["LabSynthesisStep"]
+    class_class_curie: ClassVar[str] = "dcatplab:LabSynthesisStep"
+    class_name: ClassVar[str] = "LabSynthesisStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.LabSynthesisStep
+
+    id: Union[str, LabSynthesisStepId] = None
+    has_successor_step: Optional[Union[Union[str, LabSynthesisStepId], list[Union[str, LabSynthesisStepId]]]] = empty_list()
+    had_input_activity: Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, "LabSynthesisStep"]], list[Union[dict, "LabSynthesisStep"]]]] = empty_dict()
+    has_part: Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, "LabSynthesisStep"]], list[Union[dict, "LabSynthesisStep"]]]] = empty_dict()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.has_successor_step, list):
+            self.has_successor_step = [self.has_successor_step] if self.has_successor_step is not None else []
+        self.has_successor_step = [v if isinstance(v, LabSynthesisStepId) else LabSynthesisStepId(v) for v in self.has_successor_step]
+
+        self._normalize_inlined_as_list(slot_name="had_input_activity", slot_type=LabSynthesisStep, key_name="id", keyed=True)
+
+        self._normalize_inlined_as_list(slot_name="has_part", slot_type=LabSynthesisStep, key_name="id", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class SolutionPreparationStep(LabSynthesisStep):
+    """
+    A step that initialises a new solution or reaction vessel (NewSolution action). The prepared intermediate product
+    is represented as an IntermediateSolution.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["SolutionPreparationStep"]
+    class_class_curie: ClassVar[str] = "dcatplab:SolutionPreparationStep"
+    class_name: ClassVar[str] = "SolutionPreparationStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SolutionPreparationStep
+
+    id: Union[str, SolutionPreparationStepId] = None
+    has_initial_material: Optional[Union[str, MaterialEntityId]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SolutionPreparationStepId):
+            self.id = SolutionPreparationStepId(self.id)
+
+        if self.has_initial_material is not None and not isinstance(self.has_initial_material, MaterialEntityId):
+            self.has_initial_material = MaterialEntityId(self.has_initial_material)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class MaterialAdditionStep(LabSynthesisStep):
+    """
+    A step in which a material is added to the reaction mixture (Add action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0000652"]
+    class_class_curie: ClassVar[str] = "OBI:0000652"
+    class_name: ClassVar[str] = "MaterialAdditionStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MaterialAdditionStep
+
+    id: Union[str, MaterialAdditionStepId] = None
+    has_added_material: Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]] = empty_dict()
+    added_dropwise: Optional[Union[bool, Bool]] = None
+    has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
+    has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MaterialAdditionStepId):
+            self.id = MaterialAdditionStepId(self.id)
+
+        self._normalize_inlined_as_list(slot_name="has_added_material", slot_type=MaterialEntity, key_name="id", keyed=True)
+
+        if self.added_dropwise is not None and not isinstance(self.added_dropwise, Bool):
+            self.added_dropwise = Bool(self.added_dropwise)
+
+        if not isinstance(self.has_step_duration, list):
+            self.has_step_duration = [self.has_step_duration] if self.has_step_duration is not None else []
+        self.has_step_duration = [v if isinstance(v, Duration) else Duration(**as_dict(v)) for v in self.has_step_duration]
+
+        if not isinstance(self.has_ph_value, list):
+            self.has_ph_value = [self.has_ph_value] if self.has_ph_value is not None else []
+        self.has_ph_value = [v if isinstance(v, PHValue) else PHValue(**as_dict(v)) for v in self.has_ph_value]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class StirringStep(LabSynthesisStep):
+    """
+    A step in which the reaction mixture is stirred (Stir action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHMO["0002774"]
+    class_class_curie: ClassVar[str] = "CHMO:0002774"
+    class_name: ClassVar[str] = "StirringStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.StirringStep
+
+    id: Union[str, StirringStepId] = None
+    has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
+    has_stirring_speed: Optional[Union[Union[dict, "StirringSpeed"], list[Union[dict, "StirringSpeed"]]]] = empty_list()
+    has_temperature: Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]] = empty_list()
+    has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, StirringStepId):
+            self.id = StirringStepId(self.id)
+
+        if not isinstance(self.has_step_duration, list):
+            self.has_step_duration = [self.has_step_duration] if self.has_step_duration is not None else []
+        self.has_step_duration = [v if isinstance(v, Duration) else Duration(**as_dict(v)) for v in self.has_step_duration]
+
+        if not isinstance(self.has_stirring_speed, list):
+            self.has_stirring_speed = [self.has_stirring_speed] if self.has_stirring_speed is not None else []
+        self.has_stirring_speed = [v if isinstance(v, StirringSpeed) else StirringSpeed(**as_dict(v)) for v in self.has_stirring_speed]
+
+        if not isinstance(self.has_temperature, list):
+            self.has_temperature = [self.has_temperature] if self.has_temperature is not None else []
+        self.has_temperature = [v if isinstance(v, Temperature) else Temperature(**as_dict(v)) for v in self.has_temperature]
+
+        if not isinstance(self.has_pressure, list):
+            self.has_pressure = [self.has_pressure] if self.has_pressure is not None else []
+        self.has_pressure = [v if isinstance(v, Pressure) else Pressure(**as_dict(v)) for v in self.has_pressure]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class TemperatureChangeStep(LabSynthesisStep):
+    """
+    A step that changes the temperature of the reaction mixture (ChangeTemperature action). Use has_target_temperature
+    for numeric targets (e.g. "65 °C", "338 K") and temperature_target_type for qualitative targets (Cool, Heat, room
+    temperature, Reflux). These are mutually exclusive; populate only one per instance.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["TemperatureChangeStep"]
+    class_class_curie: ClassVar[str] = "dcatplab:TemperatureChangeStep"
+    class_name: ClassVar[str] = "TemperatureChangeStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.TemperatureChangeStep
+
+    id: Union[str, TemperatureChangeStepId] = None
+    has_target_temperature: Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]] = empty_list()
+    temperature_target_type: Optional[Union[str, "TemperatureTargetTypeEnum"]] = None
+    uses_microwave: Optional[Union[bool, Bool]] = None
+    has_heat_ramp: Optional[Union[Union[dict, "HeatRamp"], list[Union[dict, "HeatRamp"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TemperatureChangeStepId):
+            self.id = TemperatureChangeStepId(self.id)
+
+        if not isinstance(self.has_target_temperature, list):
+            self.has_target_temperature = [self.has_target_temperature] if self.has_target_temperature is not None else []
+        self.has_target_temperature = [v if isinstance(v, Temperature) else Temperature(**as_dict(v)) for v in self.has_target_temperature]
+
+        if self.temperature_target_type is not None and not isinstance(self.temperature_target_type, TemperatureTargetTypeEnum):
+            self.temperature_target_type = TemperatureTargetTypeEnum(self.temperature_target_type)
+
+        if self.uses_microwave is not None and not isinstance(self.uses_microwave, Bool):
+            self.uses_microwave = Bool(self.uses_microwave)
+
+        if not isinstance(self.has_heat_ramp, list):
+            self.has_heat_ramp = [self.has_heat_ramp] if self.has_heat_ramp is not None else []
+        self.has_heat_ramp = [v if isinstance(v, HeatRamp) else HeatRamp(**as_dict(v)) for v in self.has_heat_ramp]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class AtmosphereSettingStep(LabSynthesisStep):
+    """
+    A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["AtmosphereSettingStep"]
+    class_class_curie: ClassVar[str] = "dcatplab:AtmosphereSettingStep"
+    class_name: ClassVar[str] = "AtmosphereSettingStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AtmosphereSettingStep
+
+    id: Union[str, AtmosphereSettingStepId] = None
+    has_atmosphere_type: Optional[Union[str, "AtmosphereTypeEnum"]] = None
+    has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
+    has_flow_rate: Optional[Union[Union[dict, "FlowRate"], list[Union[dict, "FlowRate"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AtmosphereSettingStepId):
+            self.id = AtmosphereSettingStepId(self.id)
+
+        if self.has_atmosphere_type is not None and not isinstance(self.has_atmosphere_type, AtmosphereTypeEnum):
+            self.has_atmosphere_type = AtmosphereTypeEnum(self.has_atmosphere_type)
+
+        if not isinstance(self.has_pressure, list):
+            self.has_pressure = [self.has_pressure] if self.has_pressure is not None else []
+        self.has_pressure = [v if isinstance(v, Pressure) else Pressure(**as_dict(v)) for v in self.has_pressure]
+
+        if not isinstance(self.has_flow_rate, list):
+            self.has_flow_rate = [self.has_flow_rate] if self.has_flow_rate is not None else []
+        self.has_flow_rate = [v if isinstance(v, FlowRate) else FlowRate(**as_dict(v)) for v in self.has_flow_rate]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class WaitingStep(LabSynthesisStep):
+    """
+    A step in which the reaction mixture is allowed to rest for a defined duration (Wait action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0000045"]
+    class_class_curie: ClassVar[str] = "OBI:0000045"
+    class_name: ClassVar[str] = "WaitingStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.WaitingStep
+
+    id: Union[str, WaitingStepId] = None
+    has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, WaitingStepId):
+            self.id = WaitingStepId(self.id)
+
+        if not isinstance(self.has_step_duration, list):
+            self.has_step_duration = [self.has_step_duration] if self.has_step_duration is not None else []
+        self.has_step_duration = [v if isinstance(v, Duration) else Duration(**as_dict(v)) for v in self.has_step_duration]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class SeparationStep(LabSynthesisStep):
+    """
+    A step in which phases of the reaction mixture are separated (Separate action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0600014"]
+    class_class_curie: ClassVar[str] = "OBI:0600014"
+    class_name: ClassVar[str] = "SeparationStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SeparationStep
+
+    id: Union[str, SeparationStepId] = None
+    phase_to_keep: Optional[str] = None
+    uses_separation_method: Optional[Union[dict[Union[str, DefinedTermId], Union[dict, DefinedTerm]], list[Union[dict, DefinedTerm]]]] = empty_dict()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SeparationStepId):
+            self.id = SeparationStepId(self.id)
+
+        if self.phase_to_keep is not None and not isinstance(self.phase_to_keep, str):
+            self.phase_to_keep = str(self.phase_to_keep)
+
+        self._normalize_inlined_as_list(slot_name="uses_separation_method", slot_type=DefinedTerm, key_name="id", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class WashingStep(LabSynthesisStep):
+    """
+    A step in which the separated material is washed with a solvent (Wash action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0000653"]
+    class_class_curie: ClassVar[str] = "OBI:0000653"
+    class_name: ClassVar[str] = "WashingStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.WashingStep
+
+    id: Union[str, WashingStepId] = None
+    uses_washing_material: Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]] = empty_dict()
+    uses_washing_method: Optional[Union[dict[Union[str, DefinedTermId], Union[dict, DefinedTerm]], list[Union[dict, DefinedTerm]]]] = empty_dict()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, WashingStepId):
+            self.id = WashingStepId(self.id)
+
+        self._normalize_inlined_as_list(slot_name="uses_washing_material", slot_type=MaterialEntity, key_name="id", keyed=True)
+
+        self._normalize_inlined_as_list(slot_name="uses_washing_method", slot_type=DefinedTerm, key_name="id", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class GrindingStep(LabSynthesisStep):
+    """
+    A step in which the material is ground or milled (Grind action).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHMO["0001652"]
+    class_class_curie: ClassVar[str] = "CHMO:0001652"
+    class_name: ClassVar[str] = "GrindingStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.GrindingStep
+
+    id: Union[str, GrindingStepId] = None
+    has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, GrindingStepId):
+            self.id = GrindingStepId(self.id)
+
+        if not isinstance(self.has_step_duration, list):
+            self.has_step_duration = [self.has_step_duration] if self.has_step_duration is not None else []
+        self.has_step_duration = [v if isinstance(v, Duration) else Duration(**as_dict(v)) for v in self.has_step_duration]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class RepetitionBlock(LabSynthesisStep):
+    """
+    A wrapper block grouping one or more steps that are executed a number of times (Repeat action). The has_part slot
+    contains the repeated steps in order.
+    Ordering convention:
+    - The step immediately preceding the block sets has_successor_step to point to BOTH
+    the RepetitionBlock and the first inner step.
+    - The last inner step's has_successor_step points out of the block.
+    - repetition_count is the TOTAL number of executions (e.g. 4 if source data says
+    "Repeat 3 additional times"). Document the convention per dataset.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = OBI["0000303"]
+    class_class_curie: ClassVar[str] = "OBI:0000303"
+    class_name: ClassVar[str] = "RepetitionBlock"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.RepetitionBlock
+
+    id: Union[str, RepetitionBlockId] = None
+    repetition_count: Optional[int] = None
+    has_part: Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, LabSynthesisStep]], list[Union[dict, LabSynthesisStep]]]] = empty_dict()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RepetitionBlockId):
+            self.id = RepetitionBlockId(self.id)
+
+        if self.repetition_count is not None and not isinstance(self.repetition_count, int):
+            self.repetition_count = int(self.repetition_count)
+
+        self._normalize_inlined_as_list(slot_name="has_part", slot_type=LabSynthesisStep, key_name="id", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class EvaluatedEntity(Entity):
     """
     An Entity that is being evaluated in a DataGeneratingActivity.
@@ -1370,7 +1825,7 @@ class EvaluatedEntity(Entity):
     class_class_uri: ClassVar[URIRef] = PROV["Entity"]
     class_class_curie: ClassVar[str] = "prov:Entity"
     class_name: ClassVar[str] = "EvaluatedEntity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.EvaluatedEntity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.EvaluatedEntity
 
     id: Union[str, EvaluatedEntityId] = None
     was_generated_by: Optional[Union[dict[Union[str, ActivityId], Union[dict, Activity]], list[Union[dict, Activity]]]] = empty_dict()
@@ -1409,7 +1864,7 @@ class AnalysisSourceData(EvaluatedEntity):
     class_class_uri: ClassVar[URIRef] = PROV["Entity"]
     class_class_curie: ClassVar[str] = "prov:Entity"
     class_name: ClassVar[str] = "AnalysisSourceData"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AnalysisSourceData
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AnalysisSourceData
 
     id: Union[str, AnalysisSourceDataId] = None
     was_generated_by: Optional[Union[dict[Union[str, DataGeneratingActivityId], Union[dict, DataGeneratingActivity]], list[Union[dict, DataGeneratingActivity]]]] = empty_dict()
@@ -1434,7 +1889,7 @@ class Kind(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = VCARD["Kind"]
     class_class_curie: ClassVar[str] = "vcard:Kind"
     class_name: ClassVar[str] = "Kind"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Kind
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Kind
 
 
 @dataclass(repr=False)
@@ -1447,7 +1902,7 @@ class Location(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCTERMS["Location"]
     class_class_curie: ClassVar[str] = "dcterms:Location"
     class_name: ClassVar[str] = "Location"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Location
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Location
 
     bbox: Optional[str] = None
     centroid: Optional[str] = None
@@ -1477,7 +1932,7 @@ class Plan(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Plan"]
     class_class_curie: ClassVar[str] = "prov:Plan"
     class_name: ClassVar[str] = "Plan"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Plan
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Plan
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1510,7 +1965,7 @@ class QualitativeAttribute(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Entity"]
     class_class_curie: ClassVar[str] = "prov:Entity"
     class_name: ClassVar[str] = "QualitativeAttribute"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.QualitativeAttribute
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.QualitativeAttribute
 
     value: str = None
     title: Optional[str] = None
@@ -1549,7 +2004,7 @@ class QuantitativeAttribute(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "QuantitativeAttribute"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.QuantitativeAttribute
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.QuantitativeAttribute
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -1589,6 +2044,70 @@ class QuantitativeAttribute(YAMLRoot):
 
 
 @dataclass(repr=False)
+class Duration(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing a time duration for a synthesis step (e.g. "8 h", "30 min"). Recommended QUDT
+    quantitykind: Time.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "Duration"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Duration
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class StirringSpeed(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing the rate of stirring (e.g. "500 rpm"). Recommended QUDT quantitykind:
+    AngularVelocity.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "StirringSpeed"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.StirringSpeed
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class FlowRate(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing a volumetric flow rate of gas (e.g. "10 mL/min"). Recommended QUDT
+    quantitykind: VolumeFlowRate.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "FlowRate"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.FlowRate
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class HeatRamp(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing the rate of temperature increase (e.g. "5 °C/min"). Recommended QUDT
+    quantitykind: TemperatureRate.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "HeatRamp"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.HeatRamp
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
 class Relationship(YAMLRoot):
     """
     See [DCAT-AP specs:Relationship](https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Relationship)
@@ -1598,7 +2117,7 @@ class Relationship(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCAT["Relationship"]
     class_class_curie: ClassVar[str] = "dcat:Relationship"
     class_name: ClassVar[str] = "Relationship"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Relationship
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Relationship
 
     had_role: Union[Union[dict, "Role"], list[Union[dict, "Role"]]] = None
     relation: Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]] = empty_dict()
@@ -1627,7 +2146,7 @@ class Software(AgenticEntity):
     class_class_uri: ClassVar[URIRef] = PROV["SoftwareAgent"]
     class_class_curie: ClassVar[str] = "prov:SoftwareAgent"
     class_name: ClassVar[str] = "Software"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Software
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Software
 
     id: Union[str, SoftwareId] = None
     has_part: Optional[Union[dict[Union[str, SoftwareId], Union[dict, "Software"]], list[Union[dict, "Software"]]]] = empty_dict()
@@ -1659,7 +2178,7 @@ class SupportiveEntity(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = DCATAP_PLUS["SupportiveEntity"]
     class_class_curie: ClassVar[str] = "dcatap_plus:SupportiveEntity"
     class_name: ClassVar[str] = "SupportiveEntity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.SupportiveEntity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SupportiveEntity
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1684,7 +2203,7 @@ class Attribution(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = PROV["Attribution"]
     class_class_curie: ClassVar[str] = "prov:Attribution"
     class_name: ClassVar[str] = "Attribution"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Attribution
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Attribution
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1709,7 +2228,7 @@ class ChecksumAlgorithm(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = SPDX["ChecksumAlgorithm"]
     class_class_curie: ClassVar[str] = "spdx:ChecksumAlgorithm"
     class_name: ClassVar[str] = "ChecksumAlgorithm"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ChecksumAlgorithm
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ChecksumAlgorithm
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1734,7 +2253,7 @@ class Concept(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = SKOS["Concept"]
     class_class_curie: ClassVar[str] = "skos:Concept"
     class_name: ClassVar[str] = "Concept"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Concept
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Concept
 
     preferred_label: Union[str, list[str]] = None
     title: Optional[str] = None
@@ -1766,7 +2285,7 @@ class ConceptScheme(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = SKOS["ConceptScheme"]
     class_class_curie: ClassVar[str] = "skos:ConceptScheme"
     class_name: ClassVar[str] = "ConceptScheme"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ConceptScheme
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ConceptScheme
 
     title: Union[str, list[str]] = None
     description: Optional[str] = None
@@ -1794,7 +2313,7 @@ class Document(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = FOAF["Document"]
     class_class_curie: ClassVar[str] = "foaf:Document"
     class_name: ClassVar[str] = "Document"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Document
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Document
 
     id: Union[str, DocumentId] = None
     title: Optional[str] = None
@@ -1825,7 +2344,7 @@ class Frequency(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["Frequency"]
     class_class_curie: ClassVar[str] = "dcterms:Frequency"
     class_name: ClassVar[str] = "Frequency"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Frequency
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Frequency
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1850,7 +2369,7 @@ class Geometry(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = LOCN["Geometry"]
     class_class_curie: ClassVar[str] = "locn:Geometry"
     class_name: ClassVar[str] = "Geometry"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Geometry
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Geometry
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1875,7 +2394,7 @@ class Identifier(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = ADMS["Identifier"]
     class_class_curie: ClassVar[str] = "adms:Identifier"
     class_name: ClassVar[str] = "Identifier"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Identifier
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Identifier
 
     notation: str = None
     title: Optional[str] = None
@@ -1906,7 +2425,7 @@ class LegalResource(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = ELI["LegalResource"]
     class_class_curie: ClassVar[str] = "eli:LegalResource"
     class_name: ClassVar[str] = "LegalResource"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.LegalResource
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.LegalResource
 
     id: Union[str, LegalResourceId] = None
     title: Optional[str] = None
@@ -1937,7 +2456,7 @@ class LicenseDocument(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["LicenseDocument"]
     class_class_curie: ClassVar[str] = "dcterms:LicenseDocument"
     class_name: ClassVar[str] = "LicenseDocument"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.LicenseDocument
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.LicenseDocument
 
     id: Union[str, LicenseDocumentId] = None
     type: Optional[Union[Union[dict, Concept], list[Union[dict, Concept]]]] = empty_list()
@@ -1973,7 +2492,7 @@ class LinguisticSystem(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["LinguisticSystem"]
     class_class_curie: ClassVar[str] = "dcterms:LinguisticSystem"
     class_name: ClassVar[str] = "LinguisticSystem"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.LinguisticSystem
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.LinguisticSystem
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -1998,7 +2517,7 @@ class MediaType(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["MediaType"]
     class_class_curie: ClassVar[str] = "dcterms:MediaType"
     class_name: ClassVar[str] = "MediaType"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MediaType
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MediaType
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2023,7 +2542,7 @@ class MediaTypeOrExtent(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["MediaTypeOrExtent"]
     class_class_curie: ClassVar[str] = "dcterms:MediaTypeOrExtent"
     class_name: ClassVar[str] = "MediaTypeOrExtent"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MediaTypeOrExtent
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MediaTypeOrExtent
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2048,7 +2567,7 @@ class PeriodOfTime(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["PeriodOfTime"]
     class_class_curie: ClassVar[str] = "dcterms:PeriodOfTime"
     class_name: ClassVar[str] = "PeriodOfTime"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PeriodOfTime
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.PeriodOfTime
 
     beginning: Optional[Union[dict, "TimeInstant"]] = None
     end: Optional[Union[dict, "TimeInstant"]] = None
@@ -2089,7 +2608,7 @@ class Policy(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = ODRL["Policy"]
     class_class_curie: ClassVar[str] = "odrl:Policy"
     class_name: ClassVar[str] = "Policy"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Policy
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Policy
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2114,7 +2633,7 @@ class ProvenanceStatement(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["ProvenanceStatement"]
     class_class_curie: ClassVar[str] = "dcterms:ProvenanceStatement"
     class_name: ClassVar[str] = "ProvenanceStatement"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ProvenanceStatement
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ProvenanceStatement
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2139,7 +2658,7 @@ class Resource(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = RDFS["Resource"]
     class_class_curie: ClassVar[str] = "rdfs:Resource"
     class_name: ClassVar[str] = "Resource"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Resource
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Resource
 
     id: Union[str, ResourceId] = None
     title: Optional[str] = None
@@ -2170,7 +2689,7 @@ class RightsStatement(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["RightsStatement"]
     class_class_curie: ClassVar[str] = "dcterms:RightsStatement"
     class_name: ClassVar[str] = "RightsStatement"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.RightsStatement
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.RightsStatement
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2195,7 +2714,7 @@ class Role(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCAT["Role"]
     class_class_curie: ClassVar[str] = "dcat:Role"
     class_name: ClassVar[str] = "Role"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Role
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Role
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2220,7 +2739,7 @@ class Standard(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = DCTERMS["Standard"]
     class_class_curie: ClassVar[str] = "dcterms:Standard"
     class_name: ClassVar[str] = "Standard"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Standard
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Standard
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2245,7 +2764,7 @@ class Surrounding(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = PROV["Location"]
     class_class_curie: ClassVar[str] = "prov:Location"
     class_name: ClassVar[str] = "Surrounding"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Surrounding
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Surrounding
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2278,7 +2797,7 @@ class Laboratory(Surrounding):
     class_class_uri: ClassVar[URIRef] = ENVO["01001405"]
     class_class_curie: ClassVar[str] = "ENVO:01001405"
     class_name: ClassVar[str] = "Laboratory"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Laboratory
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Laboratory
 
 
 @dataclass(repr=False)
@@ -2291,7 +2810,7 @@ class TimeInstant(SupportiveEntity):
     class_class_uri: ClassVar[URIRef] = TIME["Instant"]
     class_class_curie: ClassVar[str] = "time:Instant"
     class_name: ClassVar[str] = "TimeInstant"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.TimeInstant
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.TimeInstant
 
     title: Optional[str] = None
     description: Optional[str] = None
@@ -2307,6 +2826,119 @@ class TimeInstant(SupportiveEntity):
 
 
 @dataclass(repr=False)
+class InChIKey(QualitativeAttribute):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000059"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000059"
+    class_name: ClassVar[str] = "InChIKey"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.InChIKey
+
+    value: str = None
+
+@dataclass(repr=False)
+class InChi(QualitativeAttribute):
+    """
+    A structure descriptor which conforms to the InChI format specification.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000113"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000113"
+    class_name: ClassVar[str] = "InChi"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.InChi
+
+    value: str = None
+
+@dataclass(repr=False)
+class MolecularFormula(QualitativeAttribute):
+    """
+    A structure descriptor which identifies each constituent element by its chemical symbol and indicates the number
+    of atoms of each element found in each discrete molecule of that compound.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000042"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000042"
+    class_name: ClassVar[str] = "MolecularFormula"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MolecularFormula
+
+    value: str = None
+
+@dataclass(repr=False)
+class IUPACName(QualitativeAttribute):
+    """
+    A systematic name which is formulated according to the rules and recommendations for chemical nomenclature set out
+    by the International Union of Pure and Applied Chemistry (IUPAC).
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000107"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000107"
+    class_name: ClassVar[str] = "IUPACName"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.IUPACName
+
+    value: str = None
+
+@dataclass(repr=False)
+class SMILES(QualitativeAttribute):
+    """
+    A structure descriptor that denotes a molecular structure as a graph and conforms to the SMILES format
+    specification.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEMINF["000018"]
+    class_class_curie: ClassVar[str] = "CHEMINF:000018"
+    class_name: ClassVar[str] = "SMILES"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SMILES
+
+    value: str = None
+
+@dataclass(repr=False)
+class Concentration(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute of a ChemicalSubstance that represents the amount of a constituent divided by the volume
+    of the mixture.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHMO["0002820"]
+    class_class_curie: ClassVar[str] = "CHMO:0002820"
+    class_name: ClassVar[str] = "Concentration"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Concentration
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class AmountOfSubstance(QuantitativeAttribute):
+    """
+    The total amount of substance used in a ChemicalReaction.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "AmountOfSubstance"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AmountOfSubstance
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class PHValue(QuantitativeAttribute):
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SIO["001089"]
+    class_class_curie: ClassVar[str] = "SIO:001089"
+    class_name: ClassVar[str] = "PHValue"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.PHValue
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
 class ChemicalReaction(Activity):
     """
     A process that leads to the transformation of one set of chemical substances to another.
@@ -2316,7 +2948,7 @@ class ChemicalReaction(Activity):
     class_class_uri: ClassVar[URIRef] = SIO["010345"]
     class_class_curie: ClassVar[str] = "SIO:010345"
     class_name: ClassVar[str] = "ChemicalReaction"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ChemicalReaction
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ChemicalReaction
 
     id: Union[str, ChemicalReactionId] = None
     used_starting_material: Optional[Union[dict[Union[str, StartingMaterialId], Union[dict, "StartingMaterial"]], list[Union[dict, "StartingMaterial"]]]] = empty_dict()
@@ -2383,7 +3015,7 @@ class DissolvingSubstance(AgenticEntity):
     class_class_uri: ClassVar[URIRef] = SIO["010417"]
     class_class_curie: ClassVar[str] = "SIO:010417"
     class_name: ClassVar[str] = "DissolvingSubstance"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.DissolvingSubstance
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.DissolvingSubstance
 
     id: Union[str, DissolvingSubstanceId] = None
     title: Optional[str] = None
@@ -2398,11 +3030,11 @@ class DissolvingSubstance(AgenticEntity):
     has_volume: Optional[Union[Union[dict, "Volume"], list[Union[dict, "Volume"]]]] = empty_list()
     has_density: Optional[Union[Union[dict, "Density"], list[Union[dict, "Density"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
-    has_concentration: Optional[Union[Union[dict, "Concentration"], list[Union[dict, "Concentration"]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
+    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
+    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
     composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, "ChemicalEntity"]], list[Union[dict, "ChemicalEntity"]]]] = empty_dict()
     has_molar_equivalent: Optional[Union[Union[dict, "MolarEquivalent"], list[Union[dict, "MolarEquivalent"]]]] = empty_list()
-    has_amount: Optional[Union[Union[dict, "AmountOfSubstance"], list[Union[dict, "AmountOfSubstance"]]]] = empty_list()
+    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -2486,7 +3118,7 @@ class Catalyst(AgenticEntity):
     class_class_uri: ClassVar[URIRef] = SIO["010344"]
     class_class_curie: ClassVar[str] = "SIO:010344"
     class_name: ClassVar[str] = "Catalyst"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Catalyst
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Catalyst
 
     id: Union[str, CatalystId] = None
     title: Optional[str] = None
@@ -2501,10 +3133,10 @@ class Catalyst(AgenticEntity):
     has_volume: Optional[Union[Union[dict, "Volume"], list[Union[dict, "Volume"]]]] = empty_list()
     has_density: Optional[Union[Union[dict, "Density"], list[Union[dict, "Density"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
-    has_concentration: Optional[Union[Union[dict, "Concentration"], list[Union[dict, "Concentration"]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
+    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
+    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
     composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, "ChemicalEntity"]], list[Union[dict, "ChemicalEntity"]]]] = empty_dict()
-    has_amount: Optional[Union[Union[dict, "AmountOfSubstance"], list[Union[dict, "AmountOfSubstance"]]]] = empty_list()
+    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
     has_percentage_of_total: Optional[Union[Union[dict, "PercentageOfTotal"], list[Union[dict, "PercentageOfTotal"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2588,7 +3220,7 @@ class Reactor(Device):
     class_class_uri: ClassVar[URIRef] = AFE["0000153"]
     class_class_curie: ClassVar[str] = "AFE:0000153"
     class_name: ClassVar[str] = "Reactor"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Reactor
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Reactor
 
     id: Union[str, ReactorId] = None
     alternative_label: Optional[str] = None
@@ -2646,7 +3278,7 @@ class Yield(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "Yield"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Yield
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Yield
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -2662,7 +3294,7 @@ class MolarEquivalent(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "MolarEquivalent"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MolarEquivalent
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MolarEquivalent
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -2678,120 +3310,7 @@ class PercentageOfTotal(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "PercentageOfTotal"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PercentageOfTotal
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
-class InChIKey(QualitativeAttribute):
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000059"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000059"
-    class_name: ClassVar[str] = "InChIKey"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChIKey
-
-    value: str = None
-
-@dataclass(repr=False)
-class InChi(QualitativeAttribute):
-    """
-    A structure descriptor which conforms to the InChI format specification.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000113"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000113"
-    class_name: ClassVar[str] = "InChi"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.InChi
-
-    value: str = None
-
-@dataclass(repr=False)
-class MolecularFormula(QualitativeAttribute):
-    """
-    A structure descriptor which identifies each constituent element by its chemical symbol and indicates the number
-    of atoms of each element found in each discrete molecule of that compound.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000042"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000042"
-    class_name: ClassVar[str] = "MolecularFormula"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MolecularFormula
-
-    value: str = None
-
-@dataclass(repr=False)
-class IUPACName(QualitativeAttribute):
-    """
-    A systematic name which is formulated according to the rules and recommendations for chemical nomenclature set out
-    by the International Union of Pure and Applied Chemistry (IUPAC).
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000107"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000107"
-    class_name: ClassVar[str] = "IUPACName"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.IUPACName
-
-    value: str = None
-
-@dataclass(repr=False)
-class SMILES(QualitativeAttribute):
-    """
-    A structure descriptor that denotes a molecular structure as a graph and conforms to the SMILES format
-    specification.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEMINF["000018"]
-    class_class_curie: ClassVar[str] = "CHEMINF:000018"
-    class_name: ClassVar[str] = "SMILES"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.SMILES
-
-    value: str = None
-
-@dataclass(repr=False)
-class Concentration(QuantitativeAttribute):
-    """
-    A QuantitativeAttribute of a ChemicalSubstance that represents the amount of a constituent divided by the volume
-    of the mixture.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHMO["0002820"]
-    class_class_curie: ClassVar[str] = "CHMO:0002820"
-    class_name: ClassVar[str] = "Concentration"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Concentration
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
-class AmountOfSubstance(QuantitativeAttribute):
-    """
-    The total amount of substance used in a ChemicalReaction.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
-    class_class_curie: ClassVar[str] = "qudt:Quantity"
-    class_name: ClassVar[str] = "AmountOfSubstance"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.AmountOfSubstance
-
-    value: float = None
-    has_quantity_type: Union[str, DefinedTermId] = None
-
-@dataclass(repr=False)
-class PHValue(QuantitativeAttribute):
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = SIO["001089"]
-    class_class_curie: ClassVar[str] = "SIO:001089"
-    class_name: ClassVar[str] = "PHValue"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PHValue
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.PercentageOfTotal
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -2808,7 +3327,7 @@ class Materialistic(YAMLRoot):
     class_class_uri: ClassVar[URIRef] = MATERIAL_ENTITIES_AP["Materialistic"]
     class_class_curie: ClassVar[str] = "material_entities_ap:Materialistic"
     class_name: ClassVar[str] = "Materialistic"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Materialistic
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Materialistic
 
     alternative_label: Optional[str] = None
     has_physical_state: Optional[Union[str, "PhysicalStateEnum"]] = None
@@ -2858,7 +3377,7 @@ class MaterialEntity(Entity):
     class_class_uri: ClassVar[URIRef] = BFO["0000040"]
     class_class_curie: ClassVar[str] = "BFO:0000040"
     class_name: ClassVar[str] = "MaterialEntity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MaterialEntity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MaterialEntity
 
     id: Union[str, MaterialEntityId] = None
     has_part: Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]] = empty_dict()
@@ -2918,7 +3437,7 @@ class ChemicalEntity(MaterialEntity):
     class_class_uri: ClassVar[URIRef] = CHEBI["23367"]
     class_class_curie: ClassVar[str] = "CHEBI:23367"
     class_name: ClassVar[str] = "ChemicalEntity"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ChemicalEntity
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ChemicalEntity
 
     id: Union[str, ChemicalEntityId] = None
     inchi: Optional[Union[Union[dict, InChi], list[Union[dict, InChi]]]] = empty_list()
@@ -2971,7 +3490,7 @@ class Atom(ChemicalEntity):
     class_class_uri: ClassVar[URIRef] = CHEBI["33250"]
     class_class_curie: ClassVar[str] = "CHEBI:33250"
     class_name: ClassVar[str] = "Atom"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Atom
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Atom
 
     id: Union[str, AtomId] = None
     rdf_type: Union[dict, DefinedTerm] = None
@@ -3000,7 +3519,7 @@ class ChemicalSubstance(MaterialEntity):
     class_class_uri: ClassVar[URIRef] = CHEBI["59999"]
     class_class_curie: ClassVar[str] = "CHEBI:59999"
     class_name: ClassVar[str] = "ChemicalSubstance"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ChemicalSubstance
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ChemicalSubstance
 
     id: Union[str, ChemicalSubstanceId] = None
     has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
@@ -3037,6 +3556,21 @@ class ChemicalSubstance(MaterialEntity):
 
 
 @dataclass(repr=False)
+class Polymer(ChemicalSubstance):
+    """
+    A ChemicalSubstance that is composed of macromolecules of different kinds and which may be differentiated by
+    composition, length, degree of branching etc..
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = CHEBI["60027"]
+    class_class_curie: ClassVar[str] = "CHEBI:60027"
+    class_name: ClassVar[str] = "Polymer"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Polymer
+
+    id: Union[str, PolymerId] = None
+
+@dataclass(repr=False)
 class StartingMaterial(ChemicalSubstance):
     """
     A ChemicalSubstance with that has a starting material role in a synthesis.
@@ -3046,7 +3580,7 @@ class StartingMaterial(ChemicalSubstance):
     class_class_uri: ClassVar[URIRef] = PROCO["0000029"]
     class_class_curie: ClassVar[str] = "PROCO:0000029"
     class_name: ClassVar[str] = "StartingMaterial"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.StartingMaterial
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.StartingMaterial
 
     id: Union[str, StartingMaterialId] = None
     has_molar_equivalent: Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]] = empty_list()
@@ -3074,7 +3608,7 @@ class Reagent(ChemicalSubstance):
     class_class_uri: ClassVar[URIRef] = SIO["010411"]
     class_class_curie: ClassVar[str] = "SIO:010411"
     class_name: ClassVar[str] = "Reagent"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Reagent
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Reagent
 
     id: Union[str, ReagentId] = None
     has_molar_equivalent: Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]] = empty_list()
@@ -3102,7 +3636,7 @@ class ChemicalProduct(ChemicalSubstance):
     class_class_uri: ClassVar[URIRef] = NCIT["C48810"]
     class_class_curie: ClassVar[str] = "NCIT:C48810"
     class_name: ClassVar[str] = "ChemicalProduct"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.ChemicalProduct
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ChemicalProduct
 
     id: Union[str, ChemicalProductId] = None
 
@@ -3116,21 +3650,6 @@ class ChemicalProduct(ChemicalSubstance):
 
 
 @dataclass(repr=False)
-class Polymer(ChemicalSubstance):
-    """
-    A ChemicalSubstance that is composed of macromolecules of different kinds and which may be differentiated by
-    composition, length, degree of branching etc..
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = CHEBI["60027"]
-    class_class_curie: ClassVar[str] = "CHEBI:60027"
-    class_name: ClassVar[str] = "Polymer"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Polymer
-
-    id: Union[str, PolymerId] = None
-
-@dataclass(repr=False)
 class MaterialSample(EvaluatedEntity):
     """
     A Sample that was derived from a previous MaterialSample or some other kind of MaterialEntity.
@@ -3140,7 +3659,7 @@ class MaterialSample(EvaluatedEntity):
     class_class_uri: ClassVar[URIRef] = OBI["0000747"]
     class_class_curie: ClassVar[str] = "OBI:0000747"
     class_name: ClassVar[str] = "MaterialSample"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MaterialSample
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MaterialSample
 
     id: Union[str, MaterialSampleId] = None
     derived_from: Optional[Union[dict, Entity]] = None
@@ -3191,135 +3710,29 @@ class MaterialSample(EvaluatedEntity):
 
 
 @dataclass(repr=False)
-class SubstanceSample(MaterialSample):
+class IntermediateSolution(MaterialSample):
     """
-    A MaterialSample derived from a ChemicalSubstance that is of interest in an analytical procedure.
+    A MaterialSample representing an intermediate product of a synthesis workflow, created by a
+    SolutionPreparationStep. Optionally references the starting MaterialEntity from which it was prepared.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = SIO["001378"]
-    class_class_curie: ClassVar[str] = "SIO:001378"
-    class_name: ClassVar[str] = "SubstanceSample"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.SubstanceSample
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["IntermediateSolution"]
+    class_class_curie: ClassVar[str] = "dcatplab:IntermediateSolution"
+    class_name: ClassVar[str] = "IntermediateSolution"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.IntermediateSolution
 
-    id: Union[str, SubstanceSampleId] = None
-    has_qualitative_attribute: Optional[Union[Union[dict, QualitativeAttribute], list[Union[dict, QualitativeAttribute]]]] = empty_list()
-    has_quantitative_attribute: Optional[Union[Union[dict, QuantitativeAttribute], list[Union[dict, QuantitativeAttribute]]]] = empty_list()
-    has_part: Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]] = empty_dict()
-    part_of: Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]] = empty_dict()
-    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
-    composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]] = empty_dict()
-    has_molar_equivalent: Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]] = empty_list()
-    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
-    has_percentage_of_total: Optional[Union[Union[dict, PercentageOfTotal], list[Union[dict, PercentageOfTotal]]]] = empty_list()
+    id: Union[str, IntermediateSolutionId] = None
+    has_initial_material: Optional[Union[str, MaterialEntityId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, SubstanceSampleId):
-            self.id = SubstanceSampleId(self.id)
+        if not isinstance(self.id, IntermediateSolutionId):
+            self.id = IntermediateSolutionId(self.id)
 
-        if not isinstance(self.has_qualitative_attribute, list):
-            self.has_qualitative_attribute = [self.has_qualitative_attribute] if self.has_qualitative_attribute is not None else []
-        self.has_qualitative_attribute = [v if isinstance(v, QualitativeAttribute) else QualitativeAttribute(**as_dict(v)) for v in self.has_qualitative_attribute]
-
-        if not isinstance(self.has_quantitative_attribute, list):
-            self.has_quantitative_attribute = [self.has_quantitative_attribute] if self.has_quantitative_attribute is not None else []
-        self.has_quantitative_attribute = [v if isinstance(v, QuantitativeAttribute) else QuantitativeAttribute(**as_dict(v)) for v in self.has_quantitative_attribute]
-
-        self._normalize_inlined_as_list(slot_name="has_part", slot_type=Entity, key_name="id", keyed=True)
-
-        self._normalize_inlined_as_list(slot_name="part_of", slot_type=Entity, key_name="id", keyed=True)
-
-        if not isinstance(self.has_concentration, list):
-            self.has_concentration = [self.has_concentration] if self.has_concentration is not None else []
-        self.has_concentration = [v if isinstance(v, Concentration) else Concentration(**as_dict(v)) for v in self.has_concentration]
-
-        if not isinstance(self.has_ph_value, list):
-            self.has_ph_value = [self.has_ph_value] if self.has_ph_value is not None else []
-        self.has_ph_value = [v if isinstance(v, PHValue) else PHValue(**as_dict(v)) for v in self.has_ph_value]
-
-        self._normalize_inlined_as_list(slot_name="composed_of", slot_type=ChemicalEntity, key_name="id", keyed=True)
-
-        if not isinstance(self.has_molar_equivalent, list):
-            self.has_molar_equivalent = [self.has_molar_equivalent] if self.has_molar_equivalent is not None else []
-        self.has_molar_equivalent = [v if isinstance(v, MolarEquivalent) else MolarEquivalent(**as_dict(v)) for v in self.has_molar_equivalent]
-
-        if not isinstance(self.has_amount, list):
-            self.has_amount = [self.has_amount] if self.has_amount is not None else []
-        self.has_amount = [v if isinstance(v, AmountOfSubstance) else AmountOfSubstance(**as_dict(v)) for v in self.has_amount]
-
-        if not isinstance(self.has_percentage_of_total, list):
-            self.has_percentage_of_total = [self.has_percentage_of_total] if self.has_percentage_of_total is not None else []
-        self.has_percentage_of_total = [v if isinstance(v, PercentageOfTotal) else PercentageOfTotal(**as_dict(v)) for v in self.has_percentage_of_total]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class PolymerSample(SubstanceSample):
-    """
-    A SubstanceSample derived from a Polymer.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = SIO["001378"]
-    class_class_curie: ClassVar[str] = "SIO:001378"
-    class_name: ClassVar[str] = "PolymerSample"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.PolymerSample
-
-    id: Union[str, PolymerSampleId] = None
-    has_qualitative_attribute: Optional[Union[Union[dict, QualitativeAttribute], list[Union[dict, QualitativeAttribute]]]] = empty_list()
-    has_quantitative_attribute: Optional[Union[Union[dict, QuantitativeAttribute], list[Union[dict, QuantitativeAttribute]]]] = empty_list()
-    has_part: Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]] = empty_dict()
-    part_of: Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]] = empty_dict()
-    has_concentration: Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]] = empty_list()
-    has_ph_value: Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]] = empty_list()
-    composed_of: Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]] = empty_dict()
-    has_molar_equivalent: Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]] = empty_list()
-    has_amount: Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]] = empty_list()
-    has_percentage_of_total: Optional[Union[Union[dict, PercentageOfTotal], list[Union[dict, PercentageOfTotal]]]] = empty_list()
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PolymerSampleId):
-            self.id = PolymerSampleId(self.id)
-
-        if not isinstance(self.has_qualitative_attribute, list):
-            self.has_qualitative_attribute = [self.has_qualitative_attribute] if self.has_qualitative_attribute is not None else []
-        self.has_qualitative_attribute = [v if isinstance(v, QualitativeAttribute) else QualitativeAttribute(**as_dict(v)) for v in self.has_qualitative_attribute]
-
-        if not isinstance(self.has_quantitative_attribute, list):
-            self.has_quantitative_attribute = [self.has_quantitative_attribute] if self.has_quantitative_attribute is not None else []
-        self.has_quantitative_attribute = [v if isinstance(v, QuantitativeAttribute) else QuantitativeAttribute(**as_dict(v)) for v in self.has_quantitative_attribute]
-
-        self._normalize_inlined_as_list(slot_name="has_part", slot_type=Entity, key_name="id", keyed=True)
-
-        self._normalize_inlined_as_list(slot_name="part_of", slot_type=Entity, key_name="id", keyed=True)
-
-        if not isinstance(self.has_concentration, list):
-            self.has_concentration = [self.has_concentration] if self.has_concentration is not None else []
-        self.has_concentration = [v if isinstance(v, Concentration) else Concentration(**as_dict(v)) for v in self.has_concentration]
-
-        if not isinstance(self.has_ph_value, list):
-            self.has_ph_value = [self.has_ph_value] if self.has_ph_value is not None else []
-        self.has_ph_value = [v if isinstance(v, PHValue) else PHValue(**as_dict(v)) for v in self.has_ph_value]
-
-        self._normalize_inlined_as_list(slot_name="composed_of", slot_type=ChemicalEntity, key_name="id", keyed=True)
-
-        if not isinstance(self.has_molar_equivalent, list):
-            self.has_molar_equivalent = [self.has_molar_equivalent] if self.has_molar_equivalent is not None else []
-        self.has_molar_equivalent = [v if isinstance(v, MolarEquivalent) else MolarEquivalent(**as_dict(v)) for v in self.has_molar_equivalent]
-
-        if not isinstance(self.has_amount, list):
-            self.has_amount = [self.has_amount] if self.has_amount is not None else []
-        self.has_amount = [v if isinstance(v, AmountOfSubstance) else AmountOfSubstance(**as_dict(v)) for v in self.has_amount]
-
-        if not isinstance(self.has_percentage_of_total, list):
-            self.has_percentage_of_total = [self.has_percentage_of_total] if self.has_percentage_of_total is not None else []
-        self.has_percentage_of_total = [v if isinstance(v, PercentageOfTotal) else PercentageOfTotal(**as_dict(v)) for v in self.has_percentage_of_total]
+        if self.has_initial_material is not None and not isinstance(self.has_initial_material, MaterialEntityId):
+            self.has_initial_material = MaterialEntityId(self.has_initial_material)
 
         super().__post_init__(**kwargs)
 
@@ -3334,7 +3747,7 @@ class Temperature(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "Temperature"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Temperature
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Temperature
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3349,7 +3762,7 @@ class Mass(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "Mass"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Mass
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Mass
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3365,7 +3778,7 @@ class MolarMass(Mass):
     class_class_uri: ClassVar[URIRef] = AFR["0002409"]
     class_class_curie: ClassVar[str] = "AFR:0002409"
     class_name: ClassVar[str] = "MolarMass"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.MolarMass
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MolarMass
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3380,7 +3793,7 @@ class Volume(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "Volume"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Volume
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Volume
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3395,7 +3808,7 @@ class Density(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = SIO["001406"]
     class_class_curie: ClassVar[str] = "SIO:001406"
     class_name: ClassVar[str] = "Density"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Density
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Density
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
@@ -3407,12 +3820,78 @@ class Pressure(QuantitativeAttribute):
     class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
     class_class_curie: ClassVar[str] = "qudt:Quantity"
     class_name: ClassVar[str] = "Pressure"
-    class_model_uri: ClassVar[URIRef] = CHEMDCATAP.Pressure
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.Pressure
 
     value: float = None
     has_quantity_type: Union[str, DefinedTermId] = None
 
 # Enumerations
+class SeparationMethodEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for separation methods used in SeparationStep.
+    """
+    filtration = PermissibleValue(
+        text="filtration",
+        meaning=CHMO["0001640"])
+    centrifugation = PermissibleValue(
+        text="centrifugation",
+        meaning=OBI["0302886"])
+    evaporation = PermissibleValue(
+        text="evaporation",
+        meaning=CHMO["0001574"])
+    fractionation = PermissibleValue(
+        text="fractionation",
+        meaning=CHMO["0001625"])
+
+    _defn = EnumDefinition(
+        name="SeparationMethodEnum",
+        description="Controlled vocabulary for separation methods used in SeparationStep.",
+    )
+
+class AtmosphereTypeEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for atmosphere types in AtmosphereSettingStep.
+    """
+    air = PermissibleValue(text="air")
+    inert = PermissibleValue(text="inert")
+    nitrogen = PermissibleValue(
+        text="nitrogen",
+        meaning=CHEBI["17997"])
+    argon = PermissibleValue(
+        text="argon",
+        meaning=CHEBI["39289"])
+    hydrogen = PermissibleValue(
+        text="hydrogen",
+        meaning=CHEBI["18276"])
+    vacuum = PermissibleValue(text="vacuum")
+    autogeneous = PermissibleValue(text="autogeneous")
+    oxygen = PermissibleValue(
+        text="oxygen",
+        meaning=CHEBI["15379"])
+
+    _defn = EnumDefinition(
+        name="AtmosphereTypeEnum",
+        description="Controlled vocabulary for atmosphere types in AtmosphereSettingStep.",
+    )
+
+class TemperatureTargetTypeEnum(EnumDefinitionImpl):
+    """
+    Qualitative temperature targets for TemperatureChangeStep, for cases where a numeric temperature value is not
+    recorded.
+    """
+    COOL = PermissibleValue(text="COOL")
+    HEAT = PermissibleValue(text="HEAT")
+    ROOM_TEMPERATURE = PermissibleValue(
+        text="ROOM_TEMPERATURE",
+        meaning=PATO["0015173"])
+    REFLUX = PermissibleValue(text="REFLUX")
+    AMBIENT = PermissibleValue(text="AMBIENT")
+
+    _defn = EnumDefinition(
+        name="TemperatureTargetTypeEnum",
+        description="""Qualitative temperature targets for TemperatureChangeStep, for cases where a numeric temperature value is not recorded.""",
+    )
+
 class DatasetThemes(EnumDefinitionImpl):
 
     AGRI = PermissibleValue(
@@ -3539,902 +4018,974 @@ class PhysicalStateEnum(EnumDefinitionImpl):
 class slots:
     pass
 
+slots.has_synthesis_step = Slot(uri=BFO['0000051'], name="has_synthesis_step", curie=BFO.curie('0000051'),
+                   model_uri=DCATPLAB.has_synthesis_step, domain=None, range=Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, LabSynthesisStep]], list[Union[dict, LabSynthesisStep]]]])
+
+slots.has_successor_step = Slot(uri=DCATPLAB.hasSuccessorStep, name="has_successor_step", curie=DCATPLAB.curie('hasSuccessorStep'),
+                   model_uri=DCATPLAB.has_successor_step, domain=None, range=Optional[Union[Union[str, LabSynthesisStepId], list[Union[str, LabSynthesisStepId]]]])
+
+slots.has_initial_material = Slot(uri=PROV.used, name="has_initial_material", curie=PROV.curie('used'),
+                   model_uri=DCATPLAB.has_initial_material, domain=None, range=Optional[Union[str, MaterialEntityId]])
+
+slots.has_added_material = Slot(uri=RO['0004009'], name="has_added_material", curie=RO.curie('0004009'),
+                   model_uri=DCATPLAB.has_added_material, domain=None, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, MaterialEntity]], list[Union[dict, MaterialEntity]]]])
+
+slots.added_dropwise = Slot(uri=CHMO['0001544'], name="added_dropwise", curie=CHMO.curie('0001544'),
+                   model_uri=DCATPLAB.added_dropwise, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.has_step_duration = Slot(uri=SIO['000008'], name="has_step_duration", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_step_duration, domain=None, range=Optional[Union[Union[dict, Duration], list[Union[dict, Duration]]]])
+
+slots.has_stirring_speed = Slot(uri=SIO['000008'], name="has_stirring_speed", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_stirring_speed, domain=None, range=Optional[Union[Union[dict, StirringSpeed], list[Union[dict, StirringSpeed]]]])
+
+slots.has_target_temperature = Slot(uri=DCATPLAB.has_target_temperature, name="has_target_temperature", curie=DCATPLAB.curie('has_target_temperature'),
+                   model_uri=DCATPLAB.has_target_temperature, domain=None, range=Optional[Union[Union[dict, Temperature], list[Union[dict, Temperature]]]])
+
+slots.temperature_target_type = Slot(uri=DCATPLAB.temperature_target_type, name="temperature_target_type", curie=DCATPLAB.curie('temperature_target_type'),
+                   model_uri=DCATPLAB.temperature_target_type, domain=None, range=Optional[Union[str, "TemperatureTargetTypeEnum"]])
+
+slots.uses_microwave = Slot(uri=DCATPLAB.uses_microwave, name="uses_microwave", curie=DCATPLAB.curie('uses_microwave'),
+                   model_uri=DCATPLAB.uses_microwave, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.has_heat_ramp = Slot(uri=SIO['000008'], name="has_heat_ramp", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_heat_ramp, domain=None, range=Optional[Union[Union[dict, HeatRamp], list[Union[dict, HeatRamp]]]])
+
+slots.has_atmosphere_type = Slot(uri=DCATPLAB.has_atmosphere_type, name="has_atmosphere_type", curie=DCATPLAB.curie('has_atmosphere_type'),
+                   model_uri=DCATPLAB.has_atmosphere_type, domain=None, range=Optional[Union[str, "AtmosphereTypeEnum"]])
+
+slots.has_flow_rate = Slot(uri=SIO['000008'], name="has_flow_rate", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_flow_rate, domain=None, range=Optional[Union[Union[dict, FlowRate], list[Union[dict, FlowRate]]]])
+
+slots.phase_to_keep = Slot(uri=DCATPLAB.phase_to_keep, name="phase_to_keep", curie=DCATPLAB.curie('phase_to_keep'),
+                   model_uri=DCATPLAB.phase_to_keep, domain=None, range=Optional[str])
+
+slots.uses_separation_method = Slot(uri=SIO['000008'], name="uses_separation_method", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.uses_separation_method, domain=None, range=Optional[Union[dict[Union[str, DefinedTermId], Union[dict, DefinedTerm]], list[Union[dict, DefinedTerm]]]])
+
+slots.uses_washing_material = Slot(uri=RO['0004009'], name="uses_washing_material", curie=RO.curie('0004009'),
+                   model_uri=DCATPLAB.uses_washing_material, domain=None, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, MaterialEntity]], list[Union[dict, MaterialEntity]]]])
+
+slots.uses_washing_method = Slot(uri=SIO['000008'], name="uses_washing_method", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.uses_washing_method, domain=None, range=Optional[Union[dict[Union[str, DefinedTermId], Union[dict, DefinedTerm]], list[Union[dict, DefinedTerm]]]])
+
+slots.repetition_count = Slot(uri=DCATPLAB.repetition_count, name="repetition_count", curie=DCATPLAB.curie('repetition_count'),
+                   model_uri=DCATPLAB.repetition_count, domain=None, range=Optional[int])
+
 slots.access_URL = Slot(uri=DCAT.accessURL, name="access_URL", curie=DCAT.curie('accessURL'),
-                   model_uri=CHEMDCATAP.access_URL, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.access_URL, domain=None, range=Optional[str])
 
 slots.access_rights = Slot(uri=DCTERMS.accessRights, name="access_rights", curie=DCTERMS.curie('accessRights'),
-                   model_uri=CHEMDCATAP.access_rights, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.access_rights, domain=None, range=Optional[str])
 
 slots.access_service = Slot(uri=DCAT.accessService, name="access_service", curie=DCAT.curie('accessService'),
-                   model_uri=CHEMDCATAP.access_service, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.access_service, domain=None, range=Optional[str])
 
 slots.algorithm = Slot(uri=SPDX.algorithm, name="algorithm", curie=SPDX.curie('algorithm'),
-                   model_uri=CHEMDCATAP.algorithm, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.algorithm, domain=None, range=Optional[str])
 
 slots.applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.applicable_legislation, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.applicable_legislation, domain=None, range=Optional[str])
 
 slots.application_profile = Slot(uri=DCTERMS.conformsTo, name="application_profile", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.application_profile, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.application_profile, domain=None, range=Optional[str])
 
 slots.availability = Slot(uri=DCATAP.availability, name="availability", curie=DCATAP.curie('availability'),
-                   model_uri=CHEMDCATAP.availability, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.availability, domain=None, range=Optional[str])
 
 slots.bbox = Slot(uri=DCAT.bbox, name="bbox", curie=DCAT.curie('bbox'),
-                   model_uri=CHEMDCATAP.bbox, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.bbox, domain=None, range=Optional[str])
 
 slots.beginning = Slot(uri=TIME.hasBeginning, name="beginning", curie=TIME.curie('hasBeginning'),
-                   model_uri=CHEMDCATAP.beginning, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.beginning, domain=None, range=Optional[str])
 
 slots.byte_size = Slot(uri=DCAT.byteSize, name="byte_size", curie=DCAT.curie('byteSize'),
-                   model_uri=CHEMDCATAP.byte_size, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.byte_size, domain=None, range=Optional[str])
 
 slots.carried_out_by = Slot(uri=PROV.wasAssociatedWith, name="carried_out_by", curie=PROV.curie('wasAssociatedWith'),
-                   model_uri=CHEMDCATAP.carried_out_by, domain=None, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, AgenticEntity]], list[Union[dict, AgenticEntity]]]])
+                   model_uri=DCATPLAB.carried_out_by, domain=None, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, AgenticEntity]], list[Union[dict, AgenticEntity]]]])
 
 slots.catalogue = Slot(uri=DCAT.catalog, name="catalogue", curie=DCAT.curie('catalog'),
-                   model_uri=CHEMDCATAP.catalogue, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.catalogue, domain=None, range=Optional[str])
 
 slots.centroid = Slot(uri=DCAT.centroid, name="centroid", curie=DCAT.curie('centroid'),
-                   model_uri=CHEMDCATAP.centroid, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.centroid, domain=None, range=Optional[str])
 
 slots.change_type = Slot(uri=ADMS.status, name="change_type", curie=ADMS.curie('status'),
-                   model_uri=CHEMDCATAP.change_type, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.change_type, domain=None, range=Optional[str])
 
 slots.checksum = Slot(uri=SPDX.checksum, name="checksum", curie=SPDX.curie('checksum'),
-                   model_uri=CHEMDCATAP.checksum, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.checksum, domain=None, range=Optional[str])
 
 slots.checksum_value = Slot(uri=SPDX.checksumValue, name="checksum_value", curie=SPDX.curie('checksumValue'),
-                   model_uri=CHEMDCATAP.checksum_value, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.checksum_value, domain=None, range=Optional[str])
 
 slots.compression_format = Slot(uri=DCAT.compressFormat, name="compression_format", curie=DCAT.curie('compressFormat'),
-                   model_uri=CHEMDCATAP.compression_format, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.compression_format, domain=None, range=Optional[str])
 
 slots.conforms_to = Slot(uri=DCTERMS.conformsTo, name="conforms_to", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.conforms_to, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.conforms_to, domain=None, range=Optional[str])
 
 slots.contact_point = Slot(uri=DCAT.contactPoint, name="contact_point", curie=DCAT.curie('contactPoint'),
-                   model_uri=CHEMDCATAP.contact_point, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.contact_point, domain=None, range=Optional[str])
 
 slots.creator = Slot(uri=DCTERMS.creator, name="creator", curie=DCTERMS.curie('creator'),
-                   model_uri=CHEMDCATAP.creator, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.creator, domain=None, range=Optional[str])
 
 slots.dataset_distribution = Slot(uri=DCAT.distribution, name="dataset_distribution", curie=DCAT.curie('distribution'),
-                   model_uri=CHEMDCATAP.dataset_distribution, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.dataset_distribution, domain=None, range=Optional[str])
 
 slots.description = Slot(uri=DCTERMS.description, name="description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.description, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.description, domain=None, range=Optional[str])
 
 slots.documentation = Slot(uri=FOAF.page, name="documentation", curie=FOAF.curie('page'),
-                   model_uri=CHEMDCATAP.documentation, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.documentation, domain=None, range=Optional[str])
 
 slots.download_URL = Slot(uri=DCAT.downloadURL, name="download_URL", curie=DCAT.curie('downloadURL'),
-                   model_uri=CHEMDCATAP.download_URL, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.download_URL, domain=None, range=Optional[str])
 
 slots.end = Slot(uri=TIME.hasEnd, name="end", curie=TIME.curie('hasEnd'),
-                   model_uri=CHEMDCATAP.end, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.end, domain=None, range=Optional[str])
 
 slots.end_date = Slot(uri=DCAT.endDate, name="end_date", curie=DCAT.curie('endDate'),
-                   model_uri=CHEMDCATAP.end_date, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.end_date, domain=None, range=Optional[str])
 
 slots.endpoint_URL = Slot(uri=DCAT.endpointURL, name="endpoint_URL", curie=DCAT.curie('endpointURL'),
-                   model_uri=CHEMDCATAP.endpoint_URL, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.endpoint_URL, domain=None, range=Optional[str])
 
 slots.endpoint_description = Slot(uri=DCAT.endpointDescription, name="endpoint_description", curie=DCAT.curie('endpointDescription'),
-                   model_uri=CHEMDCATAP.endpoint_description, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.endpoint_description, domain=None, range=Optional[str])
 
 slots.evaluated_activity = Slot(uri=PROV.wasInformedBy, name="evaluated_activity", curie=PROV.curie('wasInformedBy'),
-                   model_uri=CHEMDCATAP.evaluated_activity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedActivityId], Union[dict, EvaluatedActivity]], list[Union[dict, EvaluatedActivity]]]])
+                   model_uri=DCATPLAB.evaluated_activity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedActivityId], Union[dict, EvaluatedActivity]], list[Union[dict, EvaluatedActivity]]]])
 
 slots.evaluated_entity = Slot(uri=PROV.used, name="evaluated_entity", curie=PROV.curie('used'),
-                   model_uri=CHEMDCATAP.evaluated_entity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedEntityId], Union[dict, EvaluatedEntity]], list[Union[dict, EvaluatedEntity]]]])
+                   model_uri=DCATPLAB.evaluated_entity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedEntityId], Union[dict, EvaluatedEntity]], list[Union[dict, EvaluatedEntity]]]])
 
 slots.format = Slot(uri=DCTERMS.format, name="format", curie=DCTERMS.curie('format'),
-                   model_uri=CHEMDCATAP.format, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.format, domain=None, range=Optional[str])
 
 slots.frequency = Slot(uri=DCTERMS.accrualPeriodicity, name="frequency", curie=DCTERMS.curie('accrualPeriodicity'),
-                   model_uri=CHEMDCATAP.frequency, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.frequency, domain=None, range=Optional[str])
 
 slots.geographical_coverage = Slot(uri=DCTERMS.spatial, name="geographical_coverage", curie=DCTERMS.curie('spatial'),
-                   model_uri=CHEMDCATAP.geographical_coverage, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.geographical_coverage, domain=None, range=Optional[str])
 
 slots.geometry = Slot(uri=LOCN.geometry, name="geometry", curie=LOCN.curie('geometry'),
-                   model_uri=CHEMDCATAP.geometry, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.geometry, domain=None, range=Optional[str])
 
 slots.had_input_activity = Slot(uri=PROV.wasInformedBy, name="had_input_activity", curie=PROV.curie('wasInformedBy'),
-                   model_uri=CHEMDCATAP.had_input_activity, domain=None, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, Activity]], list[Union[dict, Activity]]]])
+                   model_uri=DCATPLAB.had_input_activity, domain=None, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, Activity]], list[Union[dict, Activity]]]])
 
 slots.had_input_entity = Slot(uri=PROV.used, name="had_input_entity", curie=PROV.curie('used'),
-                   model_uri=CHEMDCATAP.had_input_entity, domain=None, range=Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]])
+                   model_uri=DCATPLAB.had_input_entity, domain=None, range=Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]])
 
 slots.had_output_entity = Slot(uri=PROV.generated, name="had_output_entity", curie=PROV.curie('generated'),
-                   model_uri=CHEMDCATAP.had_output_entity, domain=None, range=Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]])
+                   model_uri=DCATPLAB.had_output_entity, domain=None, range=Optional[Union[dict[Union[str, EntityId], Union[dict, Entity]], list[Union[dict, Entity]]]])
 
 slots.had_role = Slot(uri=DCAT.hadRole, name="had_role", curie=DCAT.curie('hadRole'),
-                   model_uri=CHEMDCATAP.had_role, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.had_role, domain=None, range=Optional[str])
 
 slots.has_dataset = Slot(uri=DCAT.dataset, name="has_dataset", curie=DCAT.curie('dataset'),
-                   model_uri=CHEMDCATAP.has_dataset, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.has_dataset, domain=None, range=Optional[str])
 
 slots.has_part = Slot(uri=DCTERMS.hasPart, name="has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.has_part, domain=None, range=Optional[Union[str, ActivityId]])
+                   model_uri=DCATPLAB.has_part, domain=None, range=Optional[Union[str, ActivityId]])
 
 slots.has_policy = Slot(uri=ODRL.hasPolicy, name="has_policy", curie=ODRL.curie('hasPolicy'),
-                   model_uri=CHEMDCATAP.has_policy, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.has_policy, domain=None, range=Optional[str])
 
 slots.has_qualitative_attribute = Slot(uri=DCTERMS.relation, name="has_qualitative_attribute", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.has_qualitative_attribute, domain=None, range=Optional[Union[Union[dict, QualitativeAttribute], list[Union[dict, QualitativeAttribute]]]])
+                   model_uri=DCATPLAB.has_qualitative_attribute, domain=None, range=Optional[Union[Union[dict, QualitativeAttribute], list[Union[dict, QualitativeAttribute]]]])
 
 slots.has_quantitative_attribute = Slot(uri=DCTERMS.relation, name="has_quantitative_attribute", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.has_quantitative_attribute, domain=None, range=Optional[Union[Union[dict, QuantitativeAttribute], list[Union[dict, QuantitativeAttribute]]]])
+                   model_uri=DCATPLAB.has_quantitative_attribute, domain=None, range=Optional[Union[Union[dict, QuantitativeAttribute], list[Union[dict, QuantitativeAttribute]]]])
 
 slots.has_version = Slot(uri=DCAT.hasVersion, name="has_version", curie=DCAT.curie('hasVersion'),
-                   model_uri=CHEMDCATAP.has_version, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.has_version, domain=None, range=Optional[str])
 
 slots.homepage = Slot(uri=FOAF.homepage, name="homepage", curie=FOAF.curie('homepage'),
-                   model_uri=CHEMDCATAP.homepage, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.homepage, domain=None, range=Optional[str])
 
 slots.id = Slot(uri=DCATAP_PLUS.id, name="id", curie=DCATAP_PLUS.curie('id'),
-                   model_uri=CHEMDCATAP.id, domain=None, range=URIRef)
+                   model_uri=DCATPLAB.id, domain=None, range=URIRef)
 
 slots.identifier = Slot(uri=DCTERMS.identifier, name="identifier", curie=DCTERMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.identifier, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.identifier, domain=None, range=Optional[str])
 
 slots.in_series = Slot(uri=DCAT.inSeries, name="in_series", curie=DCAT.curie('inSeries'),
-                   model_uri=CHEMDCATAP.in_series, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.in_series, domain=None, range=Optional[str])
 
 slots.is_about_activity = Slot(uri=DCTERMS.subject, name="is_about_activity", curie=DCTERMS.curie('subject'),
-                   model_uri=CHEMDCATAP.is_about_activity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedActivityId], Union[dict, EvaluatedActivity]], list[Union[dict, EvaluatedActivity]]]])
+                   model_uri=DCATPLAB.is_about_activity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedActivityId], Union[dict, EvaluatedActivity]], list[Union[dict, EvaluatedActivity]]]])
 
 slots.is_about_entity = Slot(uri=DCTERMS.subject, name="is_about_entity", curie=DCTERMS.curie('subject'),
-                   model_uri=CHEMDCATAP.is_about_entity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedEntityId], Union[dict, EvaluatedEntity]], list[Union[dict, EvaluatedEntity]]]])
+                   model_uri=DCATPLAB.is_about_entity, domain=None, range=Optional[Union[dict[Union[str, EvaluatedEntityId], Union[dict, EvaluatedEntity]], list[Union[dict, EvaluatedEntity]]]])
 
 slots.is_referenced_by = Slot(uri=DCTERMS.isReferencedBy, name="is_referenced_by", curie=DCTERMS.curie('isReferencedBy'),
-                   model_uri=CHEMDCATAP.is_referenced_by, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.is_referenced_by, domain=None, range=Optional[str])
 
 slots.keyword = Slot(uri=DCAT.keyword, name="keyword", curie=DCAT.curie('keyword'),
-                   model_uri=CHEMDCATAP.keyword, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.keyword, domain=None, range=Optional[str])
 
 slots.landing_page = Slot(uri=DCAT.landingPage, name="landing_page", curie=DCAT.curie('landingPage'),
-                   model_uri=CHEMDCATAP.landing_page, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.landing_page, domain=None, range=Optional[str])
 
 slots.language = Slot(uri=DCTERMS.language, name="language", curie=DCTERMS.curie('language'),
-                   model_uri=CHEMDCATAP.language, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.language, domain=None, range=Optional[str])
 
 slots.licence = Slot(uri=DCTERMS.license, name="licence", curie=DCTERMS.curie('license'),
-                   model_uri=CHEMDCATAP.licence, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.licence, domain=None, range=Optional[str])
 
 slots.linked_schemas = Slot(uri=DCTERMS.conformsTo, name="linked_schemas", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.linked_schemas, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.linked_schemas, domain=None, range=Optional[str])
 
 slots.listing_date = Slot(uri=DCTERMS.issued, name="listing_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.listing_date, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.listing_date, domain=None, range=Optional[str])
 
 slots.media_type = Slot(uri=DCAT.mediaType, name="media_type", curie=DCAT.curie('mediaType'),
-                   model_uri=CHEMDCATAP.media_type, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.media_type, domain=None, range=Optional[str])
 
 slots.modification_date = Slot(uri=DCTERMS.modified, name="modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.modification_date, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.modification_date, domain=None, range=Optional[str])
 
 slots.name = Slot(uri=FOAF.name, name="name", curie=FOAF.curie('name'),
-                   model_uri=CHEMDCATAP.name, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.name, domain=None, range=Optional[str])
 
 slots.notation = Slot(uri=SKOS.notation, name="notation", curie=SKOS.curie('notation'),
-                   model_uri=CHEMDCATAP.notation, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.notation, domain=None, range=Optional[str])
 
 slots.occurred_in = Slot(uri=PROV.atLocation, name="occurred_in", curie=PROV.curie('atLocation'),
-                   model_uri=CHEMDCATAP.occurred_in, domain=None, range=Optional[Union[dict, Surrounding]])
+                   model_uri=DCATPLAB.occurred_in, domain=None, range=Optional[Union[dict, Surrounding]])
 
 slots.other_identifier = Slot(uri=ADMS.identifier, name="other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.other_identifier, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.other_identifier, domain=None, range=Optional[str])
 
 slots.packaging_format = Slot(uri=DCAT.packageFormat, name="packaging_format", curie=DCAT.curie('packageFormat'),
-                   model_uri=CHEMDCATAP.packaging_format, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.packaging_format, domain=None, range=Optional[str])
 
 slots.part_of = Slot(uri=DCTERMS.isPartOf, name="part_of", curie=DCTERMS.curie('isPartOf'),
-                   model_uri=CHEMDCATAP.part_of, domain=None, range=Optional[Union[str, ActivityId]])
+                   model_uri=DCATPLAB.part_of, domain=None, range=Optional[Union[str, ActivityId]])
 
 slots.preferred_label = Slot(uri=SKOS.prefLabel, name="preferred_label", curie=SKOS.curie('prefLabel'),
-                   model_uri=CHEMDCATAP.preferred_label, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.preferred_label, domain=None, range=Optional[str])
 
 slots.primary_topic = Slot(uri=FOAF.primaryTopic, name="primary_topic", curie=FOAF.curie('primaryTopic'),
-                   model_uri=CHEMDCATAP.primary_topic, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.primary_topic, domain=None, range=Optional[str])
 
 slots.provenance = Slot(uri=DCTERMS.provenance, name="provenance", curie=DCTERMS.curie('provenance'),
-                   model_uri=CHEMDCATAP.provenance, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.provenance, domain=None, range=Optional[str])
 
 slots.publisher = Slot(uri=DCTERMS.publisher, name="publisher", curie=DCTERMS.curie('publisher'),
-                   model_uri=CHEMDCATAP.publisher, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.publisher, domain=None, range=Optional[str])
 
 slots.qualified_attribution = Slot(uri=PROV.qualifiedAttribution, name="qualified_attribution", curie=PROV.curie('qualifiedAttribution'),
-                   model_uri=CHEMDCATAP.qualified_attribution, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.qualified_attribution, domain=None, range=Optional[str])
 
 slots.qualified_relation = Slot(uri=DCAT.qualifiedRelation, name="qualified_relation", curie=DCAT.curie('qualifiedRelation'),
-                   model_uri=CHEMDCATAP.qualified_relation, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.qualified_relation, domain=None, range=Optional[str])
 
 slots.rdf_type = Slot(uri=RDF.type, name="rdf_type", curie=RDF.curie('type'),
-                   model_uri=CHEMDCATAP.rdf_type, domain=None, range=Optional[Union[dict, DefinedTerm]])
+                   model_uri=DCATPLAB.rdf_type, domain=None, range=Optional[Union[dict, DefinedTerm]])
 
 slots.realized_plan = Slot(uri=PROV.used, name="realized_plan", curie=PROV.curie('used'),
-                   model_uri=CHEMDCATAP.realized_plan, domain=None, range=Optional[Union[dict, Plan]])
+                   model_uri=DCATPLAB.realized_plan, domain=None, range=Optional[Union[dict, Plan]])
 
 slots.record = Slot(uri=DCAT.record, name="record", curie=DCAT.curie('record'),
-                   model_uri=CHEMDCATAP.record, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.record, domain=None, range=Optional[str])
 
 slots.related_resource = Slot(uri=DCTERMS.relation, name="related_resource", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.related_resource, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.related_resource, domain=None, range=Optional[str])
 
 slots.relation = Slot(uri=DCTERMS.relation, name="relation", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.relation, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.relation, domain=None, range=Optional[str])
 
 slots.release_date = Slot(uri=DCTERMS.issued, name="release_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.release_date, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.release_date, domain=None, range=Optional[str])
 
 slots.rights = Slot(uri=DCTERMS.rights, name="rights", curie=DCTERMS.curie('rights'),
-                   model_uri=CHEMDCATAP.rights, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.rights, domain=None, range=Optional[str])
 
 slots.sample = Slot(uri=ADMS.sample, name="sample", curie=ADMS.curie('sample'),
-                   model_uri=CHEMDCATAP.sample, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.sample, domain=None, range=Optional[str])
 
 slots.serves_dataset = Slot(uri=DCAT.servesDataset, name="serves_dataset", curie=DCAT.curie('servesDataset'),
-                   model_uri=CHEMDCATAP.serves_dataset, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.serves_dataset, domain=None, range=Optional[str])
 
 slots.service = Slot(uri=DCAT.service, name="service", curie=DCAT.curie('service'),
-                   model_uri=CHEMDCATAP.service, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.service, domain=None, range=Optional[str])
 
 slots.source = Slot(uri=DCTERMS.source, name="source", curie=DCTERMS.curie('source'),
-                   model_uri=CHEMDCATAP.source, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.source, domain=None, range=Optional[str])
 
 slots.source_metadata = Slot(uri=DCTERMS.source, name="source_metadata", curie=DCTERMS.curie('source'),
-                   model_uri=CHEMDCATAP.source_metadata, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.source_metadata, domain=None, range=Optional[str])
 
 slots.spatial_resolution = Slot(uri=DCAT.spatialResolutionInMeters, name="spatial_resolution", curie=DCAT.curie('spatialResolutionInMeters'),
-                   model_uri=CHEMDCATAP.spatial_resolution, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.spatial_resolution, domain=None, range=Optional[str])
 
 slots.start_date = Slot(uri=DCAT.startDate, name="start_date", curie=DCAT.curie('startDate'),
-                   model_uri=CHEMDCATAP.start_date, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.start_date, domain=None, range=Optional[str])
 
 slots.status = Slot(uri=ADMS.status, name="status", curie=ADMS.curie('status'),
-                   model_uri=CHEMDCATAP.status, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.status, domain=None, range=Optional[str])
 
 slots.temporal_coverage = Slot(uri=DCTERMS.temporal, name="temporal_coverage", curie=DCTERMS.curie('temporal'),
-                   model_uri=CHEMDCATAP.temporal_coverage, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.temporal_coverage, domain=None, range=Optional[str])
 
 slots.temporal_resolution = Slot(uri=DCAT.temporalResolution, name="temporal_resolution", curie=DCAT.curie('temporalResolution'),
-                   model_uri=CHEMDCATAP.temporal_resolution, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.temporal_resolution, domain=None, range=Optional[str])
 
 slots.theme = Slot(uri=DCAT.theme, name="theme", curie=DCAT.curie('theme'),
-                   model_uri=CHEMDCATAP.theme, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.theme, domain=None, range=Optional[str])
 
 slots.themes = Slot(uri=DCAT.themeTaxonomy, name="themes", curie=DCAT.curie('themeTaxonomy'),
-                   model_uri=CHEMDCATAP.themes, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.themes, domain=None, range=Optional[str])
 
 slots.title = Slot(uri=DCTERMS.title, name="title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.title, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.title, domain=None, range=Optional[str])
 
 slots.type = Slot(uri=DCTERMS.type, name="type", curie=DCTERMS.curie('type'),
-                   model_uri=CHEMDCATAP.type, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.type, domain=None, range=Optional[str])
 
 slots.value = Slot(uri=PROV.value, name="value", curie=PROV.curie('value'),
-                   model_uri=CHEMDCATAP.value, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.value, domain=None, range=Optional[str])
 
 slots.version = Slot(uri=DCAT.version, name="version", curie=DCAT.curie('version'),
-                   model_uri=CHEMDCATAP.version, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.version, domain=None, range=Optional[str])
 
 slots.version_notes = Slot(uri=ADMS.versionNotes, name="version_notes", curie=ADMS.curie('versionNotes'),
-                   model_uri=CHEMDCATAP.version_notes, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.version_notes, domain=None, range=Optional[str])
 
 slots.was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="was_generated_by", curie=PROV.curie('wasGeneratedBy'),
-                   model_uri=CHEMDCATAP.was_generated_by, domain=None, range=Optional[str])
-
-slots.used_starting_material = Slot(uri=RO['0004009'], name="used_starting_material", curie=RO.curie('0004009'),
-                   model_uri=CHEMDCATAP.used_starting_material, domain=None, range=Optional[Union[dict[Union[str, StartingMaterialId], Union[dict, StartingMaterial]], list[Union[dict, StartingMaterial]]]])
-
-slots.used_reactant = Slot(uri=RO['0004009'], name="used_reactant", curie=RO.curie('0004009'),
-                   model_uri=CHEMDCATAP.used_reactant, domain=None, range=Optional[Union[dict[Union[str, ReagentId], Union[dict, Reagent]], list[Union[dict, Reagent]]]])
-
-slots.generated_product = Slot(uri=RO['0004008'], name="generated_product", curie=RO.curie('0004008'),
-                   model_uri=CHEMDCATAP.generated_product, domain=None, range=Optional[Union[dict[Union[str, ChemicalProductId], Union[dict, ChemicalProduct]], list[Union[dict, ChemicalProduct]]]])
-
-slots.used_catalyst = Slot(uri=RXNO['0000425'], name="used_catalyst", curie=RXNO.curie('0000425'),
-                   model_uri=CHEMDCATAP.used_catalyst, domain=None, range=Optional[Union[dict[Union[str, CatalystId], Union[dict, Catalyst]], list[Union[dict, Catalyst]]]])
-
-slots.used_solvent = Slot(uri=PROV.wasAssociatedWith, name="used_solvent", curie=PROV.curie('wasAssociatedWith'),
-                   model_uri=CHEMDCATAP.used_solvent, domain=None, range=Optional[Union[dict[Union[str, DissolvingSubstanceId], Union[dict, DissolvingSubstance]], list[Union[dict, DissolvingSubstance]]]])
-
-slots.has_duration = Slot(uri=SCHEMA.duration, name="has_duration", curie=SCHEMA.curie('duration'),
-                   model_uri=CHEMDCATAP.has_duration, domain=None, range=Optional[str])
-
-slots.used_reactor = Slot(uri=PROV.wasAssociatedWith, name="used_reactor", curie=PROV.curie('wasAssociatedWith'),
-                   model_uri=CHEMDCATAP.used_reactor, domain=None, range=Optional[Union[dict[Union[str, ReactorId], Union[dict, Reactor]], list[Union[dict, Reactor]]]])
-
-slots.has_yield = Slot(uri=SIO['000008'], name="has_yield", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_yield, domain=None, range=Optional[Union[Union[dict, Yield], list[Union[dict, Yield]]]])
-
-slots.has_molar_equivalent = Slot(uri=SIO['000008'], name="has_molar_equivalent", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_molar_equivalent, domain=None, range=Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]])
-
-slots.has_percentage_of_total = Slot(uri=SIO['000008'], name="has_percentage_of_total", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_percentage_of_total, domain=None, range=Optional[Union[Union[dict, PercentageOfTotal], list[Union[dict, PercentageOfTotal]]]])
-
-slots.has_reaction_step = Slot(uri=BFO['0000051'], name="has_reaction_step", curie=BFO.curie('0000051'),
-                   model_uri=CHEMDCATAP.has_reaction_step, domain=None, range=Optional[Union[str, ChemicalReactionId]])
+                   model_uri=DCATPLAB.was_generated_by, domain=None, range=Optional[str])
 
 slots.composed_of = Slot(uri=BFO['0000051'], name="composed_of", curie=BFO.curie('0000051'),
-                   model_uri=CHEMDCATAP.composed_of, domain=None, range=Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]])
+                   model_uri=DCATPLAB.composed_of, domain=None, range=Optional[Union[dict[Union[str, ChemicalEntityId], Union[dict, ChemicalEntity]], list[Union[dict, ChemicalEntity]]]])
 
 slots.has_concentration = Slot(uri=SIO['000008'], name="has_concentration", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_concentration, domain=None, range=Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]])
+                   model_uri=DCATPLAB.has_concentration, domain=None, range=Optional[Union[Union[dict, Concentration], list[Union[dict, Concentration]]]])
 
 slots.has_amount = Slot(uri=SIO['000008'], name="has_amount", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_amount, domain=None, range=Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]])
+                   model_uri=DCATPLAB.has_amount, domain=None, range=Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]])
 
 slots.has_ph_value = Slot(uri=SIO['000008'], name="has_ph_value", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_ph_value, domain=None, range=Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]])
+                   model_uri=DCATPLAB.has_ph_value, domain=None, range=Optional[Union[Union[dict, PHValue], list[Union[dict, PHValue]]]])
 
 slots.inchi = Slot(uri=SIO['000008'], name="inchi", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.inchi, domain=None, range=Optional[Union[Union[dict, InChi], list[Union[dict, InChi]]]])
+                   model_uri=DCATPLAB.inchi, domain=None, range=Optional[Union[Union[dict, InChi], list[Union[dict, InChi]]]])
 
 slots.inchikey = Slot(uri=SIO['000008'], name="inchikey", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.inchikey, domain=None, range=Optional[Union[Union[dict, InChIKey], list[Union[dict, InChIKey]]]])
+                   model_uri=DCATPLAB.inchikey, domain=None, range=Optional[Union[Union[dict, InChIKey], list[Union[dict, InChIKey]]]])
 
 slots.smiles = Slot(uri=SIO['000008'], name="smiles", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.smiles, domain=None, range=Optional[Union[Union[dict, SMILES], list[Union[dict, SMILES]]]])
+                   model_uri=DCATPLAB.smiles, domain=None, range=Optional[Union[Union[dict, SMILES], list[Union[dict, SMILES]]]])
 
 slots.molecular_formula = Slot(uri=SIO['000008'], name="molecular_formula", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.molecular_formula, domain=None, range=Optional[Union[Union[dict, MolecularFormula], list[Union[dict, MolecularFormula]]]])
+                   model_uri=DCATPLAB.molecular_formula, domain=None, range=Optional[Union[Union[dict, MolecularFormula], list[Union[dict, MolecularFormula]]]])
 
 slots.iupac_name = Slot(uri=SIO['000008'], name="iupac_name", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.iupac_name, domain=None, range=Optional[Union[Union[dict, IUPACName], list[Union[dict, IUPACName]]]])
+                   model_uri=DCATPLAB.iupac_name, domain=None, range=Optional[Union[Union[dict, IUPACName], list[Union[dict, IUPACName]]]])
 
 slots.has_molar_mass = Slot(uri=SIO['000008'], name="has_molar_mass", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_molar_mass, domain=None, range=Optional[Union[Union[dict, MolarMass], list[Union[dict, MolarMass]]]])
+                   model_uri=DCATPLAB.has_molar_mass, domain=None, range=Optional[Union[Union[dict, MolarMass], list[Union[dict, MolarMass]]]])
+
+slots.used_starting_material = Slot(uri=RO['0004009'], name="used_starting_material", curie=RO.curie('0004009'),
+                   model_uri=DCATPLAB.used_starting_material, domain=None, range=Optional[Union[dict[Union[str, StartingMaterialId], Union[dict, StartingMaterial]], list[Union[dict, StartingMaterial]]]])
+
+slots.used_reactant = Slot(uri=RO['0004009'], name="used_reactant", curie=RO.curie('0004009'),
+                   model_uri=DCATPLAB.used_reactant, domain=None, range=Optional[Union[dict[Union[str, ReagentId], Union[dict, Reagent]], list[Union[dict, Reagent]]]])
+
+slots.generated_product = Slot(uri=RO['0004008'], name="generated_product", curie=RO.curie('0004008'),
+                   model_uri=DCATPLAB.generated_product, domain=None, range=Optional[Union[dict[Union[str, ChemicalProductId], Union[dict, ChemicalProduct]], list[Union[dict, ChemicalProduct]]]])
+
+slots.used_catalyst = Slot(uri=RXNO['0000425'], name="used_catalyst", curie=RXNO.curie('0000425'),
+                   model_uri=DCATPLAB.used_catalyst, domain=None, range=Optional[Union[dict[Union[str, CatalystId], Union[dict, Catalyst]], list[Union[dict, Catalyst]]]])
+
+slots.used_solvent = Slot(uri=PROV.wasAssociatedWith, name="used_solvent", curie=PROV.curie('wasAssociatedWith'),
+                   model_uri=DCATPLAB.used_solvent, domain=None, range=Optional[Union[dict[Union[str, DissolvingSubstanceId], Union[dict, DissolvingSubstance]], list[Union[dict, DissolvingSubstance]]]])
+
+slots.has_duration = Slot(uri=SCHEMA.duration, name="has_duration", curie=SCHEMA.curie('duration'),
+                   model_uri=DCATPLAB.has_duration, domain=None, range=Optional[str])
+
+slots.used_reactor = Slot(uri=PROV.wasAssociatedWith, name="used_reactor", curie=PROV.curie('wasAssociatedWith'),
+                   model_uri=DCATPLAB.used_reactor, domain=None, range=Optional[Union[dict[Union[str, ReactorId], Union[dict, Reactor]], list[Union[dict, Reactor]]]])
+
+slots.has_yield = Slot(uri=SIO['000008'], name="has_yield", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_yield, domain=None, range=Optional[Union[Union[dict, Yield], list[Union[dict, Yield]]]])
+
+slots.has_molar_equivalent = Slot(uri=SIO['000008'], name="has_molar_equivalent", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_molar_equivalent, domain=None, range=Optional[Union[Union[dict, MolarEquivalent], list[Union[dict, MolarEquivalent]]]])
+
+slots.has_percentage_of_total = Slot(uri=SIO['000008'], name="has_percentage_of_total", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_percentage_of_total, domain=None, range=Optional[Union[Union[dict, PercentageOfTotal], list[Union[dict, PercentageOfTotal]]]])
+
+slots.has_reaction_step = Slot(uri=BFO['0000051'], name="has_reaction_step", curie=BFO.curie('0000051'),
+                   model_uri=DCATPLAB.has_reaction_step, domain=None, range=Optional[Union[str, ChemicalReactionId]])
 
 slots.alternative_label = Slot(uri=SKOS.altLabel, name="alternative_label", curie=SKOS.curie('altLabel'),
-                   model_uri=CHEMDCATAP.alternative_label, domain=None, range=Optional[str])
+                   model_uri=DCATPLAB.alternative_label, domain=None, range=Optional[str])
 
 slots.has_physical_state = Slot(uri=SIO['000008'], name="has_physical_state", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_physical_state, domain=None, range=Optional[Union[str, "PhysicalStateEnum"]])
+                   model_uri=DCATPLAB.has_physical_state, domain=None, range=Optional[Union[str, "PhysicalStateEnum"]])
 
 slots.has_temperature = Slot(uri=SIO['000008'], name="has_temperature", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_temperature, domain=None, range=Optional[Union[Union[dict, Temperature], list[Union[dict, Temperature]]]])
+                   model_uri=DCATPLAB.has_temperature, domain=None, range=Optional[Union[Union[dict, Temperature], list[Union[dict, Temperature]]]])
 
 slots.has_mass = Slot(uri=SIO['000008'], name="has_mass", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_mass, domain=None, range=Optional[Union[Union[dict, Mass], list[Union[dict, Mass]]]])
+                   model_uri=DCATPLAB.has_mass, domain=None, range=Optional[Union[Union[dict, Mass], list[Union[dict, Mass]]]])
 
 slots.has_volume = Slot(uri=SIO['000008'], name="has_volume", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_volume, domain=None, range=Optional[Union[Union[dict, Volume], list[Union[dict, Volume]]]])
+                   model_uri=DCATPLAB.has_volume, domain=None, range=Optional[Union[Union[dict, Volume], list[Union[dict, Volume]]]])
 
 slots.has_density = Slot(uri=SIO['000008'], name="has_density", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_density, domain=None, range=Optional[Union[Union[dict, Density], list[Union[dict, Density]]]])
+                   model_uri=DCATPLAB.has_density, domain=None, range=Optional[Union[Union[dict, Density], list[Union[dict, Density]]]])
 
 slots.has_pressure = Slot(uri=SIO['000008'], name="has_pressure", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.has_pressure, domain=None, range=Optional[Union[Union[dict, Pressure], list[Union[dict, Pressure]]]])
+                   model_uri=DCATPLAB.has_pressure, domain=None, range=Optional[Union[Union[dict, Pressure], list[Union[dict, Pressure]]]])
 
 slots.derived_from = Slot(uri=PROV.wasDerivedFrom, name="derived_from", curie=PROV.curie('wasDerivedFrom'),
-                   model_uri=CHEMDCATAP.derived_from, domain=None, range=Optional[Union[dict, Entity]])
+                   model_uri=DCATPLAB.derived_from, domain=None, range=Optional[Union[dict, Entity]])
 
 slots.definedTerm__from_CV = Slot(uri=SCHEMA.inDefinedTermSet, name="definedTerm__from_CV", curie=SCHEMA.curie('inDefinedTermSet'),
-                   model_uri=CHEMDCATAP.definedTerm__from_CV, domain=None, range=Optional[Union[str, URIorCURIE]])
+                   model_uri=DCATPLAB.definedTerm__from_CV, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.quantitativeAttribute__has_quantity_type = Slot(uri=QUDT.hasQuantityKind, name="quantitativeAttribute__has_quantity_type", curie=QUDT.curie('hasQuantityKind'),
-                   model_uri=CHEMDCATAP.quantitativeAttribute__has_quantity_type, domain=None, range=Union[str, DefinedTermId])
+                   model_uri=DCATPLAB.quantitativeAttribute__has_quantity_type, domain=None, range=Union[str, DefinedTermId])
 
 slots.quantitativeAttribute__unit = Slot(uri=QUDT.unit, name="quantitativeAttribute__unit", curie=QUDT.curie('unit'),
-                   model_uri=CHEMDCATAP.quantitativeAttribute__unit, domain=None, range=Optional[Union[str, DefinedTermId]])
+                   model_uri=DCATPLAB.quantitativeAttribute__unit, domain=None, range=Optional[Union[str, DefinedTermId]])
+
+slots.LabSynthesisActivity_evaluated_entity = Slot(uri=PROV.used, name="LabSynthesisActivity_evaluated_entity", curie=PROV.curie('used'),
+                   model_uri=DCATPLAB.LabSynthesisActivity_evaluated_entity, domain=LabSynthesisActivity, range=Optional[Union[dict[Union[str, MaterialSampleId], Union[dict, "MaterialSample"]], list[Union[dict, "MaterialSample"]]]])
+
+slots.LabSynthesisActivity_had_output_entity = Slot(uri=PROV.generated, name="LabSynthesisActivity_had_output_entity", curie=PROV.curie('generated'),
+                   model_uri=DCATPLAB.LabSynthesisActivity_had_output_entity, domain=LabSynthesisActivity, range=Optional[Union[dict[Union[str, MaterialSampleId], Union[dict, "MaterialSample"]], list[Union[dict, "MaterialSample"]]]])
+
+slots.LabSynthesisActivity_occurred_in = Slot(uri=PROV.atLocation, name="LabSynthesisActivity_occurred_in", curie=PROV.curie('atLocation'),
+                   model_uri=DCATPLAB.LabSynthesisActivity_occurred_in, domain=LabSynthesisActivity, range=Optional[Union[dict, "Laboratory"]])
+
+slots.LabSynthesisStep_had_input_activity = Slot(uri=PROV.wasInformedBy, name="LabSynthesisStep_had_input_activity", curie=PROV.curie('wasInformedBy'),
+                   model_uri=DCATPLAB.LabSynthesisStep_had_input_activity, domain=LabSynthesisStep, range=Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, "LabSynthesisStep"]], list[Union[dict, "LabSynthesisStep"]]]])
+
+slots.LabSynthesisStep_has_part = Slot(uri=DCTERMS.hasPart, name="LabSynthesisStep_has_part", curie=DCTERMS.curie('hasPart'),
+                   model_uri=DCATPLAB.LabSynthesisStep_has_part, domain=LabSynthesisStep, range=Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, "LabSynthesisStep"]], list[Union[dict, "LabSynthesisStep"]]]])
+
+slots.RepetitionBlock_has_part = Slot(uri=DCTERMS.hasPart, name="RepetitionBlock_has_part", curie=DCTERMS.curie('hasPart'),
+                   model_uri=DCATPLAB.RepetitionBlock_has_part, domain=RepetitionBlock, range=Optional[Union[dict[Union[str, LabSynthesisStepId], Union[dict, LabSynthesisStep]], list[Union[dict, LabSynthesisStep]]]])
 
 slots.Activity_title = Slot(uri=DCTERMS.title, name="Activity_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.Activity_title, domain=Activity, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Activity_title, domain=Activity, range=Optional[Union[str, list[str]]])
 
 slots.Activity_description = Slot(uri=DCTERMS.description, name="Activity_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.Activity_description, domain=Activity, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Activity_description, domain=Activity, range=Optional[Union[str, list[str]]])
 
 slots.Activity_has_part = Slot(uri=DCTERMS.hasPart, name="Activity_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.Activity_has_part, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
+                   model_uri=DCATPLAB.Activity_has_part, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
 
 slots.Activity_part_of = Slot(uri=DCTERMS.isPartOf, name="Activity_part_of", curie=DCTERMS.curie('isPartOf'),
-                   model_uri=CHEMDCATAP.Activity_part_of, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
+                   model_uri=DCATPLAB.Activity_part_of, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
 
 slots.Activity_other_identifier = Slot(uri=ADMS.identifier, name="Activity_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Activity_other_identifier, domain=Activity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.Activity_other_identifier, domain=Activity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Activity_has_qualitative_attribute = Slot(uri=DCTERMS.relation, name="Activity_has_qualitative_attribute", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.Activity_has_qualitative_attribute, domain=Activity, range=Optional[Union[Union[dict, "QualitativeAttribute"], list[Union[dict, "QualitativeAttribute"]]]])
+                   model_uri=DCATPLAB.Activity_has_qualitative_attribute, domain=Activity, range=Optional[Union[Union[dict, "QualitativeAttribute"], list[Union[dict, "QualitativeAttribute"]]]])
 
 slots.Activity_has_quantitative_attribute = Slot(uri=DCTERMS.relation, name="Activity_has_quantitative_attribute", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.Activity_has_quantitative_attribute, domain=Activity, range=Optional[Union[Union[dict, "QuantitativeAttribute"], list[Union[dict, "QuantitativeAttribute"]]]])
+                   model_uri=DCATPLAB.Activity_has_quantitative_attribute, domain=Activity, range=Optional[Union[Union[dict, "QuantitativeAttribute"], list[Union[dict, "QuantitativeAttribute"]]]])
 
 slots.Activity_had_input_entity = Slot(uri=PROV.used, name="Activity_had_input_entity", curie=PROV.curie('used'),
-                   model_uri=CHEMDCATAP.Activity_had_input_entity, domain=Activity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
+                   model_uri=DCATPLAB.Activity_had_input_entity, domain=Activity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
 
 slots.Activity_had_output_entity = Slot(uri=PROV.generated, name="Activity_had_output_entity", curie=PROV.curie('generated'),
-                   model_uri=CHEMDCATAP.Activity_had_output_entity, domain=Activity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
+                   model_uri=DCATPLAB.Activity_had_output_entity, domain=Activity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
 
 slots.Activity_had_input_activity = Slot(uri=PROV.wasInformedBy, name="Activity_had_input_activity", curie=PROV.curie('wasInformedBy'),
-                   model_uri=CHEMDCATAP.Activity_had_input_activity, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
+                   model_uri=DCATPLAB.Activity_had_input_activity, domain=Activity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, "Activity"]], list[Union[dict, "Activity"]]]])
 
 slots.Activity_carried_out_by = Slot(uri=PROV.wasAssociatedWith, name="Activity_carried_out_by", curie=PROV.curie('wasAssociatedWith'),
-                   model_uri=CHEMDCATAP.Activity_carried_out_by, domain=Activity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
+                   model_uri=DCATPLAB.Activity_carried_out_by, domain=Activity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
 
 slots.Agent_name = Slot(uri=FOAF.name, name="Agent_name", curie=FOAF.curie('name'),
-                   model_uri=CHEMDCATAP.Agent_name, domain=Agent, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Agent_name, domain=Agent, range=Union[str, list[str]])
 
 slots.Agent_type = Slot(uri=DCTERMS.type, name="Agent_type", curie=DCTERMS.curie('type'),
-                   model_uri=CHEMDCATAP.Agent_type, domain=Agent, range=Optional[Union[dict, "Concept"]])
+                   model_uri=DCATPLAB.Agent_type, domain=Agent, range=Optional[Union[dict, "Concept"]])
 
 slots.AgenticEntity_has_part = Slot(uri=DCTERMS.hasPart, name="AgenticEntity_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.AgenticEntity_has_part, domain=AgenticEntity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
+                   model_uri=DCATPLAB.AgenticEntity_has_part, domain=AgenticEntity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
 
 slots.AgenticEntity_part_of = Slot(uri=DCTERMS.isPartOf, name="AgenticEntity_part_of", curie=DCTERMS.curie('isPartOf'),
-                   model_uri=CHEMDCATAP.AgenticEntity_part_of, domain=AgenticEntity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
+                   model_uri=DCATPLAB.AgenticEntity_part_of, domain=AgenticEntity, range=Optional[Union[dict[Union[str, AgenticEntityId], Union[dict, "AgenticEntity"]], list[Union[dict, "AgenticEntity"]]]])
 
 slots.AgenticEntity_other_identifier = Slot(uri=ADMS.identifier, name="AgenticEntity_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.AgenticEntity_other_identifier, domain=AgenticEntity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.AgenticEntity_other_identifier, domain=AgenticEntity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.AnalysisDataset_was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="AnalysisDataset_was_generated_by", curie=PROV.curie('wasGeneratedBy'),
-                   model_uri=CHEMDCATAP.AnalysisDataset_was_generated_by, domain=AnalysisDataset, range=Optional[Union[dict[Union[str, DataAnalysisId], Union[dict, DataAnalysis]], list[Union[dict, DataAnalysis]]]])
+                   model_uri=DCATPLAB.AnalysisDataset_was_generated_by, domain=AnalysisDataset, range=Optional[Union[dict[Union[str, DataAnalysisId], Union[dict, DataAnalysis]], list[Union[dict, DataAnalysis]]]])
 
 slots.AnalysisSourceData_was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="AnalysisSourceData_was_generated_by", curie=PROV.curie('wasGeneratedBy'),
-                   model_uri=CHEMDCATAP.AnalysisSourceData_was_generated_by, domain=AnalysisSourceData, range=Optional[Union[dict[Union[str, DataGeneratingActivityId], Union[dict, DataGeneratingActivity]], list[Union[dict, DataGeneratingActivity]]]])
+                   model_uri=DCATPLAB.AnalysisSourceData_was_generated_by, domain=AnalysisSourceData, range=Optional[Union[dict[Union[str, DataGeneratingActivityId], Union[dict, DataGeneratingActivity]], list[Union[dict, DataGeneratingActivity]]]])
 
 slots.Catalogue_applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="Catalogue_applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.Catalogue_applicable_legislation, domain=Catalogue, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
+                   model_uri=DCATPLAB.Catalogue_applicable_legislation, domain=Catalogue, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
 
 slots.Catalogue_catalogue = Slot(uri=DCAT.catalog, name="Catalogue_catalogue", curie=DCAT.curie('catalog'),
-                   model_uri=CHEMDCATAP.Catalogue_catalogue, domain=Catalogue, range=Optional[Union[Union[dict, "Catalogue"], list[Union[dict, "Catalogue"]]]])
+                   model_uri=DCATPLAB.Catalogue_catalogue, domain=Catalogue, range=Optional[Union[Union[dict, "Catalogue"], list[Union[dict, "Catalogue"]]]])
 
 slots.Catalogue_creator = Slot(uri=DCTERMS.creator, name="Catalogue_creator", curie=DCTERMS.curie('creator'),
-                   model_uri=CHEMDCATAP.Catalogue_creator, domain=Catalogue, range=Optional[Union[dict, Agent]])
+                   model_uri=DCATPLAB.Catalogue_creator, domain=Catalogue, range=Optional[Union[dict, Agent]])
 
 slots.Catalogue_description = Slot(uri=DCTERMS.description, name="Catalogue_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.Catalogue_description, domain=Catalogue, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Catalogue_description, domain=Catalogue, range=Union[str, list[str]])
 
 slots.Catalogue_geographical_coverage = Slot(uri=DCTERMS.spatial, name="Catalogue_geographical_coverage", curie=DCTERMS.curie('spatial'),
-                   model_uri=CHEMDCATAP.Catalogue_geographical_coverage, domain=Catalogue, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
+                   model_uri=DCATPLAB.Catalogue_geographical_coverage, domain=Catalogue, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
 
 slots.Catalogue_has_dataset = Slot(uri=DCAT.dataset, name="Catalogue_has_dataset", curie=DCAT.curie('dataset'),
-                   model_uri=CHEMDCATAP.Catalogue_has_dataset, domain=Catalogue, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
+                   model_uri=DCATPLAB.Catalogue_has_dataset, domain=Catalogue, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
 
 slots.Catalogue_has_part = Slot(uri=DCTERMS.hasPart, name="Catalogue_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.Catalogue_has_part, domain=Catalogue, range=Optional[Union[Union[dict, "Catalogue"], list[Union[dict, "Catalogue"]]]])
+                   model_uri=DCATPLAB.Catalogue_has_part, domain=Catalogue, range=Optional[Union[Union[dict, "Catalogue"], list[Union[dict, "Catalogue"]]]])
 
 slots.Catalogue_homepage = Slot(uri=FOAF.homepage, name="Catalogue_homepage", curie=FOAF.curie('homepage'),
-                   model_uri=CHEMDCATAP.Catalogue_homepage, domain=Catalogue, range=Optional[Union[dict, "Document"]])
+                   model_uri=DCATPLAB.Catalogue_homepage, domain=Catalogue, range=Optional[Union[dict, "Document"]])
 
 slots.Catalogue_language = Slot(uri=DCTERMS.language, name="Catalogue_language", curie=DCTERMS.curie('language'),
-                   model_uri=CHEMDCATAP.Catalogue_language, domain=Catalogue, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
+                   model_uri=DCATPLAB.Catalogue_language, domain=Catalogue, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
 
 slots.Catalogue_licence = Slot(uri=DCTERMS.license, name="Catalogue_licence", curie=DCTERMS.curie('license'),
-                   model_uri=CHEMDCATAP.Catalogue_licence, domain=Catalogue, range=Optional[Union[dict, "LicenseDocument"]])
+                   model_uri=DCATPLAB.Catalogue_licence, domain=Catalogue, range=Optional[Union[dict, "LicenseDocument"]])
 
 slots.Catalogue_modification_date = Slot(uri=DCTERMS.modified, name="Catalogue_modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.Catalogue_modification_date, domain=Catalogue, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Catalogue_modification_date, domain=Catalogue, range=Optional[Union[str, XSDDate]])
 
 slots.Catalogue_publisher = Slot(uri=DCTERMS.publisher, name="Catalogue_publisher", curie=DCTERMS.curie('publisher'),
-                   model_uri=CHEMDCATAP.Catalogue_publisher, domain=Catalogue, range=Union[dict, Agent])
+                   model_uri=DCATPLAB.Catalogue_publisher, domain=Catalogue, range=Union[dict, Agent])
 
 slots.Catalogue_record = Slot(uri=DCAT.record, name="Catalogue_record", curie=DCAT.curie('record'),
-                   model_uri=CHEMDCATAP.Catalogue_record, domain=Catalogue, range=Optional[Union[Union[dict, "CatalogueRecord"], list[Union[dict, "CatalogueRecord"]]]])
+                   model_uri=DCATPLAB.Catalogue_record, domain=Catalogue, range=Optional[Union[Union[dict, "CatalogueRecord"], list[Union[dict, "CatalogueRecord"]]]])
 
 slots.Catalogue_release_date = Slot(uri=DCTERMS.issued, name="Catalogue_release_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.Catalogue_release_date, domain=Catalogue, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Catalogue_release_date, domain=Catalogue, range=Optional[Union[str, XSDDate]])
 
 slots.Catalogue_rights = Slot(uri=DCTERMS.rights, name="Catalogue_rights", curie=DCTERMS.curie('rights'),
-                   model_uri=CHEMDCATAP.Catalogue_rights, domain=Catalogue, range=Optional[Union[dict, "RightsStatement"]])
+                   model_uri=DCATPLAB.Catalogue_rights, domain=Catalogue, range=Optional[Union[dict, "RightsStatement"]])
 
 slots.Catalogue_service = Slot(uri=DCAT.service, name="Catalogue_service", curie=DCAT.curie('service'),
-                   model_uri=CHEMDCATAP.Catalogue_service, domain=Catalogue, range=Optional[Union[Union[dict, "DataService"], list[Union[dict, "DataService"]]]])
+                   model_uri=DCATPLAB.Catalogue_service, domain=Catalogue, range=Optional[Union[Union[dict, "DataService"], list[Union[dict, "DataService"]]]])
 
 slots.Catalogue_temporal_coverage = Slot(uri=DCTERMS.temporal, name="Catalogue_temporal_coverage", curie=DCTERMS.curie('temporal'),
-                   model_uri=CHEMDCATAP.Catalogue_temporal_coverage, domain=Catalogue, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
+                   model_uri=DCATPLAB.Catalogue_temporal_coverage, domain=Catalogue, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
 
 slots.Catalogue_themes = Slot(uri=DCAT.themeTaxonomy, name="Catalogue_themes", curie=DCAT.curie('themeTaxonomy'),
-                   model_uri=CHEMDCATAP.Catalogue_themes, domain=Catalogue, range=Optional[Union[Union[dict, "ConceptScheme"], list[Union[dict, "ConceptScheme"]]]])
+                   model_uri=DCATPLAB.Catalogue_themes, domain=Catalogue, range=Optional[Union[Union[dict, "ConceptScheme"], list[Union[dict, "ConceptScheme"]]]])
 
 slots.Catalogue_title = Slot(uri=DCTERMS.title, name="Catalogue_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.Catalogue_title, domain=Catalogue, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Catalogue_title, domain=Catalogue, range=Union[str, list[str]])
 
 slots.CatalogueRecord_application_profile = Slot(uri=DCTERMS.conformsTo, name="CatalogueRecord_application_profile", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_application_profile, domain=CatalogueRecord, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
+                   model_uri=DCATPLAB.CatalogueRecord_application_profile, domain=CatalogueRecord, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
 
 slots.CatalogueRecord_change_type = Slot(uri=ADMS.status, name="CatalogueRecord_change_type", curie=ADMS.curie('status'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_change_type, domain=CatalogueRecord, range=Optional[Union[dict, "Concept"]])
+                   model_uri=DCATPLAB.CatalogueRecord_change_type, domain=CatalogueRecord, range=Optional[Union[dict, "Concept"]])
 
 slots.CatalogueRecord_description = Slot(uri=DCTERMS.description, name="CatalogueRecord_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_description, domain=CatalogueRecord, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.CatalogueRecord_description, domain=CatalogueRecord, range=Optional[Union[str, list[str]]])
 
 slots.CatalogueRecord_language = Slot(uri=DCTERMS.language, name="CatalogueRecord_language", curie=DCTERMS.curie('language'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_language, domain=CatalogueRecord, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
+                   model_uri=DCATPLAB.CatalogueRecord_language, domain=CatalogueRecord, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
 
 slots.CatalogueRecord_listing_date = Slot(uri=DCTERMS.issued, name="CatalogueRecord_listing_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_listing_date, domain=CatalogueRecord, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.CatalogueRecord_listing_date, domain=CatalogueRecord, range=Optional[Union[str, XSDDate]])
 
 slots.CatalogueRecord_modification_date = Slot(uri=DCTERMS.modified, name="CatalogueRecord_modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_modification_date, domain=CatalogueRecord, range=Union[str, XSDDate])
+                   model_uri=DCATPLAB.CatalogueRecord_modification_date, domain=CatalogueRecord, range=Union[str, XSDDate])
 
 slots.CatalogueRecord_primary_topic = Slot(uri=FOAF.primaryTopic, name="CatalogueRecord_primary_topic", curie=FOAF.curie('primaryTopic'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_primary_topic, domain=CatalogueRecord, range=Union[dict, Any])
+                   model_uri=DCATPLAB.CatalogueRecord_primary_topic, domain=CatalogueRecord, range=Union[dict, Any])
 
 slots.CatalogueRecord_source_metadata = Slot(uri=DCTERMS.source, name="CatalogueRecord_source_metadata", curie=DCTERMS.curie('source'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_source_metadata, domain=CatalogueRecord, range=Optional[Union[dict, "CatalogueRecord"]])
+                   model_uri=DCATPLAB.CatalogueRecord_source_metadata, domain=CatalogueRecord, range=Optional[Union[dict, "CatalogueRecord"]])
 
 slots.CatalogueRecord_title = Slot(uri=DCTERMS.title, name="CatalogueRecord_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.CatalogueRecord_title, domain=CatalogueRecord, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.CatalogueRecord_title, domain=CatalogueRecord, range=Optional[Union[str, list[str]]])
 
 slots.Checksum_algorithm = Slot(uri=SPDX.algorithm, name="Checksum_algorithm", curie=SPDX.curie('algorithm'),
-                   model_uri=CHEMDCATAP.Checksum_algorithm, domain=Checksum, range=Union[dict, "ChecksumAlgorithm"])
+                   model_uri=DCATPLAB.Checksum_algorithm, domain=Checksum, range=Union[dict, "ChecksumAlgorithm"])
 
 slots.Checksum_checksum_value = Slot(uri=SPDX.checksumValue, name="Checksum_checksum_value", curie=SPDX.curie('checksumValue'),
-                   model_uri=CHEMDCATAP.Checksum_checksum_value, domain=Checksum, range=str)
+                   model_uri=DCATPLAB.Checksum_checksum_value, domain=Checksum, range=str)
 
 slots.ClassifierMixin_type = Slot(uri=DCTERMS.type, name="ClassifierMixin_type", curie=DCTERMS.curie('type'),
-                   model_uri=CHEMDCATAP.ClassifierMixin_type, domain=None, range=Optional[Union[dict, "DefinedTerm"]])
+                   model_uri=DCATPLAB.ClassifierMixin_type, domain=None, range=Optional[Union[dict, "DefinedTerm"]])
 
 slots.Concept_preferred_label = Slot(uri=SKOS.prefLabel, name="Concept_preferred_label", curie=SKOS.curie('prefLabel'),
-                   model_uri=CHEMDCATAP.Concept_preferred_label, domain=Concept, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Concept_preferred_label, domain=Concept, range=Union[str, list[str]])
 
 slots.ConceptScheme_title = Slot(uri=DCTERMS.title, name="ConceptScheme_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.ConceptScheme_title, domain=ConceptScheme, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.ConceptScheme_title, domain=ConceptScheme, range=Union[str, list[str]])
 
 slots.DataAnalysis_evaluated_entity = Slot(uri=PROV.used, name="DataAnalysis_evaluated_entity", curie=PROV.curie('used'),
-                   model_uri=CHEMDCATAP.DataAnalysis_evaluated_entity, domain=DataAnalysis, range=Optional[Union[dict[Union[str, AnalysisSourceDataId], Union[dict, "AnalysisSourceData"]], list[Union[dict, "AnalysisSourceData"]]]])
+                   model_uri=DCATPLAB.DataAnalysis_evaluated_entity, domain=DataAnalysis, range=Optional[Union[dict[Union[str, AnalysisSourceDataId], Union[dict, "AnalysisSourceData"]], list[Union[dict, "AnalysisSourceData"]]]])
 
 slots.DataService_access_rights = Slot(uri=DCTERMS.accessRights, name="DataService_access_rights", curie=DCTERMS.curie('accessRights'),
-                   model_uri=CHEMDCATAP.DataService_access_rights, domain=DataService, range=Optional[Union[dict, "RightsStatement"]])
+                   model_uri=DCATPLAB.DataService_access_rights, domain=DataService, range=Optional[Union[dict, "RightsStatement"]])
 
 slots.DataService_applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="DataService_applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.DataService_applicable_legislation, domain=DataService, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
+                   model_uri=DCATPLAB.DataService_applicable_legislation, domain=DataService, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
 
 slots.DataService_conforms_to = Slot(uri=DCTERMS.conformsTo, name="DataService_conforms_to", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.DataService_conforms_to, domain=DataService, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
+                   model_uri=DCATPLAB.DataService_conforms_to, domain=DataService, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
 
 slots.DataService_contact_point = Slot(uri=DCAT.contactPoint, name="DataService_contact_point", curie=DCAT.curie('contactPoint'),
-                   model_uri=CHEMDCATAP.DataService_contact_point, domain=DataService, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
+                   model_uri=DCATPLAB.DataService_contact_point, domain=DataService, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
 
 slots.DataService_description = Slot(uri=DCTERMS.description, name="DataService_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.DataService_description, domain=DataService, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.DataService_description, domain=DataService, range=Optional[Union[str, list[str]]])
 
 slots.DataService_documentation = Slot(uri=FOAF.page, name="DataService_documentation", curie=FOAF.curie('page'),
-                   model_uri=CHEMDCATAP.DataService_documentation, domain=DataService, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
+                   model_uri=DCATPLAB.DataService_documentation, domain=DataService, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
 
 slots.DataService_endpoint_URL = Slot(uri=DCAT.endpointURL, name="DataService_endpoint_URL", curie=DCAT.curie('endpointURL'),
-                   model_uri=CHEMDCATAP.DataService_endpoint_URL, domain=DataService, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
+                   model_uri=DCATPLAB.DataService_endpoint_URL, domain=DataService, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
 
 slots.DataService_endpoint_description = Slot(uri=DCAT.endpointDescription, name="DataService_endpoint_description", curie=DCAT.curie('endpointDescription'),
-                   model_uri=CHEMDCATAP.DataService_endpoint_description, domain=DataService, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
+                   model_uri=DCATPLAB.DataService_endpoint_description, domain=DataService, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
 
 slots.DataService_format = Slot(uri=DCTERMS.format, name="DataService_format", curie=DCTERMS.curie('format'),
-                   model_uri=CHEMDCATAP.DataService_format, domain=DataService, range=Optional[Union[Union[dict, "MediaTypeOrExtent"], list[Union[dict, "MediaTypeOrExtent"]]]])
+                   model_uri=DCATPLAB.DataService_format, domain=DataService, range=Optional[Union[Union[dict, "MediaTypeOrExtent"], list[Union[dict, "MediaTypeOrExtent"]]]])
 
 slots.DataService_keyword = Slot(uri=DCAT.keyword, name="DataService_keyword", curie=DCAT.curie('keyword'),
-                   model_uri=CHEMDCATAP.DataService_keyword, domain=DataService, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.DataService_keyword, domain=DataService, range=Optional[Union[str, list[str]]])
 
 slots.DataService_landing_page = Slot(uri=DCAT.landingPage, name="DataService_landing_page", curie=DCAT.curie('landingPage'),
-                   model_uri=CHEMDCATAP.DataService_landing_page, domain=DataService, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
+                   model_uri=DCATPLAB.DataService_landing_page, domain=DataService, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
 
 slots.DataService_licence = Slot(uri=DCTERMS.license, name="DataService_licence", curie=DCTERMS.curie('license'),
-                   model_uri=CHEMDCATAP.DataService_licence, domain=DataService, range=Optional[Union[dict, "LicenseDocument"]])
+                   model_uri=DCATPLAB.DataService_licence, domain=DataService, range=Optional[Union[dict, "LicenseDocument"]])
 
 slots.DataService_publisher = Slot(uri=DCTERMS.publisher, name="DataService_publisher", curie=DCTERMS.curie('publisher'),
-                   model_uri=CHEMDCATAP.DataService_publisher, domain=DataService, range=Optional[Union[dict, Agent]])
+                   model_uri=DCATPLAB.DataService_publisher, domain=DataService, range=Optional[Union[dict, Agent]])
 
 slots.DataService_serves_dataset = Slot(uri=DCAT.servesDataset, name="DataService_serves_dataset", curie=DCAT.curie('servesDataset'),
-                   model_uri=CHEMDCATAP.DataService_serves_dataset, domain=DataService, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
+                   model_uri=DCATPLAB.DataService_serves_dataset, domain=DataService, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
 
 slots.DataService_theme = Slot(uri=DCAT.theme, name="DataService_theme", curie=DCAT.curie('theme'),
-                   model_uri=CHEMDCATAP.DataService_theme, domain=DataService, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
+                   model_uri=DCATPLAB.DataService_theme, domain=DataService, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
 
 slots.DataService_title = Slot(uri=DCTERMS.title, name="DataService_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.DataService_title, domain=DataService, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.DataService_title, domain=DataService, range=Union[str, list[str]])
 
 slots.Dataset_access_rights = Slot(uri=DCTERMS.accessRights, name="Dataset_access_rights", curie=DCTERMS.curie('accessRights'),
-                   model_uri=CHEMDCATAP.Dataset_access_rights, domain=Dataset, range=Optional[Union[dict, "RightsStatement"]])
+                   model_uri=DCATPLAB.Dataset_access_rights, domain=Dataset, range=Optional[Union[dict, "RightsStatement"]])
 
 slots.Dataset_applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="Dataset_applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.Dataset_applicable_legislation, domain=Dataset, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
+                   model_uri=DCATPLAB.Dataset_applicable_legislation, domain=Dataset, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
 
 slots.Dataset_conforms_to = Slot(uri=DCTERMS.conformsTo, name="Dataset_conforms_to", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.Dataset_conforms_to, domain=Dataset, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
+                   model_uri=DCATPLAB.Dataset_conforms_to, domain=Dataset, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
 
 slots.Dataset_contact_point = Slot(uri=DCAT.contactPoint, name="Dataset_contact_point", curie=DCAT.curie('contactPoint'),
-                   model_uri=CHEMDCATAP.Dataset_contact_point, domain=Dataset, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
+                   model_uri=DCATPLAB.Dataset_contact_point, domain=Dataset, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
 
 slots.Dataset_creator = Slot(uri=DCTERMS.creator, name="Dataset_creator", curie=DCTERMS.curie('creator'),
-                   model_uri=CHEMDCATAP.Dataset_creator, domain=Dataset, range=Optional[Union[Union[dict, Agent], list[Union[dict, Agent]]]])
+                   model_uri=DCATPLAB.Dataset_creator, domain=Dataset, range=Optional[Union[Union[dict, Agent], list[Union[dict, Agent]]]])
 
 slots.Dataset_dataset_distribution = Slot(uri=DCAT.distribution, name="Dataset_dataset_distribution", curie=DCAT.curie('distribution'),
-                   model_uri=CHEMDCATAP.Dataset_dataset_distribution, domain=Dataset, range=Optional[Union[Union[dict, "Distribution"], list[Union[dict, "Distribution"]]]])
+                   model_uri=DCATPLAB.Dataset_dataset_distribution, domain=Dataset, range=Optional[Union[Union[dict, "Distribution"], list[Union[dict, "Distribution"]]]])
 
 slots.Dataset_description = Slot(uri=DCTERMS.description, name="Dataset_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.Dataset_description, domain=Dataset, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Dataset_description, domain=Dataset, range=Union[str, list[str]])
 
 slots.Dataset_documentation = Slot(uri=FOAF.page, name="Dataset_documentation", curie=FOAF.curie('page'),
-                   model_uri=CHEMDCATAP.Dataset_documentation, domain=Dataset, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
+                   model_uri=DCATPLAB.Dataset_documentation, domain=Dataset, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
 
 slots.Dataset_frequency = Slot(uri=DCTERMS.accrualPeriodicity, name="Dataset_frequency", curie=DCTERMS.curie('accrualPeriodicity'),
-                   model_uri=CHEMDCATAP.Dataset_frequency, domain=Dataset, range=Optional[Union[dict, "Frequency"]])
+                   model_uri=DCATPLAB.Dataset_frequency, domain=Dataset, range=Optional[Union[dict, "Frequency"]])
 
 slots.Dataset_geographical_coverage = Slot(uri=DCTERMS.spatial, name="Dataset_geographical_coverage", curie=DCTERMS.curie('spatial'),
-                   model_uri=CHEMDCATAP.Dataset_geographical_coverage, domain=Dataset, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
+                   model_uri=DCATPLAB.Dataset_geographical_coverage, domain=Dataset, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
 
 slots.Dataset_has_version = Slot(uri=DCAT.hasVersion, name="Dataset_has_version", curie=DCAT.curie('hasVersion'),
-                   model_uri=CHEMDCATAP.Dataset_has_version, domain=Dataset, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
+                   model_uri=DCATPLAB.Dataset_has_version, domain=Dataset, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
 
 slots.Dataset_identifier = Slot(uri=DCTERMS.identifier, name="Dataset_identifier", curie=DCTERMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Dataset_identifier, domain=Dataset, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Dataset_identifier, domain=Dataset, range=Optional[Union[str, list[str]]])
 
 slots.Dataset_in_series = Slot(uri=DCAT.inSeries, name="Dataset_in_series", curie=DCAT.curie('inSeries'),
-                   model_uri=CHEMDCATAP.Dataset_in_series, domain=Dataset, range=Optional[Union[Union[dict, "DatasetSeries"], list[Union[dict, "DatasetSeries"]]]])
+                   model_uri=DCATPLAB.Dataset_in_series, domain=Dataset, range=Optional[Union[Union[dict, "DatasetSeries"], list[Union[dict, "DatasetSeries"]]]])
 
 slots.Dataset_is_referenced_by = Slot(uri=DCTERMS.isReferencedBy, name="Dataset_is_referenced_by", curie=DCTERMS.curie('isReferencedBy'),
-                   model_uri=CHEMDCATAP.Dataset_is_referenced_by, domain=Dataset, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
+                   model_uri=DCATPLAB.Dataset_is_referenced_by, domain=Dataset, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
 
 slots.Dataset_keyword = Slot(uri=DCAT.keyword, name="Dataset_keyword", curie=DCAT.curie('keyword'),
-                   model_uri=CHEMDCATAP.Dataset_keyword, domain=Dataset, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Dataset_keyword, domain=Dataset, range=Optional[Union[str, list[str]]])
 
 slots.Dataset_landing_page = Slot(uri=DCAT.landingPage, name="Dataset_landing_page", curie=DCAT.curie('landingPage'),
-                   model_uri=CHEMDCATAP.Dataset_landing_page, domain=Dataset, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
+                   model_uri=DCATPLAB.Dataset_landing_page, domain=Dataset, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
 
 slots.Dataset_language = Slot(uri=DCTERMS.language, name="Dataset_language", curie=DCTERMS.curie('language'),
-                   model_uri=CHEMDCATAP.Dataset_language, domain=Dataset, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
+                   model_uri=DCATPLAB.Dataset_language, domain=Dataset, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
 
 slots.Dataset_modification_date = Slot(uri=DCTERMS.modified, name="Dataset_modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.Dataset_modification_date, domain=Dataset, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Dataset_modification_date, domain=Dataset, range=Optional[Union[str, XSDDate]])
 
 slots.Dataset_other_identifier = Slot(uri=ADMS.identifier, name="Dataset_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Dataset_other_identifier, domain=Dataset, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.Dataset_other_identifier, domain=Dataset, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Dataset_provenance = Slot(uri=DCTERMS.provenance, name="Dataset_provenance", curie=DCTERMS.curie('provenance'),
-                   model_uri=CHEMDCATAP.Dataset_provenance, domain=Dataset, range=Optional[Union[Union[dict, "ProvenanceStatement"], list[Union[dict, "ProvenanceStatement"]]]])
+                   model_uri=DCATPLAB.Dataset_provenance, domain=Dataset, range=Optional[Union[Union[dict, "ProvenanceStatement"], list[Union[dict, "ProvenanceStatement"]]]])
 
 slots.Dataset_publisher = Slot(uri=DCTERMS.publisher, name="Dataset_publisher", curie=DCTERMS.curie('publisher'),
-                   model_uri=CHEMDCATAP.Dataset_publisher, domain=Dataset, range=Optional[Union[dict, Agent]])
+                   model_uri=DCATPLAB.Dataset_publisher, domain=Dataset, range=Optional[Union[dict, Agent]])
 
 slots.Dataset_qualified_attribution = Slot(uri=PROV.qualifiedAttribution, name="Dataset_qualified_attribution", curie=PROV.curie('qualifiedAttribution'),
-                   model_uri=CHEMDCATAP.Dataset_qualified_attribution, domain=Dataset, range=Optional[Union[Union[dict, "Attribution"], list[Union[dict, "Attribution"]]]])
+                   model_uri=DCATPLAB.Dataset_qualified_attribution, domain=Dataset, range=Optional[Union[Union[dict, "Attribution"], list[Union[dict, "Attribution"]]]])
 
 slots.Dataset_qualified_relation = Slot(uri=DCAT.qualifiedRelation, name="Dataset_qualified_relation", curie=DCAT.curie('qualifiedRelation'),
-                   model_uri=CHEMDCATAP.Dataset_qualified_relation, domain=Dataset, range=Optional[Union[Union[dict, "Relationship"], list[Union[dict, "Relationship"]]]])
+                   model_uri=DCATPLAB.Dataset_qualified_relation, domain=Dataset, range=Optional[Union[Union[dict, "Relationship"], list[Union[dict, "Relationship"]]]])
 
 slots.Dataset_related_resource = Slot(uri=DCTERMS.relation, name="Dataset_related_resource", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.Dataset_related_resource, domain=Dataset, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
+                   model_uri=DCATPLAB.Dataset_related_resource, domain=Dataset, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
 
 slots.Dataset_release_date = Slot(uri=DCTERMS.issued, name="Dataset_release_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.Dataset_release_date, domain=Dataset, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Dataset_release_date, domain=Dataset, range=Optional[Union[str, XSDDate]])
 
 slots.Dataset_sample = Slot(uri=ADMS.sample, name="Dataset_sample", curie=ADMS.curie('sample'),
-                   model_uri=CHEMDCATAP.Dataset_sample, domain=Dataset, range=Optional[Union[Union[dict, "Distribution"], list[Union[dict, "Distribution"]]]])
+                   model_uri=DCATPLAB.Dataset_sample, domain=Dataset, range=Optional[Union[Union[dict, "Distribution"], list[Union[dict, "Distribution"]]]])
 
 slots.Dataset_source = Slot(uri=DCTERMS.source, name="Dataset_source", curie=DCTERMS.curie('source'),
-                   model_uri=CHEMDCATAP.Dataset_source, domain=Dataset, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
+                   model_uri=DCATPLAB.Dataset_source, domain=Dataset, range=Optional[Union[dict[Union[str, DatasetId], Union[dict, "Dataset"]], list[Union[dict, "Dataset"]]]])
 
 slots.Dataset_spatial_resolution = Slot(uri=DCAT.spatialResolutionInMeters, name="Dataset_spatial_resolution", curie=DCAT.curie('spatialResolutionInMeters'),
-                   model_uri=CHEMDCATAP.Dataset_spatial_resolution, domain=Dataset, range=Optional[Decimal])
+                   model_uri=DCATPLAB.Dataset_spatial_resolution, domain=Dataset, range=Optional[Decimal])
 
 slots.Dataset_temporal_coverage = Slot(uri=DCTERMS.temporal, name="Dataset_temporal_coverage", curie=DCTERMS.curie('temporal'),
-                   model_uri=CHEMDCATAP.Dataset_temporal_coverage, domain=Dataset, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
+                   model_uri=DCATPLAB.Dataset_temporal_coverage, domain=Dataset, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
 
 slots.Dataset_temporal_resolution = Slot(uri=DCAT.temporalResolution, name="Dataset_temporal_resolution", curie=DCAT.curie('temporalResolution'),
-                   model_uri=CHEMDCATAP.Dataset_temporal_resolution, domain=Dataset, range=Optional[str])
+                   model_uri=DCATPLAB.Dataset_temporal_resolution, domain=Dataset, range=Optional[str])
 
 slots.Dataset_theme = Slot(uri=DCAT.theme, name="Dataset_theme", curie=DCAT.curie('theme'),
-                   model_uri=CHEMDCATAP.Dataset_theme, domain=Dataset, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
+                   model_uri=DCATPLAB.Dataset_theme, domain=Dataset, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
 
 slots.Dataset_title = Slot(uri=DCTERMS.title, name="Dataset_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.Dataset_title, domain=Dataset, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.Dataset_title, domain=Dataset, range=Union[str, list[str]])
 
 slots.Dataset_type = Slot(uri=DCTERMS.type, name="Dataset_type", curie=DCTERMS.curie('type'),
-                   model_uri=CHEMDCATAP.Dataset_type, domain=Dataset, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
+                   model_uri=DCATPLAB.Dataset_type, domain=Dataset, range=Optional[Union[Union[dict, "Concept"], list[Union[dict, "Concept"]]]])
 
 slots.Dataset_version = Slot(uri=DCAT.version, name="Dataset_version", curie=DCAT.curie('version'),
-                   model_uri=CHEMDCATAP.Dataset_version, domain=Dataset, range=Optional[str])
+                   model_uri=DCATPLAB.Dataset_version, domain=Dataset, range=Optional[str])
 
 slots.Dataset_version_notes = Slot(uri=ADMS.versionNotes, name="Dataset_version_notes", curie=ADMS.curie('versionNotes'),
-                   model_uri=CHEMDCATAP.Dataset_version_notes, domain=Dataset, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Dataset_version_notes, domain=Dataset, range=Optional[Union[str, list[str]]])
 
 slots.Dataset_was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="Dataset_was_generated_by", curie=PROV.curie('wasGeneratedBy'),
-                   model_uri=CHEMDCATAP.Dataset_was_generated_by, domain=Dataset, range=Union[dict[Union[str, DataGeneratingActivityId], Union[dict, DataGeneratingActivity]], list[Union[dict, DataGeneratingActivity]]])
+                   model_uri=DCATPLAB.Dataset_was_generated_by, domain=Dataset, range=Union[dict[Union[str, DataGeneratingActivityId], Union[dict, DataGeneratingActivity]], list[Union[dict, DataGeneratingActivity]]])
 
 slots.DatasetSeries_applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="DatasetSeries_applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.DatasetSeries_applicable_legislation, domain=DatasetSeries, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
+                   model_uri=DCATPLAB.DatasetSeries_applicable_legislation, domain=DatasetSeries, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
 
 slots.DatasetSeries_contact_point = Slot(uri=DCAT.contactPoint, name="DatasetSeries_contact_point", curie=DCAT.curie('contactPoint'),
-                   model_uri=CHEMDCATAP.DatasetSeries_contact_point, domain=DatasetSeries, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
+                   model_uri=DCATPLAB.DatasetSeries_contact_point, domain=DatasetSeries, range=Optional[Union[Union[dict, "Kind"], list[Union[dict, "Kind"]]]])
 
 slots.DatasetSeries_description = Slot(uri=DCTERMS.description, name="DatasetSeries_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.DatasetSeries_description, domain=DatasetSeries, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.DatasetSeries_description, domain=DatasetSeries, range=Union[str, list[str]])
 
 slots.DatasetSeries_frequency = Slot(uri=DCTERMS.accrualPeriodicity, name="DatasetSeries_frequency", curie=DCTERMS.curie('accrualPeriodicity'),
-                   model_uri=CHEMDCATAP.DatasetSeries_frequency, domain=DatasetSeries, range=Optional[Union[dict, "Frequency"]])
+                   model_uri=DCATPLAB.DatasetSeries_frequency, domain=DatasetSeries, range=Optional[Union[dict, "Frequency"]])
 
 slots.DatasetSeries_geographical_coverage = Slot(uri=DCTERMS.spatial, name="DatasetSeries_geographical_coverage", curie=DCTERMS.curie('spatial'),
-                   model_uri=CHEMDCATAP.DatasetSeries_geographical_coverage, domain=DatasetSeries, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
+                   model_uri=DCATPLAB.DatasetSeries_geographical_coverage, domain=DatasetSeries, range=Optional[Union[Union[dict, "Location"], list[Union[dict, "Location"]]]])
 
 slots.DatasetSeries_modification_date = Slot(uri=DCTERMS.modified, name="DatasetSeries_modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.DatasetSeries_modification_date, domain=DatasetSeries, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.DatasetSeries_modification_date, domain=DatasetSeries, range=Optional[Union[str, XSDDate]])
 
 slots.DatasetSeries_publisher = Slot(uri=DCTERMS.publisher, name="DatasetSeries_publisher", curie=DCTERMS.curie('publisher'),
-                   model_uri=CHEMDCATAP.DatasetSeries_publisher, domain=DatasetSeries, range=Optional[Union[dict, Agent]])
+                   model_uri=DCATPLAB.DatasetSeries_publisher, domain=DatasetSeries, range=Optional[Union[dict, Agent]])
 
 slots.DatasetSeries_release_date = Slot(uri=DCTERMS.issued, name="DatasetSeries_release_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.DatasetSeries_release_date, domain=DatasetSeries, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.DatasetSeries_release_date, domain=DatasetSeries, range=Optional[Union[str, XSDDate]])
 
 slots.DatasetSeries_temporal_coverage = Slot(uri=DCTERMS.temporal, name="DatasetSeries_temporal_coverage", curie=DCTERMS.curie('temporal'),
-                   model_uri=CHEMDCATAP.DatasetSeries_temporal_coverage, domain=DatasetSeries, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
+                   model_uri=DCATPLAB.DatasetSeries_temporal_coverage, domain=DatasetSeries, range=Optional[Union[Union[dict, "PeriodOfTime"], list[Union[dict, "PeriodOfTime"]]]])
 
 slots.DatasetSeries_title = Slot(uri=DCTERMS.title, name="DatasetSeries_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.DatasetSeries_title, domain=DatasetSeries, range=Union[str, list[str]])
+                   model_uri=DCATPLAB.DatasetSeries_title, domain=DatasetSeries, range=Union[str, list[str]])
 
 slots.DefinedTerm_title = Slot(uri=SCHEMA.name, name="DefinedTerm_title", curie=SCHEMA.curie('name'),
-                   model_uri=CHEMDCATAP.DefinedTerm_title, domain=DefinedTerm, range=Optional[str])
+                   model_uri=DCATPLAB.DefinedTerm_title, domain=DefinedTerm, range=Optional[str])
 
 slots.Device_has_part = Slot(uri=DCTERMS.hasPart, name="Device_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.Device_has_part, domain=Device, range=Optional[Union[dict[Union[str, DeviceId], Union[dict, "Device"]], list[Union[dict, "Device"]]]])
+                   model_uri=DCATPLAB.Device_has_part, domain=Device, range=Optional[Union[dict[Union[str, DeviceId], Union[dict, "Device"]], list[Union[dict, "Device"]]]])
 
 slots.Device_other_identifier = Slot(uri=ADMS.identifier, name="Device_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Device_other_identifier, domain=Device, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.Device_other_identifier, domain=Device, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Distribution_access_URL = Slot(uri=DCAT.accessURL, name="Distribution_access_URL", curie=DCAT.curie('accessURL'),
-                   model_uri=CHEMDCATAP.Distribution_access_URL, domain=Distribution, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
+                   model_uri=DCATPLAB.Distribution_access_URL, domain=Distribution, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
 
 slots.Distribution_access_service = Slot(uri=DCAT.accessService, name="Distribution_access_service", curie=DCAT.curie('accessService'),
-                   model_uri=CHEMDCATAP.Distribution_access_service, domain=Distribution, range=Optional[Union[Union[dict, DataService], list[Union[dict, DataService]]]])
+                   model_uri=DCATPLAB.Distribution_access_service, domain=Distribution, range=Optional[Union[Union[dict, DataService], list[Union[dict, DataService]]]])
 
 slots.Distribution_applicable_legislation = Slot(uri=DCATAP.applicableLegislation, name="Distribution_applicable_legislation", curie=DCATAP.curie('applicableLegislation'),
-                   model_uri=CHEMDCATAP.Distribution_applicable_legislation, domain=Distribution, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
+                   model_uri=DCATPLAB.Distribution_applicable_legislation, domain=Distribution, range=Optional[Union[dict[Union[str, LegalResourceId], Union[dict, "LegalResource"]], list[Union[dict, "LegalResource"]]]])
 
 slots.Distribution_availability = Slot(uri=DCATAP.availability, name="Distribution_availability", curie=DCATAP.curie('availability'),
-                   model_uri=CHEMDCATAP.Distribution_availability, domain=Distribution, range=Optional[Union[dict, "Concept"]])
+                   model_uri=DCATPLAB.Distribution_availability, domain=Distribution, range=Optional[Union[dict, "Concept"]])
 
 slots.Distribution_byte_size = Slot(uri=DCAT.byteSize, name="Distribution_byte_size", curie=DCAT.curie('byteSize'),
-                   model_uri=CHEMDCATAP.Distribution_byte_size, domain=Distribution, range=Optional[int])
+                   model_uri=DCATPLAB.Distribution_byte_size, domain=Distribution, range=Optional[int])
 
 slots.Distribution_checksum = Slot(uri=SPDX.checksum, name="Distribution_checksum", curie=SPDX.curie('checksum'),
-                   model_uri=CHEMDCATAP.Distribution_checksum, domain=Distribution, range=Optional[Union[dict, Checksum]])
+                   model_uri=DCATPLAB.Distribution_checksum, domain=Distribution, range=Optional[Union[dict, Checksum]])
 
 slots.Distribution_compression_format = Slot(uri=DCAT.compressFormat, name="Distribution_compression_format", curie=DCAT.curie('compressFormat'),
-                   model_uri=CHEMDCATAP.Distribution_compression_format, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
+                   model_uri=DCATPLAB.Distribution_compression_format, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
 
 slots.Distribution_description = Slot(uri=DCTERMS.description, name="Distribution_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.Distribution_description, domain=Distribution, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Distribution_description, domain=Distribution, range=Optional[Union[str, list[str]]])
 
 slots.Distribution_documentation = Slot(uri=FOAF.page, name="Distribution_documentation", curie=FOAF.curie('page'),
-                   model_uri=CHEMDCATAP.Distribution_documentation, domain=Distribution, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
+                   model_uri=DCATPLAB.Distribution_documentation, domain=Distribution, range=Optional[Union[dict[Union[str, DocumentId], Union[dict, "Document"]], list[Union[dict, "Document"]]]])
 
 slots.Distribution_download_URL = Slot(uri=DCAT.downloadURL, name="Distribution_download_URL", curie=DCAT.curie('downloadURL'),
-                   model_uri=CHEMDCATAP.Distribution_download_URL, domain=Distribution, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
+                   model_uri=DCATPLAB.Distribution_download_URL, domain=Distribution, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]]])
 
 slots.Distribution_format = Slot(uri=DCTERMS.format, name="Distribution_format", curie=DCTERMS.curie('format'),
-                   model_uri=CHEMDCATAP.Distribution_format, domain=Distribution, range=Optional[Union[dict, "MediaTypeOrExtent"]])
+                   model_uri=DCATPLAB.Distribution_format, domain=Distribution, range=Optional[Union[dict, "MediaTypeOrExtent"]])
 
 slots.Distribution_has_policy = Slot(uri=ODRL.hasPolicy, name="Distribution_has_policy", curie=ODRL.curie('hasPolicy'),
-                   model_uri=CHEMDCATAP.Distribution_has_policy, domain=Distribution, range=Optional[Union[dict, "Policy"]])
+                   model_uri=DCATPLAB.Distribution_has_policy, domain=Distribution, range=Optional[Union[dict, "Policy"]])
 
 slots.Distribution_language = Slot(uri=DCTERMS.language, name="Distribution_language", curie=DCTERMS.curie('language'),
-                   model_uri=CHEMDCATAP.Distribution_language, domain=Distribution, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
+                   model_uri=DCATPLAB.Distribution_language, domain=Distribution, range=Optional[Union[Union[dict, "LinguisticSystem"], list[Union[dict, "LinguisticSystem"]]]])
 
 slots.Distribution_licence = Slot(uri=DCTERMS.license, name="Distribution_licence", curie=DCTERMS.curie('license'),
-                   model_uri=CHEMDCATAP.Distribution_licence, domain=Distribution, range=Optional[Union[dict, "LicenseDocument"]])
+                   model_uri=DCATPLAB.Distribution_licence, domain=Distribution, range=Optional[Union[dict, "LicenseDocument"]])
 
 slots.Distribution_linked_schemas = Slot(uri=DCTERMS.conformsTo, name="Distribution_linked_schemas", curie=DCTERMS.curie('conformsTo'),
-                   model_uri=CHEMDCATAP.Distribution_linked_schemas, domain=Distribution, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
+                   model_uri=DCATPLAB.Distribution_linked_schemas, domain=Distribution, range=Optional[Union[Union[dict, "Standard"], list[Union[dict, "Standard"]]]])
 
 slots.Distribution_media_type = Slot(uri=DCAT.mediaType, name="Distribution_media_type", curie=DCAT.curie('mediaType'),
-                   model_uri=CHEMDCATAP.Distribution_media_type, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
+                   model_uri=DCATPLAB.Distribution_media_type, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
 
 slots.Distribution_modification_date = Slot(uri=DCTERMS.modified, name="Distribution_modification_date", curie=DCTERMS.curie('modified'),
-                   model_uri=CHEMDCATAP.Distribution_modification_date, domain=Distribution, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Distribution_modification_date, domain=Distribution, range=Optional[Union[str, XSDDate]])
 
 slots.Distribution_packaging_format = Slot(uri=DCAT.packageFormat, name="Distribution_packaging_format", curie=DCAT.curie('packageFormat'),
-                   model_uri=CHEMDCATAP.Distribution_packaging_format, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
+                   model_uri=DCATPLAB.Distribution_packaging_format, domain=Distribution, range=Optional[Union[dict, "MediaType"]])
 
 slots.Distribution_release_date = Slot(uri=DCTERMS.issued, name="Distribution_release_date", curie=DCTERMS.curie('issued'),
-                   model_uri=CHEMDCATAP.Distribution_release_date, domain=Distribution, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.Distribution_release_date, domain=Distribution, range=Optional[Union[str, XSDDate]])
 
 slots.Distribution_rights = Slot(uri=DCTERMS.rights, name="Distribution_rights", curie=DCTERMS.curie('rights'),
-                   model_uri=CHEMDCATAP.Distribution_rights, domain=Distribution, range=Optional[Union[dict, "RightsStatement"]])
+                   model_uri=DCATPLAB.Distribution_rights, domain=Distribution, range=Optional[Union[dict, "RightsStatement"]])
 
 slots.Distribution_spatial_resolution = Slot(uri=DCAT.spatialResolutionInMeters, name="Distribution_spatial_resolution", curie=DCAT.curie('spatialResolutionInMeters'),
-                   model_uri=CHEMDCATAP.Distribution_spatial_resolution, domain=Distribution, range=Optional[Decimal])
+                   model_uri=DCATPLAB.Distribution_spatial_resolution, domain=Distribution, range=Optional[Decimal])
 
 slots.Distribution_status = Slot(uri=ADMS.status, name="Distribution_status", curie=ADMS.curie('status'),
-                   model_uri=CHEMDCATAP.Distribution_status, domain=Distribution, range=Optional[Union[dict, "Concept"]])
+                   model_uri=DCATPLAB.Distribution_status, domain=Distribution, range=Optional[Union[dict, "Concept"]])
 
 slots.Distribution_temporal_resolution = Slot(uri=DCAT.temporalResolution, name="Distribution_temporal_resolution", curie=DCAT.curie('temporalResolution'),
-                   model_uri=CHEMDCATAP.Distribution_temporal_resolution, domain=Distribution, range=Optional[str])
+                   model_uri=DCATPLAB.Distribution_temporal_resolution, domain=Distribution, range=Optional[str])
 
 slots.Distribution_title = Slot(uri=DCTERMS.title, name="Distribution_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.Distribution_title, domain=Distribution, range=Optional[Union[str, list[str]]])
+                   model_uri=DCATPLAB.Distribution_title, domain=Distribution, range=Optional[Union[str, list[str]]])
 
 slots.Entity_title = Slot(uri=DCTERMS.title, name="Entity_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.Entity_title, domain=Entity, range=Optional[str])
+                   model_uri=DCATPLAB.Entity_title, domain=Entity, range=Optional[str])
 
 slots.Entity_description = Slot(uri=DCTERMS.description, name="Entity_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.Entity_description, domain=Entity, range=Optional[str])
+                   model_uri=DCATPLAB.Entity_description, domain=Entity, range=Optional[str])
 
 slots.Entity_other_identifier = Slot(uri=ADMS.identifier, name="Entity_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Entity_other_identifier, domain=Entity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.Entity_other_identifier, domain=Entity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Entity_has_part = Slot(uri=DCTERMS.hasPart, name="Entity_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.Entity_has_part, domain=Entity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
+                   model_uri=DCATPLAB.Entity_has_part, domain=Entity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
 
 slots.Entity_part_of = Slot(uri=DCTERMS.isPartOf, name="Entity_part_of", curie=DCTERMS.curie('isPartOf'),
-                   model_uri=CHEMDCATAP.Entity_part_of, domain=Entity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
+                   model_uri=DCATPLAB.Entity_part_of, domain=Entity, range=Optional[Union[dict[Union[str, EntityId], Union[dict, "Entity"]], list[Union[dict, "Entity"]]]])
 
 slots.EvaluatedActivity_other_identifier = Slot(uri=ADMS.identifier, name="EvaluatedActivity_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.EvaluatedActivity_other_identifier, domain=EvaluatedActivity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.EvaluatedActivity_other_identifier, domain=EvaluatedActivity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.EvaluatedEntity_title = Slot(uri=DCTERMS.title, name="EvaluatedEntity_title", curie=DCTERMS.curie('title'),
-                   model_uri=CHEMDCATAP.EvaluatedEntity_title, domain=EvaluatedEntity, range=Optional[str])
+                   model_uri=DCATPLAB.EvaluatedEntity_title, domain=EvaluatedEntity, range=Optional[str])
 
 slots.EvaluatedEntity_description = Slot(uri=DCTERMS.description, name="EvaluatedEntity_description", curie=DCTERMS.curie('description'),
-                   model_uri=CHEMDCATAP.EvaluatedEntity_description, domain=EvaluatedEntity, range=Optional[str])
+                   model_uri=DCATPLAB.EvaluatedEntity_description, domain=EvaluatedEntity, range=Optional[str])
 
 slots.EvaluatedEntity_was_generated_by = Slot(uri=PROV.wasGeneratedBy, name="EvaluatedEntity_was_generated_by", curie=PROV.curie('wasGeneratedBy'),
-                   model_uri=CHEMDCATAP.EvaluatedEntity_was_generated_by, domain=EvaluatedEntity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, Activity]], list[Union[dict, Activity]]]])
+                   model_uri=DCATPLAB.EvaluatedEntity_was_generated_by, domain=EvaluatedEntity, range=Optional[Union[dict[Union[str, ActivityId], Union[dict, Activity]], list[Union[dict, Activity]]]])
 
 slots.EvaluatedEntity_other_identifier = Slot(uri=ADMS.identifier, name="EvaluatedEntity_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.EvaluatedEntity_other_identifier, domain=EvaluatedEntity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
+                   model_uri=DCATPLAB.EvaluatedEntity_other_identifier, domain=EvaluatedEntity, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Identifier_notation = Slot(uri=SKOS.notation, name="Identifier_notation", curie=SKOS.curie('notation'),
-                   model_uri=CHEMDCATAP.Identifier_notation, domain=Identifier, range=str)
+                   model_uri=DCATPLAB.Identifier_notation, domain=Identifier, range=str)
 
 slots.LicenseDocument_type = Slot(uri=DCTERMS.type, name="LicenseDocument_type", curie=DCTERMS.curie('type'),
-                   model_uri=CHEMDCATAP.LicenseDocument_type, domain=LicenseDocument, range=Optional[Union[Union[dict, Concept], list[Union[dict, Concept]]]])
+                   model_uri=DCATPLAB.LicenseDocument_type, domain=LicenseDocument, range=Optional[Union[Union[dict, Concept], list[Union[dict, Concept]]]])
 
 slots.Location_bbox = Slot(uri=DCAT.bbox, name="Location_bbox", curie=DCAT.curie('bbox'),
-                   model_uri=CHEMDCATAP.Location_bbox, domain=Location, range=Optional[str])
+                   model_uri=DCATPLAB.Location_bbox, domain=Location, range=Optional[str])
 
 slots.Location_centroid = Slot(uri=DCAT.centroid, name="Location_centroid", curie=DCAT.curie('centroid'),
-                   model_uri=CHEMDCATAP.Location_centroid, domain=Location, range=Optional[str])
+                   model_uri=DCATPLAB.Location_centroid, domain=Location, range=Optional[str])
 
 slots.Location_geometry = Slot(uri=LOCN.geometry, name="Location_geometry", curie=LOCN.curie('geometry'),
-                   model_uri=CHEMDCATAP.Location_geometry, domain=Location, range=Optional[Union[dict, "Geometry"]])
+                   model_uri=DCATPLAB.Location_geometry, domain=Location, range=Optional[Union[dict, "Geometry"]])
 
 slots.PeriodOfTime_beginning = Slot(uri=TIME.hasBeginning, name="PeriodOfTime_beginning", curie=TIME.curie('hasBeginning'),
-                   model_uri=CHEMDCATAP.PeriodOfTime_beginning, domain=PeriodOfTime, range=Optional[Union[dict, "TimeInstant"]])
+                   model_uri=DCATPLAB.PeriodOfTime_beginning, domain=PeriodOfTime, range=Optional[Union[dict, "TimeInstant"]])
 
 slots.PeriodOfTime_end = Slot(uri=TIME.hasEnd, name="PeriodOfTime_end", curie=TIME.curie('hasEnd'),
-                   model_uri=CHEMDCATAP.PeriodOfTime_end, domain=PeriodOfTime, range=Optional[Union[dict, "TimeInstant"]])
+                   model_uri=DCATPLAB.PeriodOfTime_end, domain=PeriodOfTime, range=Optional[Union[dict, "TimeInstant"]])
 
 slots.PeriodOfTime_end_date = Slot(uri=DCAT.endDate, name="PeriodOfTime_end_date", curie=DCAT.curie('endDate'),
-                   model_uri=CHEMDCATAP.PeriodOfTime_end_date, domain=PeriodOfTime, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.PeriodOfTime_end_date, domain=PeriodOfTime, range=Optional[Union[str, XSDDate]])
 
 slots.PeriodOfTime_start_date = Slot(uri=DCAT.startDate, name="PeriodOfTime_start_date", curie=DCAT.curie('startDate'),
-                   model_uri=CHEMDCATAP.PeriodOfTime_start_date, domain=PeriodOfTime, range=Optional[Union[str, XSDDate]])
+                   model_uri=DCATPLAB.PeriodOfTime_start_date, domain=PeriodOfTime, range=Optional[Union[str, XSDDate]])
 
 slots.QualitativeAttribute_value = Slot(uri=PROV.value, name="QualitativeAttribute_value", curie=PROV.curie('value'),
-                   model_uri=CHEMDCATAP.QualitativeAttribute_value, domain=QualitativeAttribute, range=str)
+                   model_uri=DCATPLAB.QualitativeAttribute_value, domain=QualitativeAttribute, range=str)
 
 slots.QuantitativeAttribute_value = Slot(uri=PROV.value, name="QuantitativeAttribute_value", curie=PROV.curie('value'),
-                   model_uri=CHEMDCATAP.QuantitativeAttribute_value, domain=QuantitativeAttribute, range=float)
+                   model_uri=DCATPLAB.QuantitativeAttribute_value, domain=QuantitativeAttribute, range=float)
 
 slots.Relationship_had_role = Slot(uri=DCAT.hadRole, name="Relationship_had_role", curie=DCAT.curie('hadRole'),
-                   model_uri=CHEMDCATAP.Relationship_had_role, domain=Relationship, range=Union[Union[dict, "Role"], list[Union[dict, "Role"]]])
+                   model_uri=DCATPLAB.Relationship_had_role, domain=Relationship, range=Union[Union[dict, "Role"], list[Union[dict, "Role"]]])
 
 slots.Relationship_relation = Slot(uri=DCTERMS.relation, name="Relationship_relation", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.Relationship_relation, domain=Relationship, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
+                   model_uri=DCATPLAB.Relationship_relation, domain=Relationship, range=Union[dict[Union[str, ResourceId], Union[dict, "Resource"]], list[Union[dict, "Resource"]]])
 
 slots.Software_has_part = Slot(uri=DCTERMS.hasPart, name="Software_has_part", curie=DCTERMS.curie('hasPart'),
-                   model_uri=CHEMDCATAP.Software_has_part, domain=Software, range=Optional[Union[dict[Union[str, SoftwareId], Union[dict, "Software"]], list[Union[dict, "Software"]]]])
+                   model_uri=DCATPLAB.Software_has_part, domain=Software, range=Optional[Union[dict[Union[str, SoftwareId], Union[dict, "Software"]], list[Union[dict, "Software"]]]])
 
 slots.Software_other_identifier = Slot(uri=ADMS.identifier, name="Software_other_identifier", curie=ADMS.curie('identifier'),
-                   model_uri=CHEMDCATAP.Software_other_identifier, domain=Software, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
-
-slots.ChemicalReaction_has_temperature = Slot(uri=SIO['000008'], name="ChemicalReaction_has_temperature", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.ChemicalReaction_has_temperature, domain=ChemicalReaction, range=Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]])
-
-slots.ChemicalReaction_has_pressure = Slot(uri=SIO['000008'], name="ChemicalReaction_has_pressure", curie=SIO.curie('000008'),
-                   model_uri=CHEMDCATAP.ChemicalReaction_has_pressure, domain=ChemicalReaction, range=Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]])
-
-slots.ChemicalReaction_related_resource = Slot(uri=DCTERMS.relation, name="ChemicalReaction_related_resource", curie=DCTERMS.curie('relation'),
-                   model_uri=CHEMDCATAP.ChemicalReaction_related_resource, domain=ChemicalReaction, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, Resource]], list[Union[dict, Resource]]]])
+                   model_uri=DCATPLAB.Software_other_identifier, domain=Software, range=Optional[Union[Union[dict, "Identifier"], list[Union[dict, "Identifier"]]]])
 
 slots.Atom_rdf_type = Slot(uri=RDF.type, name="Atom_rdf_type", curie=RDF.curie('type'),
-                   model_uri=CHEMDCATAP.Atom_rdf_type, domain=Atom, range=Union[dict, DefinedTerm])
+                   model_uri=DCATPLAB.Atom_rdf_type, domain=Atom, range=Union[dict, DefinedTerm])
+
+slots.ChemicalReaction_has_temperature = Slot(uri=SIO['000008'], name="ChemicalReaction_has_temperature", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.ChemicalReaction_has_temperature, domain=ChemicalReaction, range=Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]])
+
+slots.ChemicalReaction_has_pressure = Slot(uri=SIO['000008'], name="ChemicalReaction_has_pressure", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.ChemicalReaction_has_pressure, domain=ChemicalReaction, range=Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]])
+
+slots.ChemicalReaction_related_resource = Slot(uri=DCTERMS.relation, name="ChemicalReaction_related_resource", curie=DCTERMS.curie('relation'),
+                   model_uri=DCATPLAB.ChemicalReaction_related_resource, domain=ChemicalReaction, range=Optional[Union[dict[Union[str, ResourceId], Union[dict, Resource]], list[Union[dict, Resource]]]])
 
 slots.MaterialEntity_has_part = Slot(uri=BFO['0000051'], name="MaterialEntity_has_part", curie=BFO.curie('0000051'),
-                   model_uri=CHEMDCATAP.MaterialEntity_has_part, domain=MaterialEntity, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]])
+                   model_uri=DCATPLAB.MaterialEntity_has_part, domain=MaterialEntity, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]])
 
 slots.MaterialSample_derived_from = Slot(uri=PROV.wasDerivedFrom, name="MaterialSample_derived_from", curie=PROV.curie('wasDerivedFrom'),
-                   model_uri=CHEMDCATAP.MaterialSample_derived_from, domain=MaterialSample, range=Optional[Union[dict, Entity]])
+                   model_uri=DCATPLAB.MaterialSample_derived_from, domain=MaterialSample, range=Optional[Union[dict, Entity]])

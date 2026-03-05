@@ -13,7 +13,6 @@ see_also:
 
 prefixes:
   dcatplab: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
-  chemdcatap: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/
   dcatapplus: https://nfdi-de.github.io/dcat-ap-plus/latest/schema/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
