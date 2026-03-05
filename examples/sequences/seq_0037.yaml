@@ -1,0 +1,69 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037
+type: LabSynthesisActivity
+title: Synthesis Sequence 0037
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/mat_002
+    type: MaterialSample
+    title: Tetraammine Platinum (II) Nitrate
+    has_mass:
+      type: Mass
+      value: 0.061
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/mat_003
+    type: MaterialSample
+    title: Deionized Water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/mat_004
+    type: MaterialSample
+    title: Parent Zeolite Y
+    has_mass:
+      type: Mass
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_005
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 373.0
+    unit:
+      id: https://qudt.org/vocab/unit/K
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_006
+  type: AtmosphereSettingStep
+  has_atmosphere_type: air
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_007
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 12.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0037/step_006

@@ -1,0 +1,286 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044
+type: LabSynthesisActivity
+title: Synthesis Sequence 0044
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_001
+  type: SolutionPreparationStep
+  title: gel A
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_002
+    type: MaterialSample
+    title: ZSM-5
+    has_mass:
+      type: Mass
+      value: 5.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_003
+    type: MaterialSample
+    title: distilled water
+    has_mass:
+      type: Mass
+      value: 30.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_004
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_005
+  type: SolutionPreparationStep
+  title: gel B
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_006
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_006
+    type: MaterialSample
+    title: Orthophosphoric acid
+    has_mass:
+      type: Mass
+      value: 7.8
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 85.0
+      unit:
+        id: https://qudt.org/vocab/unit/% H3PO4
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_007
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_007
+    type: MaterialSample
+    title: Distilled water
+    has_mass:
+      type: Mass
+      value: 70.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_008
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_009
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_009
+    type: MaterialSample
+    title: Pseudoboehmite
+    has_mass:
+      type: Mass
+      value: 4.6
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 72.0
+      unit:
+        id: https://qudt.org/vocab/unit/wt% Al2O3
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_010
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 30.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_011
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_011
+    type: MaterialSample
+    title: Silica sol
+    has_mass:
+      type: Mass
+      value: 3.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 30.0
+      unit:
+        id: https://qudt.org/vocab/unit/wt% SiO2
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_012
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 120.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_013
+  type: SolutionPreparationStep
+  title: gel C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_014
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_014
+    type: MaterialSample
+    title: gel A
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_015
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_015
+    type: MaterialSample
+    title: gel B
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_014
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_016
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_016
+    type: MaterialSample
+    title: Di-n-propylamine
+    has_mass:
+      type: Mass
+      value: 6.2
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 99.0
+      unit:
+        id: https://qudt.org/vocab/unit/Percent
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_017
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 150.0
+    unit:
+      id: https://qudt.org/vocab/unit/MIN
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_016
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_018
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_018
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 180.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_017
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_019
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_019
+  type: AtmosphereSettingStep
+  has_atmosphere_type: autogeneous
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_018
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_020
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_020
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 24.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_019
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_021
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_021
+  type: SeparationStep
+  phase_to_keep: precipitate
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_020
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_022
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_022
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/mat_022
+    type: MaterialSample
+    title: Distilled water
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_021
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_023
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_023
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 120.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_022
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_024
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_024
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_023
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_025
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_025
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 600.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_024
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_026
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_026
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    value: 6.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_025

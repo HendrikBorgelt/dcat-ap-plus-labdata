@@ -1,0 +1,126 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048
+type: LabSynthesisActivity
+title: Synthesis Sequence 0048
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_002
+    type: MaterialSample
+    title: 1,4-diiodobutane
+    has_mass:
+      type: Mass
+      value: 31.1
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 100.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  added_dropwise: true
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_003
+    type: MaterialSample
+    title: Acetonitrile
+    has_volume:
+      type: Volume
+      value: 75.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_004
+    type: MaterialSample
+    title: Tris(dimethylamino) phosphine
+    has_mass:
+      type: Mass
+      value: 40.8
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_amount:
+      type: AmountOfSubstance
+      value: 250.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliMOL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_005
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_005
+    type: MaterialSample
+    title: Acetonitrile
+    has_volume:
+      type: Volume
+      value: 75.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_006
+  type: TemperatureChangeStep
+  temperature_target_type: ROOM_TEMPERATURE
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_007
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 2.0
+    unit:
+      id: https://qudt.org/vocab/unit/DAY
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_008
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_007
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_009
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_009
+    type: MaterialSample
+    title: Acetonitrile
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_010
+  type: WashingStep
+  uses_washing_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/mat_010
+    type: MaterialSample
+    title: Diethyl ether
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_011
+  type: TemperatureChangeStep
+  temperature_target_type: HEAT
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_012
+  type: AtmosphereSettingStep
+  has_atmosphere_type: vacuum
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_011

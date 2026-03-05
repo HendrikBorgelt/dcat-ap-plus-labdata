@@ -1,0 +1,63 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014
+type: LabSynthesisActivity
+title: Synthesis Sequence 0014
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/mat_002
+    type: MaterialSample
+    title: copper nitrate
+    has_mass:
+      type: Mass
+      value: 200.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+    has_concentration:
+      type: Concentration
+      value: 0.1
+      unit:
+        id: https://qudt.org/vocab/unit/N
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/mat_003
+    type: MaterialSample
+    title: SAPO 18/SAPO-34 zeolite
+    has_mass:
+      type: Mass
+      value: 10.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/mat_004
+    type: MaterialSample
+    title: Nitric acid
+  has_ph_value:
+    type: PHValue
+    value: 3.0
+    unit:
+      id: https://qudt.org/vocab/unit/PH
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_005
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 80.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0014/step_004

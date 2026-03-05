@@ -1,0 +1,102 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036
+type: LabSynthesisActivity
+title: Synthesis Sequence 0036
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/mat_002
+    type: MaterialSample
+    title: ZSM-5-AT
+    has_mass:
+      type: Mass
+      value: 5.0
+      unit:
+        id: https://qudt.org/vocab/unit/GM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/mat_003
+    type: MaterialSample
+    title: Ammonium Nitrate
+    has_concentration:
+      type: Concentration
+      value: 1.0
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-L
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_004
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 353.0
+    unit:
+      id: https://qudt.org/vocab/unit/K
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_005
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 2.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_006
+  type: SeparationStep
+  phase_to_keep: precipitate
+  uses_separation_method: filtration
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/repeat_001
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/repeat_001
+  type: RepetitionBlock
+  repetition_count: 6
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_007
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/mat_007
+      type: MaterialSample
+      title: distilled water
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_006
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_008
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_006
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_008
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 383.0
+    unit:
+      id: https://qudt.org/vocab/unit/K
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/repeat_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_009
+  type: WaitingStep
+  has_step_duration:
+    type: Duration
+    description: overnight
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_010
+  type: TemperatureChangeStep
+  temperature_target_type: HEAT
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0036/step_009

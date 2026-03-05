@@ -1,0 +1,220 @@
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007
+type: LabSynthesisActivity
+title: Synthesis Sequence 0007
+has_synthesis_step:
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_001
+  type: SolutionPreparationStep
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_002
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_002
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_002
+    type: MaterialSample
+    title: Toluene
+    has_volume:
+      type: Volume
+      value: 10.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_003
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_003
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_003
+    type: MaterialSample
+    title: ZSM-5 zeolite
+    has_mass:
+      type: Mass
+      value: 100.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliGM
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_004
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_004
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_004
+    type: MaterialSample
+    title: 3-aminopropyl trimethoxysilane
+    has_volume:
+      type: Volume
+      value: 100.0
+      unit:
+        id: https://qudt.org/vocab/unit/MilliL
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_005
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_005
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 2.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  has_stirring_speed:
+    type: StirringSpeed
+    description: ultrassounds
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_004
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_001
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_006
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_001
+  type: RepetitionBlock
+  repetition_count: 3
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_006
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_006
+      type: MaterialSample
+      title: toluene
+    uses_washing_method: centrifugation
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_005
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_002
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_005
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_002
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_007
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_002
+  type: RepetitionBlock
+  repetition_count: 4
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_007
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_007
+      type: MaterialSample
+      title: Ethanol
+    uses_washing_method: centrifugation
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_001
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_008
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_001
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_008
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_008
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_002
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_009
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_009
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_009
+    type: MaterialSample
+    title: Toluene Diisocyanate (TDI)
+    has_concentration:
+      type: Concentration
+      value: 0.05
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-L
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_008
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_010
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_010
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_010
+    type: MaterialSample
+    title: Ethanol (EtOH)
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_009
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_011
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_011
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_011
+    type: MaterialSample
+    title: ZSM-5 zeolite crystals
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_010
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_012
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_012
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 40.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_011
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_013
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_013
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 2.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_012
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_003
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_014
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_003
+  type: RepetitionBlock
+  repetition_count: 4
+  has_part:
+  - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_014
+    type: WashingStep
+    uses_washing_material:
+      id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_014
+      type: MaterialSample
+      title: EtOH
+    uses_washing_method: centrifugation
+    had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_013
+    has_successor_step:
+    - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_015
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_013
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_015
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_015
+  type: SolutionPreparationStep
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/repeat_003
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_016
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_016
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_016
+    type: MaterialSample
+    title: b-CD
+    has_concentration:
+      type: Concentration
+      value: 0.4
+      unit:
+        id: https://qudt.org/vocab/unit/MOL-PER-L
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_015
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_017
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_017
+  type: MaterialAdditionStep
+  has_added_material:
+    id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/mat_017
+    type: MaterialSample
+    title: zeolite crystals
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_016
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_018
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_018
+  type: TemperatureChangeStep
+  has_target_temperature:
+    type: Temperature
+    value: 40.0
+    unit:
+      id: https://qudt.org/vocab/unit/DEG_C
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_017
+  has_successor_step:
+  - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_019
+- id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_019
+  type: StirringStep
+  has_step_duration:
+    type: Duration
+    value: 2.0
+    unit:
+      id: https://qudt.org/vocab/unit/HR
+  had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0007/step_018
