@@ -7,8 +7,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_002
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_002
-  type: AtmosphereSettingStep
-  has_atmosphere_type: inert
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - inert
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_001
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0006/step_003

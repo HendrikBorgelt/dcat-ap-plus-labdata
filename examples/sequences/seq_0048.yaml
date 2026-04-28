@@ -22,7 +22,7 @@ has_synthesis_step:
       value: 100.0
       unit:
         id: https://qudt.org/vocab/unit/MilliMOL
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_001
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_003
@@ -121,6 +121,7 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_012
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_012
-  type: AtmosphereSettingStep
-  has_atmosphere_type: vacuum
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - vacuum
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0048/step_011

@@ -67,7 +67,7 @@ has_synthesis_step:
     id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/mat_008
     type: MaterialSample
     title: Concentrated sulfuric acid
-  added_dropwise: true
+  addition_type: Dropwise
   has_ph_value:
     type: PHValue
     value: 10.5
@@ -87,8 +87,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_010
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_010
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_009
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_011
@@ -152,8 +153,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_017
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_017
-  type: AtmosphereSettingStep
-  has_atmosphere_type: air
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - air
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_016
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_018
@@ -252,8 +254,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_028
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_028
-  type: AtmosphereSettingStep
-  has_atmosphere_type: air
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - air
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_027
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0019/step_029

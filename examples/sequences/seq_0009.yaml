@@ -69,7 +69,7 @@ has_synthesis_step:
       value: 4.79
       unit:
         id: https://qudt.org/vocab/unit/GM
-  added_dropwise: true
+  addition_type: Dropwise
   has_step_duration:
     type: Duration
     value: 30.0

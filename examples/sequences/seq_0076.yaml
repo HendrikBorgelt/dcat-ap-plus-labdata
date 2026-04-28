@@ -102,8 +102,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_010
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_010
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_009
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_011
@@ -159,8 +160,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_016
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_016
-  type: AtmosphereSettingStep
-  has_atmosphere_type: air
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - air
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_015
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_017
@@ -190,8 +192,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_019
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0076/step_019
-  type: AtmosphereSettingStep
-  has_atmosphere_type: hydrogen
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - hydrogen
   has_flow_rate:
     type: FlowRate
     value: 100.0

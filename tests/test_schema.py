@@ -80,12 +80,16 @@ class TestSchemaStructure:
             "MaterialAdditionStep",
             "StirringStep",
             "TemperatureChangeStep",
-            "AtmosphereSettingStep",
+            "AtmosphereChangeStep",
             "WaitingStep",
             "SeparationStep",
             "WashingStep",
             "GrindingStep",
             "RepetitionBlock",
+            "SievingStep",
+            "RecipientChangeStep",
+            "SubProductCreationStep",
+            "ContinuousAdditionStep",
         ]
         all_classes = sv.all_classes()
         missing = [c for c in expected if c not in all_classes]
@@ -167,12 +171,16 @@ class TestDatamodelImport:
             "MaterialAdditionStep",
             "StirringStep",
             "TemperatureChangeStep",
-            "AtmosphereSettingStep",
+            "AtmosphereChangeStep",
             "WaitingStep",
             "SeparationStep",
             "WashingStep",
             "GrindingStep",
             "RepetitionBlock",
+            "SievingStep",
+            "RecipientChangeStep",
+            "SubProductCreationStep",
+            "ContinuousAdditionStep",
         ]:
             cls = getattr(dm, cls_name, None)
             assert cls is not None, f"Class {cls_name} not found in datamodel"

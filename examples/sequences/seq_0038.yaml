@@ -105,6 +105,7 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0038/step_011
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0038/step_011
-  type: AtmosphereSettingStep
-  has_atmosphere_type: vacuum
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - vacuum
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0038/step_010

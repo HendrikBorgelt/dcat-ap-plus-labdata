@@ -255,7 +255,7 @@ class SeparationMethodEnum(str, Enum):
 
 class AtmosphereTypeEnum(str, Enum):
     """
-    Controlled vocabulary for atmosphere types in AtmosphereSettingStep.
+    Controlled vocabulary for atmosphere types in AtmosphereChangeStep.
     """
     air = "air"
     inert = "inert"
@@ -7159,7 +7159,7 @@ class Materialistic(ConfiguredBaseModel):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -7210,7 +7210,7 @@ class MaterialEntity(Materialistic, Entity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -7385,7 +7385,7 @@ class ChemicalEntity(MaterialEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -7565,7 +7565,7 @@ class Atom(ChemicalEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -7742,7 +7742,7 @@ class ChemicalSubstance(MaterialEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -7919,7 +7919,7 @@ class Polymer(ChemicalSubstance):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -8081,7 +8081,7 @@ class MaterialSample(Materialistic, EvaluatedEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -8912,7 +8912,7 @@ class ChemicalReaction(Activity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to specify the Pressure at which a ChemicalReaction takes place.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9121,7 +9121,7 @@ class StartingMaterial(ChemicalSubstance):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9300,7 +9300,7 @@ class DissolvingSubstance(ChemicalSubstance, Materialistic, AgenticEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9478,7 +9478,7 @@ class Reagent(ChemicalSubstance):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9656,7 +9656,7 @@ class ChemicalProduct(ChemicalSubstance):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9835,7 +9835,7 @@ class Catalyst(ChemicalSubstance, Materialistic, AgenticEntity):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -9988,7 +9988,7 @@ class Reactor(Materialistic, Device):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -10693,9 +10693,9 @@ class LabSynthesisStep(EvaluatedActivity):
     """
     An abstract base class for individual steps in a laboratory synthesis workflow.
     Step ordering model:
-      - Backward pointer: had_input_activity (prov:wasInformedBy) — step B declares step A
+      - Backward pointer: had_input_activity (prov:wasInformedBy) ï¿½ step B declares step A
         as its predecessor. Range is narrowed to LabSynthesisStep via slot_usage.
-      - Forward pointer: has_successor_step (dcatplab:hasSuccessorStep) — step A points
+      - Forward pointer: has_successor_step (dcatplab:hasSuccessorStep) ï¿½ step A points
         forward to step B.
       - RepetitionBlock: the step preceding the block has has_successor_step pointing to
         BOTH the RepetitionBlock AND the first inner repeated step, enabling type-based
@@ -11179,7 +11179,7 @@ class StirringStep(LabSynthesisStep):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -11322,11 +11322,11 @@ class StirringStep(LabSynthesisStep):
 
 class TemperatureChangeStep(LabSynthesisStep):
     """
-    A step that changes the temperature of the reaction mixture (ChangeTemperature action). Use has_target_temperature for numeric targets (e.g. \"65 °C\", \"338 K\") and temperature_target_type for qualitative targets (Cool, Heat, room temperature, Reflux). These are mutually exclusive; populate only one per instance.
+    A step that changes the temperature of the reaction mixture (ChangeTemperature action). Use has_target_temperature for numeric targets (e.g. \"65 ï¿½C\", \"338 K\") and temperature_target_type for qualitative targets (Cool, Heat, room temperature, Reflux). These are mutually exclusive; populate only one per instance.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
 
-    has_target_temperature: Optional[list[Temperature]] = Field(default=[], description="""The numeric target temperature of a TemperatureChangeStep (e.g. \"65 °C\", \"338 K\"). Use temperature_target_type for qualitative targets.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
+    has_target_temperature: Optional[list[Temperature]] = Field(default=[], description="""The numeric target temperature of a TemperatureChangeStep (e.g. \"65 ï¿½C\", \"338 K\"). Use temperature_target_type for qualitative targets.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
          'is_a': 'has_temperature',
          'recommended': True} })
     temperature_target_type: Optional[TemperatureTargetTypeEnum] = Field(default=None, description="""Qualitative temperature target for a TemperatureChangeStep, used when a numeric temperature value is unavailable. Mutually exclusive with has_target_temperature.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep']} })
@@ -11472,21 +11472,21 @@ class TemperatureChangeStep(LabSynthesisStep):
          'slot_uri': 'rdf:type'} })
 
 
-class AtmosphereSettingStep(LabSynthesisStep):
+class AtmosphereChangeStep(LabSynthesisStep):
     """
     A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
 
-    has_atmosphere_type: Optional[AtmosphereTypeEnum] = Field(default=None, description="""The type of atmosphere set in an AtmosphereSettingStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereSettingStep']} })
+    has_atmosphere_type: Optional[AtmosphereTypeEnum] = Field(default=None, description="""The type of atmosphere set in an AtmosphereChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep']} })
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
-    has_flow_rate: Optional[list[FlowRate]] = Field(default=[], description="""The gas flow rate in an AtmosphereSettingStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereSettingStep'],
+    has_flow_rate: Optional[list[FlowRate]] = Field(default=[], description="""The gas flow rate in an AtmosphereChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -12431,7 +12431,7 @@ class IntermediateSolution(MaterialSample):
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
-                       'AtmosphereSettingStep'],
+                       'AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -12875,7 +12875,7 @@ class FlowRate(QuantitativeAttribute):
 
 class HeatRamp(QuantitativeAttribute):
     """
-    A QuantitativeAttribute expressing the rate of temperature increase (e.g. \"5 °C/min\"). Recommended QUDT quantitykind: TemperatureRate.
+    A QuantitativeAttribute expressing the rate of temperature increase (e.g. \"5 ï¿½C/min\"). Recommended QUDT quantitykind: TemperatureRate.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'qudt:Quantity',
          'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
@@ -13072,7 +13072,7 @@ SolutionPreparationStep.model_rebuild()
 MaterialAdditionStep.model_rebuild()
 StirringStep.model_rebuild()
 TemperatureChangeStep.model_rebuild()
-AtmosphereSettingStep.model_rebuild()
+AtmosphereChangeStep.model_rebuild()
 WaitingStep.model_rebuild()
 SeparationStep.model_rebuild()
 WashingStep.model_rebuild()
