@@ -449,13 +449,73 @@ Alias: had_input_activity</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../ContinuousAdditionStep/">ContinuousAdditionStep</a></td>
+<td>A step in which compounds enter the reaction repeatedly or continuously (Cont...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../SievingStep/">SievingStep</a></td>
 <td>A step in which solid material is screened by particle size (Sieve action)</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../GrindingStep/">GrindingStep</a></td>
-<td>A step in which the material is ground or milled (Grind action)</td>
+<td><a href="../SolutionPreparationStep/">SolutionPreparationStep</a></td>
+<td>A step that initialises a new solution or reaction vessel (NewSolution action...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../EvaluatedActivity/">EvaluatedActivity</a></td>
+<td>An activity or process that is being evaluated in a DataGeneratingActivity</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../WaitingStep/">WaitingStep</a></td>
+<td>A step in which the reaction mixture is allowed to rest for a defined duratio...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../LabSynthesisStep/">LabSynthesisStep</a></td>
+<td>An abstract base class for individual steps in a laboratory synthesis workflo...</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../DataAnalysis/">DataAnalysis</a></td>
+<td>An Activity that evaluates the data produced by another Activity</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../WashingStep/">WashingStep</a></td>
+<td>A step in which the separated material is washed with a solvent (Wash action)</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../LabSynthesisActivity/">LabSynthesisActivity</a></td>
+<td>A DataGeneratingActivity that describes a laboratory synthesis or sample prep...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../StirringStep/">StirringStep</a></td>
+<td>A step in which the reaction mixture is stirred (Stir action)</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../SubProductCreationStep/">SubProductCreationStep</a></td>
+<td>A step marking the point where a by-product diverges from the main synthesis ...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../SeparationStep/">SeparationStep</a></td>
+<td>A step in which phases of the reaction mixture are separated (Separate action...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../AtmosphereChangeStep/">AtmosphereChangeStep</a></td>
+<td>A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere ...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../RepetitionBlock/">RepetitionBlock</a></td>
+<td>A wrapper block grouping one or more steps that are executed a number of time...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -469,38 +529,8 @@ Alias: had_input_activity</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../MaterialAdditionStep/">MaterialAdditionStep</a></td>
-<td>A step in which a material is added to the reaction mixture (Add action)</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AtmosphereChangeStep/">AtmosphereChangeStep</a></td>
-<td>A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SubProductCreationStep/">SubProductCreationStep</a></td>
-<td>A step marking the point where a by-product diverges from the main synthesis ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../LabSynthesisActivity/">LabSynthesisActivity</a></td>
-<td>A DataGeneratingActivity that describes a laboratory synthesis or sample prep...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../WaitingStep/">WaitingStep</a></td>
-<td>A step in which the reaction mixture is allowed to rest for a defined duratio...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../StirringStep/">StirringStep</a></td>
-<td>A step in which the reaction mixture is stirred (Stir action)</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../WashingStep/">WashingStep</a></td>
-<td>A step in which the separated material is washed with a solvent (Wash action)</td>
+<td><a href="../ChemicalReaction/">ChemicalReaction</a></td>
+<td>A process that leads to the transformation of one set of chemical substances ...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -509,23 +539,8 @@ Alias: had_input_activity</p>
 <td>yes</td>
 </tr>
 <tr>
-<td><a href="../DataAnalysis/">DataAnalysis</a></td>
-<td>An Activity that evaluates the data produced by another Activity</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../RepetitionBlock/">RepetitionBlock</a></td>
-<td>A wrapper block grouping one or more steps that are executed a number of time...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../LabSynthesisStep/">LabSynthesisStep</a></td>
-<td>An abstract base class for individual steps in a laboratory synthesis workflo...</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../SolutionPreparationStep/">SolutionPreparationStep</a></td>
-<td>A step that initialises a new solution or reaction vessel (NewSolution action...</td>
+<td><a href="../MaterialAdditionStep/">MaterialAdditionStep</a></td>
+<td>A step in which a material is added to the reaction mixture (Add action)</td>
 <td>no</td>
 </tr>
 <tr>
@@ -534,23 +549,8 @@ Alias: had_input_activity</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ContinuousAdditionStep/">ContinuousAdditionStep</a></td>
-<td>A step in which compounds enter the reaction repeatedly or continuously (Cont...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ChemicalReaction/">ChemicalReaction</a></td>
-<td>A process that leads to the transformation of one set of chemical substances ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SeparationStep/">SeparationStep</a></td>
-<td>A step in which phases of the reaction mixture are separated (Separate action...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EvaluatedActivity/">EvaluatedActivity</a></td>
-<td>An activity or process that is being evaluated in a DataGeneratingActivity</td>
+<td><a href="../GrindingStep/">GrindingStep</a></td>
+<td>A step in which the material is ground or milled (Grind action)</td>
 <td>no</td>
 </tr>
 </tbody>
