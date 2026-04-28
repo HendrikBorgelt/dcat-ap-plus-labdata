@@ -36,7 +36,7 @@ has_synthesis_step:
     id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/mat_005
     type: MaterialSample
     title: Sodium Silicate
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_004
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_006
@@ -61,8 +61,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_008
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_008
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_007
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_009
@@ -130,8 +131,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_015
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_015
-  type: AtmosphereSettingStep
-  has_atmosphere_type: air
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - air
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_014
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0094/step_016

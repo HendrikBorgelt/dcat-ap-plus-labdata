@@ -203,7 +203,7 @@ class TemperatureChangeStepId(LabSynthesisStepId):
     pass
 
 
-class AtmosphereSettingStepId(LabSynthesisStepId):
+class AtmosphereChangeStepId(LabSynthesisStepId):
     pass
 
 
@@ -224,6 +224,22 @@ class GrindingStepId(LabSynthesisStepId):
 
 
 class RepetitionBlockId(LabSynthesisStepId):
+    pass
+
+
+class SievingStepId(LabSynthesisStepId):
+    pass
+
+
+class RecipientChangeStepId(LabSynthesisStepId):
+    pass
+
+
+class SubProductCreationStepId(LabSynthesisStepId):
+    pass
+
+
+class ContinuousAdditionStepId(LabSynthesisStepId):
     pass
 
 
@@ -1627,18 +1643,18 @@ class TemperatureChangeStep(LabSynthesisStep):
 
 
 @dataclass(repr=False)
-class AtmosphereSettingStep(LabSynthesisStep):
+class AtmosphereChangeStep(LabSynthesisStep):
     """
     A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATPLAB["AtmosphereSettingStep"]
-    class_class_curie: ClassVar[str] = "dcatplab:AtmosphereSettingStep"
-    class_name: ClassVar[str] = "AtmosphereSettingStep"
-    class_model_uri: ClassVar[URIRef] = DCATPLAB.AtmosphereSettingStep
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["AtmosphereChangeStep"]
+    class_class_curie: ClassVar[str] = "dcatplab:AtmosphereChangeStep"
+    class_name: ClassVar[str] = "AtmosphereChangeStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.AtmosphereChangeStep
 
-    id: Union[str, AtmosphereSettingStepId] = None
+    id: Union[str, AtmosphereChangeStepId] = None
     has_atmosphere_type: Optional[Union[str, "AtmosphereTypeEnum"]] = None
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
     has_flow_rate: Optional[Union[Union[dict, "FlowRate"], list[Union[dict, "FlowRate"]]]] = empty_list()
@@ -1646,8 +1662,8 @@ class AtmosphereSettingStep(LabSynthesisStep):
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, AtmosphereSettingStepId):
-            self.id = AtmosphereSettingStepId(self.id)
+        if not isinstance(self.id, AtmosphereChangeStepId):
+            self.id = AtmosphereChangeStepId(self.id)
 
         if self.has_atmosphere_type is not None and not isinstance(self.has_atmosphere_type, AtmosphereTypeEnum):
             self.has_atmosphere_type = AtmosphereTypeEnum(self.has_atmosphere_type)
@@ -1812,6 +1828,82 @@ class RepetitionBlock(LabSynthesisStep):
 
         self._normalize_inlined_as_list(slot_name="has_part", slot_type=LabSynthesisStep, key_name="id", keyed=True)
 
+        super().__post_init__(**kwargs)
+
+
+class SievingStep(LabSynthesisStep):
+    """A step in which solid material is screened by particle size (Sieve action)."""
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB.SievingStep
+    class_class_curie: ClassVar[str] = "dcatplab:SievingStep"
+    class_name: ClassVar[str] = "SievingStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SievingStep
+
+    id: Union[str, SievingStepId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SievingStepId):
+            self.id = SievingStepId(self.id)
+        super().__post_init__(**kwargs)
+
+
+class RecipientChangeStep(LabSynthesisStep):
+    """A step that modifies the reaction vessel (ChangeRecipient action)."""
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB.RecipientChangeStep
+    class_class_curie: ClassVar[str] = "dcatplab:RecipientChangeStep"
+    class_name: ClassVar[str] = "RecipientChangeStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.RecipientChangeStep
+
+    id: Union[str, RecipientChangeStepId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RecipientChangeStepId):
+            self.id = RecipientChangeStepId(self.id)
+        super().__post_init__(**kwargs)
+
+
+class SubProductCreationStep(LabSynthesisStep):
+    """A step marking where a by-product diverges from the main synthesis path (SubProductCreation action)."""
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB.SubProductCreationStep
+    class_class_curie: ClassVar[str] = "dcatplab:SubProductCreationStep"
+    class_name: ClassVar[str] = "SubProductCreationStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.SubProductCreationStep
+
+    id: Union[str, SubProductCreationStepId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SubProductCreationStepId):
+            self.id = SubProductCreationStepId(self.id)
+        super().__post_init__(**kwargs)
+
+
+class ContinuousAdditionStep(LabSynthesisStep):
+    """A step in which compounds enter the reaction repeatedly or continuously (ContinuousAddition action)."""
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = DCATPLAB.ContinuousAdditionStep
+    class_class_curie: ClassVar[str] = "dcatplab:ContinuousAdditionStep"
+    class_name: ClassVar[str] = "ContinuousAdditionStep"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ContinuousAdditionStep
+
+    id: Union[str, ContinuousAdditionStepId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ContinuousAdditionStepId):
+            self.id = ContinuousAdditionStepId(self.id)
         super().__post_init__(**kwargs)
 
 
@@ -3850,7 +3942,7 @@ class SeparationMethodEnum(EnumDefinitionImpl):
 
 class AtmosphereTypeEnum(EnumDefinitionImpl):
     """
-    Controlled vocabulary for atmosphere types in AtmosphereSettingStep.
+    Controlled vocabulary for atmosphere types in AtmosphereChangeStep.
     """
     air = PermissibleValue(text="air")
     inert = PermissibleValue(text="inert")
@@ -3871,7 +3963,7 @@ class AtmosphereTypeEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="AtmosphereTypeEnum",
-        description="Controlled vocabulary for atmosphere types in AtmosphereSettingStep.",
+        description="Controlled vocabulary for atmosphere types in AtmosphereChangeStep.",
     )
 
 class TemperatureTargetTypeEnum(EnumDefinitionImpl):

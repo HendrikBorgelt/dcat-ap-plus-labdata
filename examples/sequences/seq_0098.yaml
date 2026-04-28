@@ -89,7 +89,7 @@ has_synthesis_step:
     id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/mat_009
     type: MaterialSample
     title: PVP alcohol solution
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_008
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0098/step_010

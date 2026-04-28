@@ -112,7 +112,8 @@ classes:
       A step in which a material is added to the reaction mixture (Add action).
     slots:
       - has_added_material
-      - added_dropwise
+      - addition_type
+      - has_open_flame
       - has_step_duration
       - has_ph_value
 
@@ -124,6 +125,7 @@ classes:
     slots:
       - has_step_duration
       - has_stirring_speed
+      - stirring_type
       - has_temperature
       - has_pressure
 
@@ -137,13 +139,15 @@ classes:
     slots:
       - has_target_temperature
       - temperature_target_type
-      - uses_microwave
+      - heating_process
       - has_heat_ramp
+      - has_microwave_power
 
-  AtmosphereSettingStep:
+  AtmosphereChangeStep:
     is_a: LabSynthesisStep
     description: >-
-      A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
+      A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere action).
+      This is a support action — its effect persists until the next AtmosphereChangeStep.
     slots:
       - has_atmosphere_type
       - has_pressure
@@ -205,6 +209,42 @@ classes:
         multivalued: true
         inlined_as_list: true
 
+  SievingStep:
+    is_a: LabSynthesisStep
+    description: >-
+      A step in which solid material is screened by particle size (Sieve action).
+    slots:
+      - has_minimum_particle_size
+      - has_maximum_particle_size
+
+  RecipientChangeStep:
+    is_a: LabSynthesisStep
+    description: >-
+      A step that modifies the reaction vessel (ChangeRecipient action).
+      This is a support action — its effect persists until the next RecipientChangeStep.
+    slots:
+      - has_recipient_type
+      - has_vessel_material
+      - has_vessel_volume
+
+  SubProductCreationStep:
+    is_a: LabSynthesisStep
+    description: >-
+      A step marking the point where a by-product diverges from the main synthesis path
+      (SubProductCreation action).
+    slots:
+      - has_subproduct
+
+  ContinuousAdditionStep:
+    is_a: LabSynthesisStep
+    description: >-
+      A step in which compounds enter the reaction repeatedly or continuously
+      (ContinuousAddition action).
+    slots:
+      - has_added_material
+      - continuous_addition_type
+      - has_intermittent_amount
+
   IntermediateSolution:
     is_a: MaterialSample
     description: >-
@@ -246,6 +286,20 @@ classes:
       A QuantitativeAttribute expressing the rate of temperature increase
       (e.g. "5 °C/min"). Recommended QUDT quantitykind: TemperatureRate.
 
+  ParticleSize:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: >-
+      A QuantitativeAttribute expressing a particle size used in a SievingStep
+      (e.g. "250 µm"). Recommended QUDT quantitykind: Length.
+
+  MicrowavePower:
+    is_a: QuantitativeAttribute
+    class_uri: qudt:Quantity
+    description: >-
+      A QuantitativeAttribute expressing the microwave power used in a
+      TemperatureChangeStep (e.g. "300 W"). Recommended QUDT quantitykind: Power.
+
 
 slots:
 
@@ -280,10 +334,10 @@ slots:
     range: MaterialEntity
     description: The material added in a MaterialAdditionStep.
 
-  added_dropwise:
+  addition_type:
     slot_uri: CHMO:0001544
-    range: boolean
-    description: Whether the material was added dropwise in a MaterialAdditionStep.
+    range: AdditionTypeEnum
+    description: The mode of material addition in a MaterialAdditionStep (Normal, Dropwise, or Diffusion).
 
   has_step_duration:
     is_a: has_quantitative_attribute
@@ -312,10 +366,6 @@ slots:
       numeric temperature value is unavailable. Mutually exclusive with
       has_target_temperature.
 
-  uses_microwave:
-    range: boolean
-    description: Whether a microwave was used in a TemperatureChangeStep.
-
   has_heat_ramp:
     is_a: has_quantitative_attribute
     slot_uri: SIO:000008
@@ -324,7 +374,8 @@ slots:
 
   has_atmosphere_type:
     range: AtmosphereTypeEnum
-    description: The type of atmosphere set in an AtmosphereSettingStep.
+    multivalued: true
+    description: The atmosphere type(s) set in an AtmosphereChangeStep. Multiple gases can be listed.
 
   has_flow_rate:
     is_a: has_quantitative_attribute
@@ -368,8 +419,83 @@ slots:
       Note: source data may use a different convention (e.g. "Repeat 3" meaning
       3 additional repetitions = 4 total). Document the convention per dataset.
 
+  # A1 — SievingStep slots
+  has_minimum_particle_size:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: ParticleSize
+    description: The minimum particle size passed through the sieve in a SievingStep.
+
+  has_maximum_particle_size:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: ParticleSize
+    description: The maximum particle size passed through the sieve in a SievingStep.
+
+  # A2 — RecipientChangeStep slots
+  has_recipient_type:
+    range: RecipientTypeEnum
+    description: The type of reaction vessel used in a RecipientChangeStep.
+
+  has_vessel_material:
+    range: VesselMaterialEnum
+    description: The material of the reaction vessel in a RecipientChangeStep.
+
+  has_vessel_volume:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: Volume
+    description: The volume capacity of the reaction vessel in a RecipientChangeStep.
+
+  # A3 — SubProductCreationStep slots
+  has_subproduct:
+    slot_uri: RO:0002234
+    range: MaterialEntity
+    description: The by-product material created or separated in a SubProductCreationStep.
+
+  # A4 — ContinuousAdditionStep slots
+  continuous_addition_type:
+    range: ContinuousAdditionTypeEnum
+    description: Whether the addition is continuous or delivered in discrete intervals.
+
+  has_intermittent_amount:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: AmountOfSubstance
+    description: Amount added per interval in an intermittent ContinuousAdditionStep.
+
+  # B1 — MaterialAdditionStep
+  has_open_flame:
+    range: boolean
+    description: Whether an open flame was present during a MaterialAdditionStep.
+
+  # B2 — StirringStep
+  stirring_type:
+    range: StirringTypeEnum
+    description: Whether stirring is performed manually or by an automatic device in a StirringStep.
+
+  # B3 — TemperatureChangeStep
+  heating_process:
+    range: HeatingProcessEnum
+    description: The heating or cooling process used in a TemperatureChangeStep.
+
+  # B4 — TemperatureChangeStep
+  has_microwave_power:
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    range: MicrowavePower
+    description: The microwave power applied in a TemperatureChangeStep (only when heating_process is Microwave).
+
 
 enums:
+
+  AdditionTypeEnum:
+    description: Controlled vocabulary for the mode of addition in a MaterialAdditionStep.
+    permissible_values:
+      Normal: {}
+      Dropwise:
+        meaning: CHMO:0001544
+      Diffusion: {}
 
   SeparationMethodEnum:
     description: Controlled vocabulary for separation methods used in SeparationStep.
@@ -378,13 +504,15 @@ enums:
         meaning: CHMO:0001640
       centrifugation:
         meaning: OBI:0302886
+      decantation:
+        meaning: CHMO:0001798
       evaporation:
         meaning: CHMO:0001574
       fractionation:
         meaning: CHMO:0001625
 
   AtmosphereTypeEnum:
-    description: Controlled vocabulary for atmosphere types in AtmosphereSettingStep.
+    description: Controlled vocabulary for atmosphere types in AtmosphereChangeStep.
     permissible_values:
       air: {}
       inert: {}
@@ -410,3 +538,37 @@ enums:
         meaning: PATO:0015173
       REFLUX: {}
       AMBIENT: {}
+
+  RecipientTypeEnum:
+    description: Controlled vocabulary for reaction vessel types in RecipientChangeStep.
+    permissible_values:
+      Beaker: {}
+      Flask: {}
+      Autoclave: {}
+
+  VesselMaterialEnum:
+    description: Controlled vocabulary for vessel materials in RecipientChangeStep.
+    permissible_values:
+      Glass: {}
+      Plastic: {}
+      Ceramic: {}
+
+  ContinuousAdditionTypeEnum:
+    description: Controlled vocabulary for addition modes in ContinuousAdditionStep.
+    permissible_values:
+      Continuous: {}
+      Intermittent: {}
+
+  StirringTypeEnum:
+    description: Controlled vocabulary for stirring modes in StirringStep.
+    permissible_values:
+      Manual: {}
+      Automatic: {}
+
+  HeatingProcessEnum:
+    description: Controlled vocabulary for heating/cooling processes in TemperatureChangeStep.
+    permissible_values:
+      Electrical: {}
+      Microwave: {}
+      IceBath: {}
+      Atmospheric: {}

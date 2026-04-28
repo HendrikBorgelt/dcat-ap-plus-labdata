@@ -84,7 +84,7 @@ has_synthesis_step:
       value: 40.0
       unit:
         id: https://qudt.org/vocab/unit/Percent
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0103/step_006
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0103/step_008

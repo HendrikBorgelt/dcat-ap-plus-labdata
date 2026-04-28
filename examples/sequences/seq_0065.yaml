@@ -37,13 +37,14 @@ has_synthesis_step:
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_004
   type: TemperatureChangeStep
   temperature_target_type: HEAT
-  uses_microwave: true
+  heating_process: Microwave
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_003
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_005
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_005
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_004
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0065/step_006

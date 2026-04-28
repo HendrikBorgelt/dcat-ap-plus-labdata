@@ -55,7 +55,7 @@ has_synthesis_step:
       value: 12.1
       unit:
         id: https://qudt.org/vocab/unit/GM
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_004
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_006
@@ -90,8 +90,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_009
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_009
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_008
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0055/step_010

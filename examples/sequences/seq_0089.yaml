@@ -151,7 +151,7 @@ has_synthesis_step:
     id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/mat_013
     type: MaterialSample
     title: '[Pd(EDA)2]Cl2 solution'
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_012
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_014
@@ -233,7 +233,7 @@ has_synthesis_step:
     id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/mat_021
     type: MaterialSample
     title: Solution B
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_020
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_022
@@ -248,8 +248,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_023
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_023
-  type: AtmosphereSettingStep
-  has_atmosphere_type: vacuum
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - vacuum
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_022
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_024
@@ -284,8 +285,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_027
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_027
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_026
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_028
@@ -349,8 +351,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_034
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_034
-  type: AtmosphereSettingStep
-  has_atmosphere_type: air
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - air
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_033
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_035
@@ -380,8 +383,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_037
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0089/step_037
-  type: AtmosphereSettingStep
-  has_atmosphere_type: 10% h2/ar
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - 10% h2/ar
   has_flow_rate:
     type: FlowRate
     value: 100.0

@@ -74,8 +74,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_006
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_006
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_005
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_007
@@ -133,8 +134,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_013
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_013
-  type: AtmosphereSettingStep
-  has_atmosphere_type: vacuum
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - vacuum
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_012
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_014
@@ -245,6 +247,7 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_024
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_024
-  type: AtmosphereSettingStep
-  has_atmosphere_type: vacuum
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - vacuum
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0102/step_023

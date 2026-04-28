@@ -110,7 +110,7 @@ has_synthesis_step:
       value: 72.0
       unit:
         id: https://qudt.org/vocab/unit/wt% Al2O3
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_008
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_010
@@ -140,7 +140,7 @@ has_synthesis_step:
       value: 30.0
       unit:
         id: https://qudt.org/vocab/unit/wt% SiO2
-  added_dropwise: true
+  addition_type: Dropwise
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_010
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_012
@@ -218,8 +218,9 @@ has_synthesis_step:
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_019
 - id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_019
-  type: AtmosphereSettingStep
-  has_atmosphere_type: autogeneous
+  type: AtmosphereChangeStep
+  has_atmosphere_type:
+  - autogeneous
   had_input_activity: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_018
   has_successor_step:
   - https://w3id.org/nfdi-de/dcat-ap-plus/labdata/example/seq_0044/step_020
