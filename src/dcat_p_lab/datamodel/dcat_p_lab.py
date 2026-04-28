@@ -1,5 +1,5 @@
 # Auto generated from dcat_p_lab.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-05T22:57:43
+# Generation date: 2026-04-28T12:45:20
 # Schema: dcat-p-lab
 #
 # id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
@@ -87,8 +87,8 @@ SIO = CurieNamespace('SIO', 'http://semanticscience.org/resource/SIO_')
 VOC4CAT = CurieNamespace('VOC4CAT', 'https://w3id.org/nfdi4cat/voc4cat_')
 ADMS = CurieNamespace('adms', 'http://www.w3.org/ns/adms#')
 DCAT = CurieNamespace('dcat', 'http://www.w3.org/ns/dcat#')
+DCAT_AP_PLUS = CurieNamespace('dcat_ap_plus', 'https://nfdi-de.github.io/dcat-ap-plus/latest/schema/')
 DCATAP = CurieNamespace('dcatap', 'http://data.europa.eu/r5r/')
-DCATAP_PLUS = CurieNamespace('dcatap_plus', 'https://w3id.org/nfdi-de/dcat-ap-plus/')
 DCATAPPLUS = CurieNamespace('dcatapplus', 'https://nfdi-de.github.io/dcat-ap-plus/latest/schema/')
 DCATPLAB = CurieNamespace('dcatplab', 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
@@ -690,8 +690,8 @@ class ClassifierMixin(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATAP_PLUS["ClassifierMixin"]
-    class_class_curie: ClassVar[str] = "dcatap_plus:ClassifierMixin"
+    class_class_uri: ClassVar[URIRef] = DCAT_AP_PLUS["ClassifierMixin"]
+    class_class_curie: ClassVar[str] = "dcat_ap_plus:ClassifierMixin"
     class_name: ClassVar[str] = "ClassifierMixin"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.ClassifierMixin
 
@@ -1530,7 +1530,8 @@ class MaterialAdditionStep(LabSynthesisStep):
 
     id: Union[str, MaterialAdditionStepId] = None
     has_added_material: Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]] = empty_dict()
-    added_dropwise: Optional[Union[bool, Bool]] = None
+    addition_type: Optional[Union[str, "AdditionTypeEnum"]] = None
+    has_open_flame: Optional[Union[bool, Bool]] = None
     has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
     has_ph_value: Optional[Union[Union[dict, "PHValue"], list[Union[dict, "PHValue"]]]] = empty_list()
 
@@ -1542,8 +1543,11 @@ class MaterialAdditionStep(LabSynthesisStep):
 
         self._normalize_inlined_as_list(slot_name="has_added_material", slot_type=MaterialEntity, key_name="id", keyed=True)
 
-        if self.added_dropwise is not None and not isinstance(self.added_dropwise, Bool):
-            self.added_dropwise = Bool(self.added_dropwise)
+        if self.addition_type is not None and not isinstance(self.addition_type, AdditionTypeEnum):
+            self.addition_type = AdditionTypeEnum(self.addition_type)
+
+        if self.has_open_flame is not None and not isinstance(self.has_open_flame, Bool):
+            self.has_open_flame = Bool(self.has_open_flame)
 
         if not isinstance(self.has_step_duration, list):
             self.has_step_duration = [self.has_step_duration] if self.has_step_duration is not None else []
@@ -1571,6 +1575,7 @@ class StirringStep(LabSynthesisStep):
     id: Union[str, StirringStepId] = None
     has_step_duration: Optional[Union[Union[dict, "Duration"], list[Union[dict, "Duration"]]]] = empty_list()
     has_stirring_speed: Optional[Union[Union[dict, "StirringSpeed"], list[Union[dict, "StirringSpeed"]]]] = empty_list()
+    stirring_type: Optional[Union[str, "StirringTypeEnum"]] = None
     has_temperature: Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
 
@@ -1587,6 +1592,9 @@ class StirringStep(LabSynthesisStep):
         if not isinstance(self.has_stirring_speed, list):
             self.has_stirring_speed = [self.has_stirring_speed] if self.has_stirring_speed is not None else []
         self.has_stirring_speed = [v if isinstance(v, StirringSpeed) else StirringSpeed(**as_dict(v)) for v in self.has_stirring_speed]
+
+        if self.stirring_type is not None and not isinstance(self.stirring_type, StirringTypeEnum):
+            self.stirring_type = StirringTypeEnum(self.stirring_type)
 
         if not isinstance(self.has_temperature, list):
             self.has_temperature = [self.has_temperature] if self.has_temperature is not None else []
@@ -1616,8 +1624,9 @@ class TemperatureChangeStep(LabSynthesisStep):
     id: Union[str, TemperatureChangeStepId] = None
     has_target_temperature: Optional[Union[Union[dict, "Temperature"], list[Union[dict, "Temperature"]]]] = empty_list()
     temperature_target_type: Optional[Union[str, "TemperatureTargetTypeEnum"]] = None
-    uses_microwave: Optional[Union[bool, Bool]] = None
+    heating_process: Optional[Union[str, "HeatingProcessEnum"]] = None
     has_heat_ramp: Optional[Union[Union[dict, "HeatRamp"], list[Union[dict, "HeatRamp"]]]] = empty_list()
+    has_microwave_power: Optional[Union[Union[dict, "MicrowavePower"], list[Union[dict, "MicrowavePower"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -1632,12 +1641,16 @@ class TemperatureChangeStep(LabSynthesisStep):
         if self.temperature_target_type is not None and not isinstance(self.temperature_target_type, TemperatureTargetTypeEnum):
             self.temperature_target_type = TemperatureTargetTypeEnum(self.temperature_target_type)
 
-        if self.uses_microwave is not None and not isinstance(self.uses_microwave, Bool):
-            self.uses_microwave = Bool(self.uses_microwave)
+        if self.heating_process is not None and not isinstance(self.heating_process, HeatingProcessEnum):
+            self.heating_process = HeatingProcessEnum(self.heating_process)
 
         if not isinstance(self.has_heat_ramp, list):
             self.has_heat_ramp = [self.has_heat_ramp] if self.has_heat_ramp is not None else []
         self.has_heat_ramp = [v if isinstance(v, HeatRamp) else HeatRamp(**as_dict(v)) for v in self.has_heat_ramp]
+
+        if not isinstance(self.has_microwave_power, list):
+            self.has_microwave_power = [self.has_microwave_power] if self.has_microwave_power is not None else []
+        self.has_microwave_power = [v if isinstance(v, MicrowavePower) else MicrowavePower(**as_dict(v)) for v in self.has_microwave_power]
 
         super().__post_init__(**kwargs)
 
@@ -1645,7 +1658,8 @@ class TemperatureChangeStep(LabSynthesisStep):
 @dataclass(repr=False)
 class AtmosphereChangeStep(LabSynthesisStep):
     """
-    A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
+    A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere action). This is a support action —
+    its effect persists until the next AtmosphereChangeStep.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -1655,7 +1669,7 @@ class AtmosphereChangeStep(LabSynthesisStep):
     class_model_uri: ClassVar[URIRef] = DCATPLAB.AtmosphereChangeStep
 
     id: Union[str, AtmosphereChangeStepId] = None
-    has_atmosphere_type: Optional[Union[str, "AtmosphereTypeEnum"]] = None
+    has_atmosphere_type: Optional[Union[Union[str, "AtmosphereTypeEnum"], list[Union[str, "AtmosphereTypeEnum"]]]] = empty_list()
     has_pressure: Optional[Union[Union[dict, "Pressure"], list[Union[dict, "Pressure"]]]] = empty_list()
     has_flow_rate: Optional[Union[Union[dict, "FlowRate"], list[Union[dict, "FlowRate"]]]] = empty_list()
 
@@ -1665,8 +1679,9 @@ class AtmosphereChangeStep(LabSynthesisStep):
         if not isinstance(self.id, AtmosphereChangeStepId):
             self.id = AtmosphereChangeStepId(self.id)
 
-        if self.has_atmosphere_type is not None and not isinstance(self.has_atmosphere_type, AtmosphereTypeEnum):
-            self.has_atmosphere_type = AtmosphereTypeEnum(self.has_atmosphere_type)
+        if not isinstance(self.has_atmosphere_type, list):
+            self.has_atmosphere_type = [self.has_atmosphere_type] if self.has_atmosphere_type is not None else []
+        self.has_atmosphere_type = [v if isinstance(v, AtmosphereTypeEnum) else AtmosphereTypeEnum(v) for v in self.has_atmosphere_type]
 
         if not isinstance(self.has_pressure, list):
             self.has_pressure = [self.has_pressure] if self.has_pressure is not None else []
@@ -1831,79 +1846,135 @@ class RepetitionBlock(LabSynthesisStep):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
 class SievingStep(LabSynthesisStep):
-    """A step in which solid material is screened by particle size (Sieve action)."""
+    """
+    A step in which solid material is screened by particle size (Sieve action).
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATPLAB.SievingStep
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["SievingStep"]
     class_class_curie: ClassVar[str] = "dcatplab:SievingStep"
     class_name: ClassVar[str] = "SievingStep"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.SievingStep
 
     id: Union[str, SievingStepId] = None
+    has_minimum_particle_size: Optional[Union[Union[dict, "ParticleSize"], list[Union[dict, "ParticleSize"]]]] = empty_list()
+    has_maximum_particle_size: Optional[Union[Union[dict, "ParticleSize"], list[Union[dict, "ParticleSize"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, SievingStepId):
             self.id = SievingStepId(self.id)
+
+        if not isinstance(self.has_minimum_particle_size, list):
+            self.has_minimum_particle_size = [self.has_minimum_particle_size] if self.has_minimum_particle_size is not None else []
+        self.has_minimum_particle_size = [v if isinstance(v, ParticleSize) else ParticleSize(**as_dict(v)) for v in self.has_minimum_particle_size]
+
+        if not isinstance(self.has_maximum_particle_size, list):
+            self.has_maximum_particle_size = [self.has_maximum_particle_size] if self.has_maximum_particle_size is not None else []
+        self.has_maximum_particle_size = [v if isinstance(v, ParticleSize) else ParticleSize(**as_dict(v)) for v in self.has_maximum_particle_size]
+
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
 class RecipientChangeStep(LabSynthesisStep):
-    """A step that modifies the reaction vessel (ChangeRecipient action)."""
+    """
+    A step that modifies the reaction vessel (ChangeRecipient action). This is a support action — its effect persists
+    until the next RecipientChangeStep.
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATPLAB.RecipientChangeStep
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["RecipientChangeStep"]
     class_class_curie: ClassVar[str] = "dcatplab:RecipientChangeStep"
     class_name: ClassVar[str] = "RecipientChangeStep"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.RecipientChangeStep
 
     id: Union[str, RecipientChangeStepId] = None
+    has_recipient_type: Optional[Union[str, "RecipientTypeEnum"]] = None
+    has_vessel_material: Optional[Union[str, "VesselMaterialEnum"]] = None
+    has_vessel_volume: Optional[Union[Union[dict, "Volume"], list[Union[dict, "Volume"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, RecipientChangeStepId):
             self.id = RecipientChangeStepId(self.id)
+
+        if self.has_recipient_type is not None and not isinstance(self.has_recipient_type, RecipientTypeEnum):
+            self.has_recipient_type = RecipientTypeEnum(self.has_recipient_type)
+
+        if self.has_vessel_material is not None and not isinstance(self.has_vessel_material, VesselMaterialEnum):
+            self.has_vessel_material = VesselMaterialEnum(self.has_vessel_material)
+
+        if not isinstance(self.has_vessel_volume, list):
+            self.has_vessel_volume = [self.has_vessel_volume] if self.has_vessel_volume is not None else []
+        self.has_vessel_volume = [v if isinstance(v, Volume) else Volume(**as_dict(v)) for v in self.has_vessel_volume]
+
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
 class SubProductCreationStep(LabSynthesisStep):
-    """A step marking where a by-product diverges from the main synthesis path (SubProductCreation action)."""
+    """
+    A step marking the point where a by-product diverges from the main synthesis path (SubProductCreation action).
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATPLAB.SubProductCreationStep
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["SubProductCreationStep"]
     class_class_curie: ClassVar[str] = "dcatplab:SubProductCreationStep"
     class_name: ClassVar[str] = "SubProductCreationStep"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.SubProductCreationStep
 
     id: Union[str, SubProductCreationStepId] = None
+    has_subproduct: Optional[Union[str, MaterialEntityId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, SubProductCreationStepId):
             self.id = SubProductCreationStepId(self.id)
+
+        if self.has_subproduct is not None and not isinstance(self.has_subproduct, MaterialEntityId):
+            self.has_subproduct = MaterialEntityId(self.has_subproduct)
+
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
 class ContinuousAdditionStep(LabSynthesisStep):
-    """A step in which compounds enter the reaction repeatedly or continuously (ContinuousAddition action)."""
+    """
+    A step in which compounds enter the reaction repeatedly or continuously (ContinuousAddition action).
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATPLAB.ContinuousAdditionStep
+    class_class_uri: ClassVar[URIRef] = DCATPLAB["ContinuousAdditionStep"]
     class_class_curie: ClassVar[str] = "dcatplab:ContinuousAdditionStep"
     class_name: ClassVar[str] = "ContinuousAdditionStep"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.ContinuousAdditionStep
 
     id: Union[str, ContinuousAdditionStepId] = None
+    has_added_material: Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, "MaterialEntity"]], list[Union[dict, "MaterialEntity"]]]] = empty_dict()
+    continuous_addition_type: Optional[Union[str, "ContinuousAdditionTypeEnum"]] = None
+    has_intermittent_amount: Optional[Union[Union[dict, "AmountOfSubstance"], list[Union[dict, "AmountOfSubstance"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ContinuousAdditionStepId):
             self.id = ContinuousAdditionStepId(self.id)
+
+        self._normalize_inlined_as_list(slot_name="has_added_material", slot_type=MaterialEntity, key_name="id", keyed=True)
+
+        if self.continuous_addition_type is not None and not isinstance(self.continuous_addition_type, ContinuousAdditionTypeEnum):
+            self.continuous_addition_type = ContinuousAdditionTypeEnum(self.continuous_addition_type)
+
+        if not isinstance(self.has_intermittent_amount, list):
+            self.has_intermittent_amount = [self.has_intermittent_amount] if self.has_intermittent_amount is not None else []
+        self.has_intermittent_amount = [v if isinstance(v, AmountOfSubstance) else AmountOfSubstance(**as_dict(v)) for v in self.has_intermittent_amount]
+
         super().__post_init__(**kwargs)
 
 
@@ -2200,6 +2271,38 @@ class HeatRamp(QuantitativeAttribute):
     has_quantity_type: Union[str, DefinedTermId] = None
 
 @dataclass(repr=False)
+class ParticleSize(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing a particle size used in a SievingStep (e.g. "250 µm"). Recommended QUDT
+    quantitykind: Length.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "ParticleSize"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.ParticleSize
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
+class MicrowavePower(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing the microwave power used in a TemperatureChangeStep (e.g. "300 W"). Recommended
+    QUDT quantitykind: Power.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = QUDT["Quantity"]
+    class_class_curie: ClassVar[str] = "qudt:Quantity"
+    class_name: ClassVar[str] = "MicrowavePower"
+    class_model_uri: ClassVar[URIRef] = DCATPLAB.MicrowavePower
+
+    value: float = None
+    has_quantity_type: Union[str, DefinedTermId] = None
+
+@dataclass(repr=False)
 class Relationship(YAMLRoot):
     """
     See [DCAT-AP specs:Relationship](https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Relationship)
@@ -2267,8 +2370,8 @@ class SupportiveEntity(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = DCATAP_PLUS["SupportiveEntity"]
-    class_class_curie: ClassVar[str] = "dcatap_plus:SupportiveEntity"
+    class_class_uri: ClassVar[URIRef] = DCAT_AP_PLUS["SupportiveEntity"]
+    class_class_curie: ClassVar[str] = "dcat_ap_plus:SupportiveEntity"
     class_name: ClassVar[str] = "SupportiveEntity"
     class_model_uri: ClassVar[URIRef] = DCATPLAB.SupportiveEntity
 
@@ -3918,6 +4021,21 @@ class Pressure(QuantitativeAttribute):
     has_quantity_type: Union[str, DefinedTermId] = None
 
 # Enumerations
+class AdditionTypeEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for the mode of addition in a MaterialAdditionStep.
+    """
+    Normal = PermissibleValue(text="Normal")
+    Dropwise = PermissibleValue(
+        text="Dropwise",
+        meaning=CHMO["0001544"])
+    Diffusion = PermissibleValue(text="Diffusion")
+
+    _defn = EnumDefinition(
+        name="AdditionTypeEnum",
+        description="Controlled vocabulary for the mode of addition in a MaterialAdditionStep.",
+    )
+
 class SeparationMethodEnum(EnumDefinitionImpl):
     """
     Controlled vocabulary for separation methods used in SeparationStep.
@@ -3928,6 +4046,9 @@ class SeparationMethodEnum(EnumDefinitionImpl):
     centrifugation = PermissibleValue(
         text="centrifugation",
         meaning=OBI["0302886"])
+    decantation = PermissibleValue(
+        text="decantation",
+        meaning=CHMO["0001798"])
     evaporation = PermissibleValue(
         text="evaporation",
         meaning=CHMO["0001574"])
@@ -3982,6 +4103,70 @@ class TemperatureTargetTypeEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="TemperatureTargetTypeEnum",
         description="""Qualitative temperature targets for TemperatureChangeStep, for cases where a numeric temperature value is not recorded.""",
+    )
+
+class RecipientTypeEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for reaction vessel types in RecipientChangeStep.
+    """
+    Beaker = PermissibleValue(text="Beaker")
+    Flask = PermissibleValue(text="Flask")
+    Autoclave = PermissibleValue(text="Autoclave")
+
+    _defn = EnumDefinition(
+        name="RecipientTypeEnum",
+        description="Controlled vocabulary for reaction vessel types in RecipientChangeStep.",
+    )
+
+class VesselMaterialEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for vessel materials in RecipientChangeStep.
+    """
+    Glass = PermissibleValue(text="Glass")
+    Plastic = PermissibleValue(text="Plastic")
+    Ceramic = PermissibleValue(text="Ceramic")
+
+    _defn = EnumDefinition(
+        name="VesselMaterialEnum",
+        description="Controlled vocabulary for vessel materials in RecipientChangeStep.",
+    )
+
+class ContinuousAdditionTypeEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for addition modes in ContinuousAdditionStep.
+    """
+    Continuous = PermissibleValue(text="Continuous")
+    Intermittent = PermissibleValue(text="Intermittent")
+
+    _defn = EnumDefinition(
+        name="ContinuousAdditionTypeEnum",
+        description="Controlled vocabulary for addition modes in ContinuousAdditionStep.",
+    )
+
+class StirringTypeEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for stirring modes in StirringStep.
+    """
+    Manual = PermissibleValue(text="Manual")
+    Automatic = PermissibleValue(text="Automatic")
+
+    _defn = EnumDefinition(
+        name="StirringTypeEnum",
+        description="Controlled vocabulary for stirring modes in StirringStep.",
+    )
+
+class HeatingProcessEnum(EnumDefinitionImpl):
+    """
+    Controlled vocabulary for heating/cooling processes in TemperatureChangeStep.
+    """
+    Electrical = PermissibleValue(text="Electrical")
+    Microwave = PermissibleValue(text="Microwave")
+    IceBath = PermissibleValue(text="IceBath")
+    Atmospheric = PermissibleValue(text="Atmospheric")
+
+    _defn = EnumDefinition(
+        name="HeatingProcessEnum",
+        description="Controlled vocabulary for heating/cooling processes in TemperatureChangeStep.",
     )
 
 class DatasetThemes(EnumDefinitionImpl):
@@ -4122,8 +4307,8 @@ slots.has_initial_material = Slot(uri=PROV.used, name="has_initial_material", cu
 slots.has_added_material = Slot(uri=RO['0004009'], name="has_added_material", curie=RO.curie('0004009'),
                    model_uri=DCATPLAB.has_added_material, domain=None, range=Optional[Union[dict[Union[str, MaterialEntityId], Union[dict, MaterialEntity]], list[Union[dict, MaterialEntity]]]])
 
-slots.added_dropwise = Slot(uri=CHMO['0001544'], name="added_dropwise", curie=CHMO.curie('0001544'),
-                   model_uri=DCATPLAB.added_dropwise, domain=None, range=Optional[Union[bool, Bool]])
+slots.addition_type = Slot(uri=CHMO['0001544'], name="addition_type", curie=CHMO.curie('0001544'),
+                   model_uri=DCATPLAB.addition_type, domain=None, range=Optional[Union[str, "AdditionTypeEnum"]])
 
 slots.has_step_duration = Slot(uri=SIO['000008'], name="has_step_duration", curie=SIO.curie('000008'),
                    model_uri=DCATPLAB.has_step_duration, domain=None, range=Optional[Union[Union[dict, Duration], list[Union[dict, Duration]]]])
@@ -4137,14 +4322,11 @@ slots.has_target_temperature = Slot(uri=DCATPLAB.has_target_temperature, name="h
 slots.temperature_target_type = Slot(uri=DCATPLAB.temperature_target_type, name="temperature_target_type", curie=DCATPLAB.curie('temperature_target_type'),
                    model_uri=DCATPLAB.temperature_target_type, domain=None, range=Optional[Union[str, "TemperatureTargetTypeEnum"]])
 
-slots.uses_microwave = Slot(uri=DCATPLAB.uses_microwave, name="uses_microwave", curie=DCATPLAB.curie('uses_microwave'),
-                   model_uri=DCATPLAB.uses_microwave, domain=None, range=Optional[Union[bool, Bool]])
-
 slots.has_heat_ramp = Slot(uri=SIO['000008'], name="has_heat_ramp", curie=SIO.curie('000008'),
                    model_uri=DCATPLAB.has_heat_ramp, domain=None, range=Optional[Union[Union[dict, HeatRamp], list[Union[dict, HeatRamp]]]])
 
 slots.has_atmosphere_type = Slot(uri=DCATPLAB.has_atmosphere_type, name="has_atmosphere_type", curie=DCATPLAB.curie('has_atmosphere_type'),
-                   model_uri=DCATPLAB.has_atmosphere_type, domain=None, range=Optional[Union[str, "AtmosphereTypeEnum"]])
+                   model_uri=DCATPLAB.has_atmosphere_type, domain=None, range=Optional[Union[Union[str, "AtmosphereTypeEnum"], list[Union[str, "AtmosphereTypeEnum"]]]])
 
 slots.has_flow_rate = Slot(uri=SIO['000008'], name="has_flow_rate", curie=SIO.curie('000008'),
                    model_uri=DCATPLAB.has_flow_rate, domain=None, range=Optional[Union[Union[dict, FlowRate], list[Union[dict, FlowRate]]]])
@@ -4163,6 +4345,42 @@ slots.uses_washing_method = Slot(uri=SIO['000008'], name="uses_washing_method", 
 
 slots.repetition_count = Slot(uri=DCATPLAB.repetition_count, name="repetition_count", curie=DCATPLAB.curie('repetition_count'),
                    model_uri=DCATPLAB.repetition_count, domain=None, range=Optional[int])
+
+slots.has_minimum_particle_size = Slot(uri=SIO['000008'], name="has_minimum_particle_size", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_minimum_particle_size, domain=None, range=Optional[Union[Union[dict, ParticleSize], list[Union[dict, ParticleSize]]]])
+
+slots.has_maximum_particle_size = Slot(uri=SIO['000008'], name="has_maximum_particle_size", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_maximum_particle_size, domain=None, range=Optional[Union[Union[dict, ParticleSize], list[Union[dict, ParticleSize]]]])
+
+slots.has_recipient_type = Slot(uri=DCATPLAB.has_recipient_type, name="has_recipient_type", curie=DCATPLAB.curie('has_recipient_type'),
+                   model_uri=DCATPLAB.has_recipient_type, domain=None, range=Optional[Union[str, "RecipientTypeEnum"]])
+
+slots.has_vessel_material = Slot(uri=DCATPLAB.has_vessel_material, name="has_vessel_material", curie=DCATPLAB.curie('has_vessel_material'),
+                   model_uri=DCATPLAB.has_vessel_material, domain=None, range=Optional[Union[str, "VesselMaterialEnum"]])
+
+slots.has_vessel_volume = Slot(uri=SIO['000008'], name="has_vessel_volume", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_vessel_volume, domain=None, range=Optional[Union[Union[dict, Volume], list[Union[dict, Volume]]]])
+
+slots.has_subproduct = Slot(uri=RO['0002234'], name="has_subproduct", curie=RO.curie('0002234'),
+                   model_uri=DCATPLAB.has_subproduct, domain=None, range=Optional[Union[str, MaterialEntityId]])
+
+slots.continuous_addition_type = Slot(uri=DCATPLAB.continuous_addition_type, name="continuous_addition_type", curie=DCATPLAB.curie('continuous_addition_type'),
+                   model_uri=DCATPLAB.continuous_addition_type, domain=None, range=Optional[Union[str, "ContinuousAdditionTypeEnum"]])
+
+slots.has_intermittent_amount = Slot(uri=SIO['000008'], name="has_intermittent_amount", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_intermittent_amount, domain=None, range=Optional[Union[Union[dict, AmountOfSubstance], list[Union[dict, AmountOfSubstance]]]])
+
+slots.has_open_flame = Slot(uri=DCATPLAB.has_open_flame, name="has_open_flame", curie=DCATPLAB.curie('has_open_flame'),
+                   model_uri=DCATPLAB.has_open_flame, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.stirring_type = Slot(uri=DCATPLAB.stirring_type, name="stirring_type", curie=DCATPLAB.curie('stirring_type'),
+                   model_uri=DCATPLAB.stirring_type, domain=None, range=Optional[Union[str, "StirringTypeEnum"]])
+
+slots.heating_process = Slot(uri=DCATPLAB.heating_process, name="heating_process", curie=DCATPLAB.curie('heating_process'),
+                   model_uri=DCATPLAB.heating_process, domain=None, range=Optional[Union[str, "HeatingProcessEnum"]])
+
+slots.has_microwave_power = Slot(uri=SIO['000008'], name="has_microwave_power", curie=SIO.curie('000008'),
+                   model_uri=DCATPLAB.has_microwave_power, domain=None, range=Optional[Union[Union[dict, MicrowavePower], list[Union[dict, MicrowavePower]]]])
 
 slots.access_URL = Slot(uri=DCAT.accessURL, name="access_URL", curie=DCAT.curie('accessURL'),
                    model_uri=DCATPLAB.access_URL, domain=None, range=Optional[str])
@@ -4299,7 +4517,7 @@ slots.has_version = Slot(uri=DCAT.hasVersion, name="has_version", curie=DCAT.cur
 slots.homepage = Slot(uri=FOAF.homepage, name="homepage", curie=FOAF.curie('homepage'),
                    model_uri=DCATPLAB.homepage, domain=None, range=Optional[str])
 
-slots.id = Slot(uri=DCATAP_PLUS.id, name="id", curie=DCATAP_PLUS.curie('id'),
+slots.id = Slot(uri=DCATAPPLUS.id, name="id", curie=DCATAPPLUS.curie('id'),
                    model_uri=DCATPLAB.id, domain=None, range=URIRef)
 
 slots.identifier = Slot(uri=DCTERMS.identifier, name="identifier", curie=DCTERMS.curie('identifier'),

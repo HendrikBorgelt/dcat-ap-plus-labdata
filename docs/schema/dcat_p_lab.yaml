@@ -1,35 +1,31 @@
-name: chem-dcat-ap
-description: This is an extension of the DCAT Application Profile PLUS LinkML schema.
-  It is intended to be used by NFDI4Chem & NFDI4Cat as a core that can further be
-  extended in profiles/schemas to provide chemistry specific specific metadata for
-  a dataset.
-title: ChemDCAT-AP
+name: dcat-p-lab
+description: 'An extension of ChemDCAT-AP describing laboratory synthesis and sample
+
+  preparation workflow metadata for ELN-style datasets.'
+title: DCAT-AP-PLUS Lab Data Profile
 see_also:
-- https://nfdi-de.github.io/chem-dcat-ap/
-- https://github.com/HendrikBorgelt/DCAT-ap_as_LinkML_template/blob/main/src/dcatlinkml/schema/dcatlinkml.yaml
-- https://gitlab.com/opensourcelab/scientificdata/scidats/-/blob/feature/linkml-schemata/schemata/metadata_model_scidats_dcat_ap.yaml?ref_type=heads
-id: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
-version: 0.0.0.post341.dev0+b70db99
+- https://nfdi-de.github.io/dcat-ap-plus/
+- https://github.com/nfdi-de/chem-dcat-ap
+id: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+version: 0.0.1
 imports:
 - linkml:types
-- dcatapplus:dcat_ap_plus
+- dcat_ap_plus:dcat_ap_plus
 - chemical_entities_ap
 - chemical_reaction_ap
 - material_entities_ap
+- dcatapplus:dcat_ap_plus
 license: CC-BY 4.0
 prefixes:
-  chemdcatap:
-    prefix_prefix: chemdcatap
-    prefix_reference: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/
-  dcatapplus:
-    prefix_prefix: dcatapplus
+  dcatplab:
+    prefix_prefix: dcatplab
+    prefix_reference: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+  dcat_ap_plus:
+    prefix_prefix: dcat_ap_plus
     prefix_reference: https://nfdi-de.github.io/dcat-ap-plus/latest/schema/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  biolink:
-    prefix_prefix: biolink
-    prefix_reference: https://w3id.org/biolink/vocab/
   schema:
     prefix_prefix: schema
     prefix_reference: http://schema.org/
@@ -39,18 +35,9 @@ prefixes:
   dcat:
     prefix_prefix: dcat
     prefix_reference: http://www.w3.org/ns/dcat#
-  adms:
-    prefix_prefix: adms
-    prefix_reference: http://www.w3.org/ns/adms#
   prov:
     prefix_prefix: prov
     prefix_reference: http://www.w3.org/ns/prov#
-  sosa:
-    prefix_prefix: sosa
-    prefix_reference: http://www.w3.org/ns/sosa/
-  vcard:
-    prefix_prefix: vcard
-    prefix_reference: http://www.w3.org/2006/vcard/ns#
   rdf:
     prefix_prefix: rdf
     prefix_reference: http://www.w3.org/1999/02/22-rdf-syntax-ns#
@@ -78,9 +65,6 @@ prefixes:
   OBI:
     prefix_prefix: OBI
     prefix_reference: http://purl.obolibrary.org/obo/OBI_
-  IAO:
-    prefix_prefix: IAO
-    prefix_reference: http://purl.obolibrary.org/obo/IAO_
   CHEBI:
     prefix_prefix: CHEBI
     prefix_reference: http://purl.obolibrary.org/obo/CHEBI_
@@ -90,64 +74,13 @@ prefixes:
   BFO:
     prefix_prefix: BFO
     prefix_reference: http://purl.obolibrary.org/obo/BFO_
-  T4FS:
-    prefix_prefix: T4FS
-    prefix_reference: http://purl.obolibrary.org/obo/T4FS_
-  FOODON:
-    prefix_prefix: FOODON
-    prefix_reference: http://purl.obolibrary.org/obo/FOODON_
-  CHEMINF:
-    prefix_prefix: CHEMINF
-    prefix_reference: http://semanticscience.org/resource/CHEMINF_
-  RXNO:
-    prefix_prefix: RXNO
-    prefix_reference: http://purl.obolibrary.org/obo/RXNO_
-  MOP:
-    prefix_prefix: MOP
-    prefix_reference: http://purl.obolibrary.org/obo/MOP_
-  ex:
-    prefix_prefix: ex
-    prefix_reference: http://example.org/
-  NCIT:
-    prefix_prefix: NCIT
-    prefix_reference: http://purl.obolibrary.org/obo/NCIT_
   SIO:
     prefix_prefix: SIO
     prefix_reference: http://semanticscience.org/resource/SIO_
-  doi:
-    prefix_prefix: doi
-    prefix_reference: https://doi.org/
-  NMR:
-    prefix_prefix: NMR
-    prefix_reference: 'http://nmrML.org/nmrCV#NMR:'
-  AFE:
-    prefix_prefix: AFE
-    prefix_reference: http://purl.allotrope.org/ontologies/equipment#AFE_
-  AFRL:
-    prefix_prefix: AFRL
-    prefix_reference: http://purl.allotrope.org/ontologies/role#AFRL_
-  AFP:
-    prefix_prefix: AFP
-    prefix_reference: http://purl.allotrope.org/ontologies/process#AFP_
-  AFR:
-    prefix_prefix: AFR
-    prefix_reference: http://purl.allotrope.org/ontologies/result#AFR_
-  VOC4CAT:
-    prefix_prefix: VOC4CAT
-    prefix_reference: https://w3id.org/nfdi4cat/voc4cat_
-  PROCO:
-    prefix_prefix: PROCO
-    prefix_reference: http://purl.obolibrary.org/obo/PROCO_
-  time:
-    prefix_prefix: time
-    prefix_reference: http://www.w3.org/2006/time#
-  REX:
-    prefix_prefix: REX
-    prefix_reference: http://purl.obolibrary.org/obo/REX_
   ENVO:
     prefix_prefix: ENVO
     prefix_reference: http://purl.obolibrary.org/obo/ENVO_
-default_prefix: chemdcatap
+default_prefix: dcatplab
 default_range: string
 subsets:
   domain_agnostic_core:
@@ -453,6 +386,142 @@ types:
     uri: xsd:nonNegativeInteger
     pattern: ([\-+]?[0-9]+)
 enums:
+  AdditionTypeEnum:
+    name: AdditionTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/AdditionTypeEnum
+    description: Controlled vocabulary for the mode of addition in a MaterialAdditionStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Normal:
+        text: Normal
+      Dropwise:
+        text: Dropwise
+        meaning: CHMO:0001544
+      Diffusion:
+        text: Diffusion
+  SeparationMethodEnum:
+    name: SeparationMethodEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/SeparationMethodEnum
+    description: Controlled vocabulary for separation methods used in SeparationStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      filtration:
+        text: filtration
+        meaning: CHMO:0001640
+      centrifugation:
+        text: centrifugation
+        meaning: OBI:0302886
+      decantation:
+        text: decantation
+        meaning: CHMO:0001798
+      evaporation:
+        text: evaporation
+        meaning: CHMO:0001574
+      fractionation:
+        text: fractionation
+        meaning: CHMO:0001625
+  AtmosphereTypeEnum:
+    name: AtmosphereTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/AtmosphereTypeEnum
+    description: Controlled vocabulary for atmosphere types in AtmosphereChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      air:
+        text: air
+      inert:
+        text: inert
+      nitrogen:
+        text: nitrogen
+        meaning: CHEBI:17997
+      argon:
+        text: argon
+        meaning: CHEBI:39289
+      hydrogen:
+        text: hydrogen
+        meaning: CHEBI:18276
+      vacuum:
+        text: vacuum
+      autogeneous:
+        text: autogeneous
+      oxygen:
+        text: oxygen
+        meaning: CHEBI:15379
+  TemperatureTargetTypeEnum:
+    name: TemperatureTargetTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/TemperatureTargetTypeEnum
+    description: Qualitative temperature targets for TemperatureChangeStep, for cases
+      where a numeric temperature value is not recorded.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      COOL:
+        text: COOL
+      HEAT:
+        text: HEAT
+      ROOM_TEMPERATURE:
+        text: ROOM_TEMPERATURE
+        meaning: PATO:0015173
+      REFLUX:
+        text: REFLUX
+      AMBIENT:
+        text: AMBIENT
+  RecipientTypeEnum:
+    name: RecipientTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/RecipientTypeEnum
+    description: Controlled vocabulary for reaction vessel types in RecipientChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Beaker:
+        text: Beaker
+      Flask:
+        text: Flask
+      Autoclave:
+        text: Autoclave
+  VesselMaterialEnum:
+    name: VesselMaterialEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/VesselMaterialEnum
+    description: Controlled vocabulary for vessel materials in RecipientChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Glass:
+        text: Glass
+      Plastic:
+        text: Plastic
+      Ceramic:
+        text: Ceramic
+  ContinuousAdditionTypeEnum:
+    name: ContinuousAdditionTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/ContinuousAdditionTypeEnum
+    description: Controlled vocabulary for addition modes in ContinuousAdditionStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Continuous:
+        text: Continuous
+      Intermittent:
+        text: Intermittent
+  StirringTypeEnum:
+    name: StirringTypeEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/StirringTypeEnum
+    description: Controlled vocabulary for stirring modes in StirringStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Manual:
+        text: Manual
+      Automatic:
+        text: Automatic
+  HeatingProcessEnum:
+    name: HeatingProcessEnum
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/HeatingProcessEnum
+    description: Controlled vocabulary for heating/cooling processes in TemperatureChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    permissible_values:
+      Electrical:
+        text: Electrical
+      Microwave:
+        text: Microwave
+      IceBath:
+        text: IceBath
+      Atmospheric:
+        text: Atmospheric
   DatasetThemes:
     name: DatasetThemes
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/DatasetThemes
@@ -617,6 +686,434 @@ enums:
         description: A state of matter with neither fixed volume nor fixed shape.
         meaning: PATO:0001737
 slots:
+  has_synthesis_step:
+    name: has_synthesis_step
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_synthesis_step
+    description: Links a LabSynthesisActivity to its constituent LabSynthesisSteps.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - BFO:0000051
+    is_a: has_part
+    slot_uri: BFO:0000051
+    owner: LabSynthesisActivity
+    domain_of:
+    - LabSynthesisActivity
+    range: LabSynthesisStep
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_successor_step:
+    name: has_successor_step
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_successor_step
+    description: Forward pointer from a LabSynthesisStep to the step(s) that follow
+      it. Inverse of had_input_activity (prov:wasInformedBy). For RepetitionBlocks,
+      the preceding step's has_successor_step points to both the RepetitionBlock and
+      the first inner repeated step.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - dcatplab:hasSuccessorStep
+    slot_uri: dcatplab:hasSuccessorStep
+    owner: LabSynthesisStep
+    domain_of:
+    - LabSynthesisStep
+    range: LabSynthesisStep
+    multivalued: true
+  has_initial_material:
+    name: has_initial_material
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_initial_material
+    description: The starting MaterialEntity for a SolutionPreparationStep or the
+      reference material for an IntermediateSolution.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - prov:used
+    slot_uri: prov:used
+    owner: IntermediateSolution
+    domain_of:
+    - SolutionPreparationStep
+    - IntermediateSolution
+    range: MaterialEntity
+  has_added_material:
+    name: has_added_material
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_added_material
+    description: The material added in a MaterialAdditionStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - RO:0004009
+    is_a: had_input_entity
+    slot_uri: RO:0004009
+    owner: ContinuousAdditionStep
+    domain_of:
+    - MaterialAdditionStep
+    - ContinuousAdditionStep
+    range: MaterialEntity
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  addition_type:
+    name: addition_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/addition_type
+    description: The mode of material addition in a MaterialAdditionStep (Normal,
+      Dropwise, or Diffusion).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - CHMO:0001544
+    slot_uri: CHMO:0001544
+    owner: MaterialAdditionStep
+    domain_of:
+    - MaterialAdditionStep
+    range: AdditionTypeEnum
+  has_step_duration:
+    name: has_step_duration
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_step_duration
+    description: 'The duration of a synthesis step. Named has_step_duration (not has_duration)
+      to avoid conflict with chemical_reaction_ap''s has_duration (range: xsd:duration).'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: GrindingStep
+    domain_of:
+    - MaterialAdditionStep
+    - StirringStep
+    - WaitingStep
+    - GrindingStep
+    range: Duration
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_stirring_speed:
+    name: has_stirring_speed
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_stirring_speed
+    description: The stirring speed in a StirringStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: StirringStep
+    domain_of:
+    - StirringStep
+    range: StirringSpeed
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_target_temperature:
+    name: has_target_temperature
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_target_temperature
+    description: "The numeric target temperature of a TemperatureChangeStep (e.g.\
+      \ \"65 \xB0C\", \"338 K\"). Use temperature_target_type for qualitative targets."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: has_temperature
+    slot_uri: dcatplab:has_target_temperature
+    owner: TemperatureChangeStep
+    domain_of:
+    - TemperatureChangeStep
+    range: Temperature
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  temperature_target_type:
+    name: temperature_target_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/temperature_target_type
+    description: Qualitative temperature target for a TemperatureChangeStep, used
+      when a numeric temperature value is unavailable. Mutually exclusive with has_target_temperature.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:temperature_target_type
+    owner: TemperatureChangeStep
+    domain_of:
+    - TemperatureChangeStep
+    range: TemperatureTargetTypeEnum
+  has_heat_ramp:
+    name: has_heat_ramp
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_heat_ramp
+    description: The rate of temperature increase in a TemperatureChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: TemperatureChangeStep
+    domain_of:
+    - TemperatureChangeStep
+    range: HeatRamp
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_atmosphere_type:
+    name: has_atmosphere_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_atmosphere_type
+    description: The atmosphere type(s) set in an AtmosphereChangeStep. Multiple gases
+      can be listed.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:has_atmosphere_type
+    owner: AtmosphereChangeStep
+    domain_of:
+    - AtmosphereChangeStep
+    range: AtmosphereTypeEnum
+    multivalued: true
+  has_flow_rate:
+    name: has_flow_rate
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_flow_rate
+    description: The gas flow rate in an AtmosphereSettingStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: AtmosphereChangeStep
+    domain_of:
+    - AtmosphereChangeStep
+    range: FlowRate
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  phase_to_keep:
+    name: phase_to_keep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/phase_to_keep
+    description: The phase retained after a SeparationStep (e.g. "precipitate", "supernatant",
+      "filtrate").
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:phase_to_keep
+    owner: SeparationStep
+    domain_of:
+    - SeparationStep
+    range: string
+  uses_separation_method:
+    name: uses_separation_method
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/uses_separation_method
+    description: The separation method used in a SeparationStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_qualitative_attribute
+    slot_uri: SIO:000008
+    owner: SeparationStep
+    domain_of:
+    - SeparationStep
+    range: DefinedTerm
+    bindings:
+    - range: SeparationMethodEnum
+      obligation_level:
+        text: RECOMMENDED
+        description: The metadata element is recommended to be present in the model
+      binds_value_of: id
+      description: Restricts the separation method to the SeparationMethodEnum vocabulary.
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  uses_washing_material:
+    name: uses_washing_material
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/uses_washing_material
+    description: The washing solvent or material used in a WashingStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - RO:0004009
+    is_a: had_input_entity
+    slot_uri: RO:0004009
+    owner: WashingStep
+    domain_of:
+    - WashingStep
+    range: MaterialEntity
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  uses_washing_method:
+    name: uses_washing_method
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/uses_washing_method
+    description: The washing method used in a WashingStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_qualitative_attribute
+    slot_uri: SIO:000008
+    owner: WashingStep
+    domain_of:
+    - WashingStep
+    range: DefinedTerm
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  repetition_count:
+    name: repetition_count
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/repetition_count
+    description: 'Total number of times the steps in a RepetitionBlock were executed.
+      Note: source data may use a different convention (e.g. "Repeat 3" meaning 3
+      additional repetitions = 4 total). Document the convention per dataset.'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:repetition_count
+    owner: RepetitionBlock
+    domain_of:
+    - RepetitionBlock
+    range: integer
+  has_minimum_particle_size:
+    name: has_minimum_particle_size
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_minimum_particle_size
+    description: The minimum particle size passed through the sieve in a SievingStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: SievingStep
+    domain_of:
+    - SievingStep
+    range: ParticleSize
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_maximum_particle_size:
+    name: has_maximum_particle_size
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_maximum_particle_size
+    description: The maximum particle size passed through the sieve in a SievingStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: SievingStep
+    domain_of:
+    - SievingStep
+    range: ParticleSize
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_recipient_type:
+    name: has_recipient_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_recipient_type
+    description: The type of reaction vessel used in a RecipientChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:has_recipient_type
+    owner: RecipientChangeStep
+    domain_of:
+    - RecipientChangeStep
+    range: RecipientTypeEnum
+  has_vessel_material:
+    name: has_vessel_material
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_vessel_material
+    description: The material of the reaction vessel in a RecipientChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:has_vessel_material
+    owner: RecipientChangeStep
+    domain_of:
+    - RecipientChangeStep
+    range: VesselMaterialEnum
+  has_vessel_volume:
+    name: has_vessel_volume
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_vessel_volume
+    description: The volume capacity of the reaction vessel in a RecipientChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: RecipientChangeStep
+    domain_of:
+    - RecipientChangeStep
+    range: Volume
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_subproduct:
+    name: has_subproduct
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_subproduct
+    description: The by-product material created or separated in a SubProductCreationStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - RO:0002234
+    slot_uri: RO:0002234
+    owner: SubProductCreationStep
+    domain_of:
+    - SubProductCreationStep
+    range: MaterialEntity
+  continuous_addition_type:
+    name: continuous_addition_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/continuous_addition_type
+    description: Whether the addition is continuous or delivered in discrete intervals.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:continuous_addition_type
+    owner: ContinuousAdditionStep
+    domain_of:
+    - ContinuousAdditionStep
+    range: ContinuousAdditionTypeEnum
+  has_intermittent_amount:
+    name: has_intermittent_amount
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_intermittent_amount
+    description: Amount added per interval in an intermittent ContinuousAdditionStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: ContinuousAdditionStep
+    domain_of:
+    - ContinuousAdditionStep
+    range: AmountOfSubstance
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  has_open_flame:
+    name: has_open_flame
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_open_flame
+    description: Whether an open flame was present during a MaterialAdditionStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:has_open_flame
+    owner: MaterialAdditionStep
+    domain_of:
+    - MaterialAdditionStep
+    range: boolean
+  stirring_type:
+    name: stirring_type
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/stirring_type
+    description: Whether stirring is performed manually or by an automatic device
+      in a StirringStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:stirring_type
+    owner: StirringStep
+    domain_of:
+    - StirringStep
+    range: StirringTypeEnum
+  heating_process:
+    name: heating_process
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/heating_process
+    description: The heating or cooling process used in a TemperatureChangeStep.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    slot_uri: dcatplab:heating_process
+    owner: TemperatureChangeStep
+    domain_of:
+    - TemperatureChangeStep
+    range: HeatingProcessEnum
+  has_microwave_power:
+    name: has_microwave_power
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/has_microwave_power
+    description: The microwave power applied in a TemperatureChangeStep (only when
+      heating_process is Microwave).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - SIO:000008
+    is_a: has_quantitative_attribute
+    slot_uri: SIO:000008
+    owner: TemperatureChangeStep
+    domain_of:
+    - TemperatureChangeStep
+    range: MicrowavePower
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   access_URL:
     name: access_URL
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/access_URL
@@ -1318,7 +1815,7 @@ slots:
     in_subset:
     - domain_agnostic_core
     from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
-    slot_uri: dcatap_plus:id
+    slot_uri: dcatapplus:id
     identifier: true
     owner: Resource
     domain_of:
@@ -2085,10 +2582,10 @@ slots:
     range: string
   composed_of:
     name: composed_of
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/composed_of
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#composed_of
     description: The slot to provide the chemical entities of which a ChemicalSubstance
       is composed of.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - BFO:0000051
     close_mappings:
@@ -2105,9 +2602,9 @@ slots:
     inlined_as_list: true
   has_concentration:
     name: has_concentration
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/has_concentration
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#has_concentration
     description: The slot to provide the Concentration of a ChemicalSubstance.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_quantitative_attribute
@@ -2122,9 +2619,9 @@ slots:
     inlined_as_list: true
   has_amount:
     name: has_amount
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/has_amount
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#has_amount
     description: The slot to provide the AmountConcentration of a ChemicalSubstance.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_quantitative_attribute
@@ -2139,15 +2636,16 @@ slots:
     inlined_as_list: true
   has_ph_value:
     name: has_ph_value
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/has_ph_value
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#has_ph_value
     description: The slot to provide the PHValue of a ChemicalSubstance.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_quantitative_attribute
     slot_uri: SIO:000008
     owner: ChemicalSubstance
     domain_of:
+    - MaterialAdditionStep
     - ChemicalSubstance
     range: PHValue
     recommended: true
@@ -2156,9 +2654,9 @@ slots:
     inlined_as_list: true
   inchi:
     name: inchi
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/inchi
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#inchi
     description: The slot to provide the InChi descriptor of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_qualitative_attribute
@@ -2173,9 +2671,9 @@ slots:
     inlined_as_list: true
   inchikey:
     name: inchikey
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/inchikey
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#inchikey
     description: The slot to provide the InChiKey of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_qualitative_attribute
@@ -2190,9 +2688,9 @@ slots:
     inlined_as_list: true
   smiles:
     name: smiles
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/smiles
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#smiles
     description: The slot to provide the canonical SMILES descriptor of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_qualitative_attribute
@@ -2207,9 +2705,9 @@ slots:
     inlined_as_list: true
   molecular_formula:
     name: molecular_formula
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/molecular_formula
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#molecular_formula
     description: The slot to provide the IUPAC formula of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_qualitative_attribute
@@ -2224,9 +2722,9 @@ slots:
     inlined_as_list: true
   iupac_name:
     name: iupac_name
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/iupac_name
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#iupac_name
     description: The slot to provide the IUPAC name of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_qualitative_attribute
@@ -2241,9 +2739,9 @@ slots:
     inlined_as_list: true
   has_molar_mass:
     name: has_molar_mass
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/has_molar_mass
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#has_molar_mass
     description: The slot to provide the MolarMass of a ChemicalEntity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:000008
     is_a: has_mass
@@ -2488,6 +2986,7 @@ slots:
     slot_uri: SIO:000008
     owner: Materialistic
     domain_of:
+    - StirringStep
     - ChemicalReaction
     - Materialistic
     range: Temperature
@@ -2557,6 +3056,8 @@ slots:
     slot_uri: SIO:000008
     owner: Materialistic
     domain_of:
+    - StirringStep
+    - AtmosphereChangeStep
     - ChemicalReaction
     - Materialistic
     range: Pressure
@@ -2635,6 +3136,141 @@ slots:
       binds_value_of: id
       description: Restricts the allowable defined terms to the QUDT Unit vocabulary.
     recommended: true
+  LabSynthesisActivity_evaluated_entity:
+    name: LabSynthesisActivity_evaluated_entity
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/evaluated_entity
+    description: The slot to specify the Entity about which the DataGeneratingActivity
+      produced information.
+    in_subset:
+    - domain_agnostic_core
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - prov:used
+    is_a: evaluated_entity
+    domain: LabSynthesisActivity
+    slot_uri: prov:used
+    alias: evaluated_entity
+    owner: LabSynthesisActivity
+    domain_of:
+    - LabSynthesisActivity
+    is_usage_slot: true
+    usage_slot_name: evaluated_entity
+    range: MaterialSample
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  LabSynthesisActivity_had_output_entity:
+    name: LabSynthesisActivity_had_output_entity
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/had_output_entity
+    description: The slot to specify the Entity that was generated as an output of
+      an Activity.
+    in_subset:
+    - domain_agnostic_core
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - prov:generated
+    is_a: had_output_entity
+    domain: LabSynthesisActivity
+    slot_uri: prov:generated
+    alias: had_output_entity
+    owner: LabSynthesisActivity
+    domain_of:
+    - LabSynthesisActivity
+    is_usage_slot: true
+    usage_slot_name: had_output_entity
+    range: MaterialSample
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  LabSynthesisActivity_occurred_in:
+    name: LabSynthesisActivity_occurred_in
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/occurred_in
+    description: The slot to specify the Surrounding in which an Activity took place.
+    in_subset:
+    - domain_agnostic_core
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - prov:atLocation
+    is_a: occurred_in
+    domain: LabSynthesisActivity
+    slot_uri: prov:atLocation
+    alias: occurred_in
+    owner: LabSynthesisActivity
+    domain_of:
+    - LabSynthesisActivity
+    is_usage_slot: true
+    usage_slot_name: occurred_in
+    range: Laboratory
+    inlined: true
+    inlined_as_list: true
+  LabSynthesisStep_had_input_activity:
+    name: LabSynthesisStep_had_input_activity
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/had_input_activity
+    description: The slot to provide a previous Activity that informed the Activity
+      by being causally via a shared participant.
+    in_subset:
+    - domain_agnostic_core
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - prov:wasInformedBy
+    is_a: had_input_activity
+    domain: LabSynthesisStep
+    slot_uri: prov:wasInformedBy
+    alias: had_input_activity
+    owner: LabSynthesisStep
+    domain_of:
+    - LabSynthesisStep
+    is_usage_slot: true
+    usage_slot_name: had_input_activity
+    range: LabSynthesisStep
+    recommended: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  LabSynthesisStep_has_part:
+    name: LabSynthesisStep_has_part
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/has_part
+    description: This slot is described in more detail within the class in which it
+      is used.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - dcterms:hasPart
+    is_a: has_part
+    domain: LabSynthesisStep
+    slot_uri: dcterms:hasPart
+    alias: has_part
+    owner: LabSynthesisStep
+    domain_of:
+    - LabSynthesisStep
+    is_usage_slot: true
+    usage_slot_name: has_part
+    range: LabSynthesisStep
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  RepetitionBlock_has_part:
+    name: RepetitionBlock_has_part
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/has_part
+    description: This slot is described in more detail within the class in which it
+      is used.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/
+    mappings:
+    - dcterms:hasPart
+    is_a: LabSynthesisStep_has_part
+    domain: RepetitionBlock
+    slot_uri: dcterms:hasPart
+    alias: has_part
+    owner: RepetitionBlock
+    domain_of:
+    - RepetitionBlock
+    is_usage_slot: true
+    usage_slot_name: has_part
+    range: LabSynthesisStep
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   Activity_title:
     name: Activity_title
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/title
@@ -6305,92 +6941,12 @@ slots:
     inlined: true
     inlined_as_list: false
 classes:
-  SubstanceSample:
-    name: SubstanceSample
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/SubstanceSample
-    description: A MaterialSample derived from a ChemicalSubstance that is of interest
-      in an analytical procedure.
-    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
-    aliases:
-    - analyte
-    mappings:
-    - SIO:001378
-    is_a: MaterialSample
-    mixins:
-    - ChemicalSubstance
-    slots:
-    - id
-    - has_qualitative_attribute
-    - has_quantitative_attribute
-    - Entity_has_part
-    - Entity_part_of
-    - ClassifierMixin_type
-    - rdf_type
-    - EvaluatedEntity_was_generated_by
-    - EvaluatedEntity_title
-    - EvaluatedEntity_description
-    - EvaluatedEntity_other_identifier
-    - MaterialSample_derived_from
-    - alternative_label
-    - has_physical_state
-    - has_temperature
-    - has_mass
-    - has_volume
-    - has_density
-    - has_pressure
-    - has_concentration
-    - has_ph_value
-    - composed_of
-    - has_molar_equivalent
-    - has_amount
-    - has_percentage_of_total
-    class_uri: SIO:001378
-  PolymerSample:
-    name: PolymerSample
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/PolymerSample
-    description: A SubstanceSample derived from a Polymer.
-    todos:
-    - Find a better mapping, as it is currently mapped to same ontology class as its
-      parent.
-    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
-    mappings:
-    - SIO:001378
-    is_a: SubstanceSample
-    mixins:
-    - Polymer
-    slots:
-    - id
-    - has_qualitative_attribute
-    - has_quantitative_attribute
-    - Entity_has_part
-    - Entity_part_of
-    - ClassifierMixin_type
-    - rdf_type
-    - EvaluatedEntity_was_generated_by
-    - EvaluatedEntity_title
-    - EvaluatedEntity_description
-    - EvaluatedEntity_other_identifier
-    - MaterialSample_derived_from
-    - alternative_label
-    - has_physical_state
-    - has_temperature
-    - has_mass
-    - has_volume
-    - has_density
-    - has_pressure
-    - has_concentration
-    - has_ph_value
-    - composed_of
-    - has_molar_equivalent
-    - has_amount
-    - has_percentage_of_total
-    class_uri: SIO:001378
   Laboratory:
     name: Laboratory
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/Laboratory
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/Laboratory
     description: A facility that provides controlled conditions in which scientific
       or technological research, experiments, and measurement may be performed.
-    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
     mappings:
     - ENVO:01001405
     is_a: Surrounding
@@ -6400,6 +6956,628 @@ classes:
     - ClassifierMixin_type
     - rdf_type
     class_uri: ENVO:01001405
+  LabSynthesisActivity:
+    name: LabSynthesisActivity
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/LabSynthesisActivity
+    description: A DataGeneratingActivity that describes a laboratory synthesis or
+      sample preparation workflow, consisting of an ordered sequence of LabSynthesisSteps.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0000070
+    is_a: DataGeneratingActivity
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_other_identifier
+    - Activity_has_part
+    - Activity_had_input_entity
+    - Activity_had_input_activity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - evaluated_activity
+    - realized_plan
+    - has_synthesis_step
+    - LabSynthesisActivity_evaluated_entity
+    - LabSynthesisActivity_had_output_entity
+    - LabSynthesisActivity_occurred_in
+    slot_usage:
+      evaluated_entity:
+        name: evaluated_entity
+        range: MaterialSample
+        multivalued: true
+      had_output_entity:
+        name: had_output_entity
+        range: MaterialSample
+        multivalued: true
+      occurred_in:
+        name: occurred_in
+        range: Laboratory
+    class_uri: OBI:0000070
+  LabSynthesisStep:
+    name: LabSynthesisStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/LabSynthesisStep
+    description: "An abstract base class for individual steps in a laboratory synthesis\
+      \ workflow.\nStep ordering model:\n  - Backward pointer: had_input_activity\
+      \ (prov:wasInformedBy) \u2014 step B declares step A\n    as its predecessor.\
+      \ Range is narrowed to LabSynthesisStep via slot_usage.\n  - Forward pointer:\
+      \ has_successor_step (dcatplab:hasSuccessorStep) \u2014 step A points\n    forward\
+      \ to step B.\n  - RepetitionBlock: the step preceding the block has has_successor_step\
+      \ pointing to\n    BOTH the RepetitionBlock AND the first inner repeated step,\
+      \ enabling type-based\n    queries without traversing the wrapper. The last\
+      \ inner step's has_successor_step\n    points out of the block to the next non-repeated\
+      \ step."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: EvaluatedActivity
+    abstract: true
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    slot_usage:
+      had_input_activity:
+        name: had_input_activity
+        range: LabSynthesisStep
+        multivalued: false
+      has_part:
+        name: has_part
+        range: LabSynthesisStep
+        multivalued: true
+        inlined_as_list: true
+    class_uri: dcatplab:LabSynthesisStep
+  SolutionPreparationStep:
+    name: SolutionPreparationStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/SolutionPreparationStep
+    description: A step that initialises a new solution or reaction vessel (NewSolution
+      action). The prepared intermediate product is represented as an IntermediateSolution.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_initial_material
+    class_uri: dcatplab:SolutionPreparationStep
+  MaterialAdditionStep:
+    name: MaterialAdditionStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/MaterialAdditionStep
+    description: A step in which a material is added to the reaction mixture (Add
+      action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0000652
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_added_material
+    - addition_type
+    - has_open_flame
+    - has_step_duration
+    - has_ph_value
+    class_uri: OBI:0000652
+  StirringStep:
+    name: StirringStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/StirringStep
+    description: A step in which the reaction mixture is stirred (Stir action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - CHMO:0002774
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_step_duration
+    - has_stirring_speed
+    - stirring_type
+    - has_temperature
+    - has_pressure
+    class_uri: CHMO:0002774
+  TemperatureChangeStep:
+    name: TemperatureChangeStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/TemperatureChangeStep
+    description: "A step that changes the temperature of the reaction mixture (ChangeTemperature\
+      \ action). Use has_target_temperature for numeric targets (e.g. \"65 \xB0C\"\
+      , \"338 K\") and temperature_target_type for qualitative targets (Cool, Heat,\
+      \ room temperature, Reflux). These are mutually exclusive; populate only one\
+      \ per instance."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_target_temperature
+    - temperature_target_type
+    - heating_process
+    - has_heat_ramp
+    - has_microwave_power
+    class_uri: dcatplab:TemperatureChangeStep
+  AtmosphereChangeStep:
+    name: AtmosphereChangeStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/AtmosphereChangeStep
+    description: "A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere\
+      \ action). This is a support action \u2014 its effect persists until the next\
+      \ AtmosphereChangeStep."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_atmosphere_type
+    - has_pressure
+    - has_flow_rate
+    class_uri: dcatplab:AtmosphereChangeStep
+  WaitingStep:
+    name: WaitingStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/WaitingStep
+    description: A step in which the reaction mixture is allowed to rest for a defined
+      duration (Wait action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0000045
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_step_duration
+    class_uri: OBI:0000045
+  SeparationStep:
+    name: SeparationStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/SeparationStep
+    description: A step in which phases of the reaction mixture are separated (Separate
+      action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0600014
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - phase_to_keep
+    - uses_separation_method
+    class_uri: OBI:0600014
+  WashingStep:
+    name: WashingStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/WashingStep
+    description: A step in which the separated material is washed with a solvent (Wash
+      action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0000653
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - uses_washing_material
+    - uses_washing_method
+    class_uri: OBI:0000653
+  GrindingStep:
+    name: GrindingStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/GrindingStep
+    description: A step in which the material is ground or milled (Grind action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - CHMO:0001652
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_step_duration
+    class_uri: CHMO:0001652
+  RepetitionBlock:
+    name: RepetitionBlock
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/RepetitionBlock
+    description: "A wrapper block grouping one or more steps that are executed a number\
+      \ of times (Repeat action). The has_part slot contains the repeated steps in\
+      \ order.\nOrdering convention:\n  - The step immediately preceding the block\
+      \ sets has_successor_step to point to BOTH\n    the RepetitionBlock and the\
+      \ first inner step.\n  - The last inner step's has_successor_step points out\
+      \ of the block.\n  - repetition_count is the TOTAL number of executions (e.g.\
+      \ 4 if source data says\n    \"Repeat 3 additional times\"). Document the convention\
+      \ per dataset."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - OBI:0000303
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - repetition_count
+    - RepetitionBlock_has_part
+    slot_usage:
+      has_part:
+        name: has_part
+        range: LabSynthesisStep
+        multivalued: true
+        inlined_as_list: true
+    class_uri: OBI:0000303
+  SievingStep:
+    name: SievingStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/SievingStep
+    description: A step in which solid material is screened by particle size (Sieve
+      action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_minimum_particle_size
+    - has_maximum_particle_size
+    class_uri: dcatplab:SievingStep
+  RecipientChangeStep:
+    name: RecipientChangeStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/RecipientChangeStep
+    description: "A step that modifies the reaction vessel (ChangeRecipient action).\
+      \ This is a support action \u2014 its effect persists until the next RecipientChangeStep."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_recipient_type
+    - has_vessel_material
+    - has_vessel_volume
+    class_uri: dcatplab:RecipientChangeStep
+  SubProductCreationStep:
+    name: SubProductCreationStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/SubProductCreationStep
+    description: A step marking the point where a by-product diverges from the main
+      synthesis path (SubProductCreation action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_subproduct
+    class_uri: dcatplab:SubProductCreationStep
+  ContinuousAdditionStep:
+    name: ContinuousAdditionStep
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/ContinuousAdditionStep
+    description: A step in which compounds enter the reaction repeatedly or continuously
+      (ContinuousAddition action).
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: LabSynthesisStep
+    slots:
+    - id
+    - Activity_title
+    - Activity_description
+    - Activity_had_input_entity
+    - Activity_had_output_entity
+    - Activity_carried_out_by
+    - Activity_has_qualitative_attribute
+    - Activity_has_quantitative_attribute
+    - Activity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedActivity_other_identifier
+    - has_successor_step
+    - LabSynthesisStep_had_input_activity
+    - LabSynthesisStep_has_part
+    - has_added_material
+    - continuous_addition_type
+    - has_intermittent_amount
+    class_uri: dcatplab:ContinuousAdditionStep
+  IntermediateSolution:
+    name: IntermediateSolution
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/IntermediateSolution
+    description: A MaterialSample representing an intermediate product of a synthesis
+      workflow, created by a SolutionPreparationStep. Optionally references the starting
+      MaterialEntity from which it was prepared.
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    is_a: MaterialSample
+    slots:
+    - id
+    - has_qualitative_attribute
+    - has_quantitative_attribute
+    - Entity_has_part
+    - Entity_part_of
+    - ClassifierMixin_type
+    - rdf_type
+    - EvaluatedEntity_was_generated_by
+    - EvaluatedEntity_title
+    - EvaluatedEntity_description
+    - EvaluatedEntity_other_identifier
+    - MaterialSample_derived_from
+    - alternative_label
+    - has_physical_state
+    - has_temperature
+    - has_mass
+    - has_volume
+    - has_density
+    - has_pressure
+    - has_initial_material
+    class_uri: dcatplab:IntermediateSolution
+  Duration:
+    name: Duration
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/Duration
+    description: 'A QuantitativeAttribute expressing a time duration for a synthesis
+      step (e.g. "8 h", "30 min"). Recommended QUDT quantitykind: Time.'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
+  StirringSpeed:
+    name: StirringSpeed
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/StirringSpeed
+    description: 'A QuantitativeAttribute expressing the rate of stirring (e.g. "500
+      rpm"). Recommended QUDT quantitykind: AngularVelocity.'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
+  FlowRate:
+    name: FlowRate
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/FlowRate
+    description: 'A QuantitativeAttribute expressing a volumetric flow rate of gas
+      (e.g. "10 mL/min"). Recommended QUDT quantitykind: VolumeFlowRate.'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
+  HeatRamp:
+    name: HeatRamp
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/HeatRamp
+    description: "A QuantitativeAttribute expressing the rate of temperature increase\
+      \ (e.g. \"5 \xB0C/min\"). Recommended QUDT quantitykind: TemperatureRate."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
+  ParticleSize:
+    name: ParticleSize
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/ParticleSize
+    description: "A QuantitativeAttribute expressing a particle size used in a SievingStep\
+      \ (e.g. \"250 \xB5m\"). Recommended QUDT quantitykind: Length."
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
+  MicrowavePower:
+    name: MicrowavePower
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/MicrowavePower
+    description: 'A QuantitativeAttribute expressing the microwave power used in a
+      TemperatureChangeStep (e.g. "300 W"). Recommended QUDT quantitykind: Power.'
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
+    mappings:
+    - qudt:Quantity
+    is_a: QuantitativeAttribute
+    slots:
+    - title
+    - description
+    - QuantitativeAttribute_value
+    - quantitativeAttribute__has_quantity_type
+    - quantitativeAttribute__unit
+    - ClassifierMixin_type
+    - rdf_type
+    class_uri: qudt:Quantity
   Activity:
     name: Activity
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/Activity
@@ -7041,7 +8219,7 @@ classes:
         name: type
         range: DefinedTerm
         inlined: true
-    class_uri: dcatap_plus:ClassifierMixin
+    class_uri: dcatapplus:ClassifierMixin
   Concept:
     name: Concept
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/Concept
@@ -8716,7 +9894,7 @@ classes:
     slots:
     - title
     - description
-    class_uri: dcatap_plus:SupportiveEntity
+    class_uri: dcatapplus:SupportiveEntity
   Surrounding:
     name: Surrounding
     definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/Surrounding
@@ -8749,11 +9927,11 @@ classes:
     class_uri: time:Instant
   ChemicalEntity:
     name: ChemicalEntity
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/ChemicalEntity
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#ChemicalEntity
     description: Any constitutionally or isotopically distinct atom, molecule, ion,
       ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately
       distinguishable entity.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEBI:23367
     is_a: MaterialEntity
@@ -8784,10 +9962,10 @@ classes:
     class_uri: CHEBI:23367
   Atom:
     name: Atom
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/Atom
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#Atom
     description: A MaterialEntity constituting the smallest component of an element
       having the chemical properties of the element.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEBI:33250
     is_a: ChemicalEntity
@@ -8824,10 +10002,10 @@ classes:
     class_uri: CHEBI:33250
   MolarMass:
     name: MolarMass
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/MolarMass
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#MolarMass
     description: A Mass (physical quality) that quantifies the mass of a homogeneous
       ChemicalSubstance containing 6.02 x 10^23 atoms or molecules.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - AFR:0002409
     close_mappings:
@@ -8844,8 +10022,8 @@ classes:
     class_uri: AFR:0002409
   InChIKey:
     name: InChIKey
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/InChIKey
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#InChIKey
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEMINF:000059
     is_a: QualitativeAttribute
@@ -8858,9 +10036,9 @@ classes:
     class_uri: CHEMINF:000059
   InChi:
     name: InChi
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/InChi
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#InChi
     description: A structure descriptor which conforms to the InChI format specification.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEMINF:000113
     is_a: QualitativeAttribute
@@ -8873,11 +10051,11 @@ classes:
     class_uri: CHEMINF:000113
   MolecularFormula:
     name: MolecularFormula
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/MolecularFormula
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#MolecularFormula
     description: A structure descriptor which identifies each constituent element
       by its chemical symbol and indicates the number of atoms of each element found
       in each discrete molecule of that compound.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEMINF:000042
     is_a: QualitativeAttribute
@@ -8890,11 +10068,11 @@ classes:
     class_uri: CHEMINF:000042
   IUPACName:
     name: IUPACName
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/IUPACName
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#IUPACName
     description: A systematic name which is formulated according to the rules and
       recommendations for chemical nomenclature set out by the International Union
       of Pure and Applied Chemistry (IUPAC).
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEMINF:000107
     is_a: QualitativeAttribute
@@ -8907,10 +10085,10 @@ classes:
     class_uri: CHEMINF:000107
   SMILES:
     name: SMILES
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/SMILES
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#SMILES
     description: A structure descriptor that denotes a molecular structure as a graph
       and conforms to the SMILES format specification.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEMINF:000018
     is_a: QualitativeAttribute
@@ -8923,10 +10101,10 @@ classes:
     class_uri: CHEMINF:000018
   ChemicalSubstance:
     name: ChemicalSubstance
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/ChemicalSubstance
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#ChemicalSubstance
     description: A MaterialEntity of constant composition, composed of chemical entities
       of the same type or of different types.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEBI:59999
     is_a: MaterialEntity
@@ -8958,11 +10136,11 @@ classes:
     class_uri: CHEBI:59999
   Polymer:
     name: Polymer
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/Polymer
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#Polymer
     description: A ChemicalSubstance that is composed of macromolecules of different
       kinds and which may be differentiated by composition, length, degree of branching
       etc..
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHEBI:60027
     is_a: ChemicalSubstance
@@ -8994,10 +10172,10 @@ classes:
     class_uri: CHEBI:60027
   Concentration:
     name: Concentration
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/Concentration
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#Concentration
     description: A QuantitativeAttribute of a ChemicalSubstance that represents the
       amount of a constituent divided by the volume of the mixture.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - CHMO:0002820
     exact_mappings:
@@ -9021,9 +10199,9 @@ classes:
     class_uri: CHMO:0002820
   AmountOfSubstance:
     name: AmountOfSubstance
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/AmountOfSubstance
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#AmountOfSubstance
     description: The total amount of substance used in a ChemicalReaction.
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     aliases:
     - SubstanceAmount
     mappings:
@@ -9042,8 +10220,8 @@ classes:
     class_uri: qudt:Quantity
   PHValue:
     name: PHValue
-    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/chemical-entities/PHValue
-    from_schema: https://nfdi-de.github.io/chem-dcat-ap/chemical_entities_ap.yaml
+    definition_uri: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#PHValue
+    from_schema: https://w3id.org/nfdi-de/dcat-ap-plus/chemistry/entity#
     mappings:
     - SIO:001089
     exact_mappings:
@@ -9597,7 +10775,7 @@ classes:
     class_uri: qudt:Quantity
 metamodel_version: 1.7.0
 source_file: dcat_p_lab.yaml
-source_file_date: '2025-12-10T13:50:20'
-source_file_size: 3671
-generation_date: '2025-12-10T13:52:58'
+source_file_date: '2026-04-28T12:30:13'
+source_file_size: 18964
+generation_date: '2026-04-28T12:35:38'
 

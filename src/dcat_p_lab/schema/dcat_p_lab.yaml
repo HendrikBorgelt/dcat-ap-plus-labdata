@@ -13,7 +13,7 @@ see_also:
 
 prefixes:
   dcatplab: https://w3id.org/nfdi-de/dcat-ap-plus/labdata/
-  dcatapplus: https://nfdi-de.github.io/dcat-ap-plus/latest/schema/
+  dcat_ap_plus: https://nfdi-de.github.io/dcat-ap-plus/latest/schema/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   dcterms: http://purl.org/dc/terms/
@@ -39,7 +39,7 @@ default_range: string
 
 imports:
   - linkml:types
-  - dcatapplus:dcat_ap_plus
+  - dcat_ap_plus:dcat_ap_plus
   - chemical_entities_ap
   - chemical_reaction_ap
 

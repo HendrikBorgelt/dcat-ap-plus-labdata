@@ -85,7 +85,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'dcatplab',
                     'preparation workflow metadata for ELN-style datasets.',
      'id': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/',
      'imports': ['linkml:types',
-                 'dcatapplus:dcat_ap_plus',
+                 'dcat_ap_plus:dcat_ap_plus',
                  'chemical_entities_ap',
                  'chemical_reaction_ap'],
      'license': 'CC-BY 4.0',
@@ -108,8 +108,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'dcatplab',
                           'prefix_reference': 'http://semanticscience.org/resource/SIO_'},
                   'dcat': {'prefix_prefix': 'dcat',
                            'prefix_reference': 'http://www.w3.org/ns/dcat#'},
-                  'dcatapplus': {'prefix_prefix': 'dcatapplus',
-                                 'prefix_reference': 'https://nfdi-de.github.io/dcat-ap-plus/latest/schema/'},
+                  'dcat_ap_plus': {'prefix_prefix': 'dcat_ap_plus',
+                                   'prefix_reference': 'https://nfdi-de.github.io/dcat-ap-plus/latest/schema/'},
                   'dcatplab': {'prefix_prefix': 'dcatplab',
                                'prefix_reference': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'},
                   'dcterms': {'prefix_prefix': 'dcterms',
@@ -243,12 +243,22 @@ class PhysicalStateEnum(str, Enum):
     """
 
 
+class AdditionTypeEnum(str, Enum):
+    """
+    Controlled vocabulary for the mode of addition in a MaterialAdditionStep.
+    """
+    Normal = "Normal"
+    Dropwise = "Dropwise"
+    Diffusion = "Diffusion"
+
+
 class SeparationMethodEnum(str, Enum):
     """
     Controlled vocabulary for separation methods used in SeparationStep.
     """
     filtration = "filtration"
     centrifugation = "centrifugation"
+    decantation = "decantation"
     evaporation = "evaporation"
     fractionation = "fractionation"
 
@@ -276,6 +286,50 @@ class TemperatureTargetTypeEnum(str, Enum):
     ROOM_TEMPERATURE = "ROOM_TEMPERATURE"
     REFLUX = "REFLUX"
     AMBIENT = "AMBIENT"
+
+
+class RecipientTypeEnum(str, Enum):
+    """
+    Controlled vocabulary for reaction vessel types in RecipientChangeStep.
+    """
+    Beaker = "Beaker"
+    Flask = "Flask"
+    Autoclave = "Autoclave"
+
+
+class VesselMaterialEnum(str, Enum):
+    """
+    Controlled vocabulary for vessel materials in RecipientChangeStep.
+    """
+    Glass = "Glass"
+    Plastic = "Plastic"
+    Ceramic = "Ceramic"
+
+
+class ContinuousAdditionTypeEnum(str, Enum):
+    """
+    Controlled vocabulary for addition modes in ContinuousAdditionStep.
+    """
+    Continuous = "Continuous"
+    Intermittent = "Intermittent"
+
+
+class StirringTypeEnum(str, Enum):
+    """
+    Controlled vocabulary for stirring modes in StirringStep.
+    """
+    Manual = "Manual"
+    Automatic = "Automatic"
+
+
+class HeatingProcessEnum(str, Enum):
+    """
+    Controlled vocabulary for heating/cooling processes in TemperatureChangeStep.
+    """
+    Electrical = "Electrical"
+    Microwave = "Microwave"
+    IceBath = "IceBath"
+    Atmospheric = "Atmospheric"
 
 
 
@@ -10693,9 +10747,9 @@ class LabSynthesisStep(EvaluatedActivity):
     """
     An abstract base class for individual steps in a laboratory synthesis workflow.
     Step ordering model:
-      - Backward pointer: had_input_activity (prov:wasInformedBy) ï¿½ step B declares step A
+      - Backward pointer: had_input_activity (prov:wasInformedBy) — step B declares step A
         as its predecessor. Range is narrowed to LabSynthesisStep via slot_usage.
-      - Forward pointer: has_successor_step (dcatplab:hasSuccessorStep) ï¿½ step A points
+      - Forward pointer: has_successor_step (dcatplab:hasSuccessorStep) — step A points
         forward to step B.
       - RepetitionBlock: the step preceding the block has has_successor_step pointing to
         BOTH the RepetitionBlock AND the first inner repeated step, enabling type-based
@@ -11001,11 +11055,12 @@ class MaterialAdditionStep(LabSynthesisStep):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'OBI:0000652',
          'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
 
-    has_added_material: Optional[list[MaterialEntity]] = Field(default=[], description="""The material added in a MaterialAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep'],
+    has_added_material: Optional[list[MaterialEntity]] = Field(default=[], description="""The material added in a MaterialAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep', 'ContinuousAdditionStep'],
          'is_a': 'had_input_entity',
          'recommended': True,
          'slot_uri': 'RO:0004009'} })
-    added_dropwise: Optional[bool] = Field(default=None, description="""Whether the material was added dropwise in a MaterialAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep'], 'slot_uri': 'CHMO:0001544'} })
+    addition_type: Optional[AdditionTypeEnum] = Field(default=None, description="""The mode of material addition in a MaterialAdditionStep (Normal, Dropwise, or Diffusion).""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep'], 'slot_uri': 'CHMO:0001544'} })
+    has_open_flame: Optional[bool] = Field(default=None, description="""Whether an open flame was present during a MaterialAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep']} })
     has_step_duration: Optional[list[Duration]] = Field(default=[], description="""The duration of a synthesis step. Named has_step_duration (not has_duration) to avoid conflict with chemical_reaction_ap's has_duration (range: xsd:duration).""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep',
                        'StirringStep',
                        'WaitingStep',
@@ -11172,6 +11227,7 @@ class StirringStep(LabSynthesisStep):
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
+    stirring_type: Optional[StirringTypeEnum] = Field(default=None, description="""Whether stirring is performed manually or by an automatic device in a StirringStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StirringStep']} })
     has_temperature: Optional[list[Temperature]] = Field(default=[], description="""The slot to provide the Temperature of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic', 'ChemicalReaction', 'StirringStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
@@ -11322,16 +11378,20 @@ class StirringStep(LabSynthesisStep):
 
 class TemperatureChangeStep(LabSynthesisStep):
     """
-    A step that changes the temperature of the reaction mixture (ChangeTemperature action). Use has_target_temperature for numeric targets (e.g. \"65 ï¿½C\", \"338 K\") and temperature_target_type for qualitative targets (Cool, Heat, room temperature, Reflux). These are mutually exclusive; populate only one per instance.
+    A step that changes the temperature of the reaction mixture (ChangeTemperature action). Use has_target_temperature for numeric targets (e.g. \"65 °C\", \"338 K\") and temperature_target_type for qualitative targets (Cool, Heat, room temperature, Reflux). These are mutually exclusive; populate only one per instance.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
 
-    has_target_temperature: Optional[list[Temperature]] = Field(default=[], description="""The numeric target temperature of a TemperatureChangeStep (e.g. \"65 ï¿½C\", \"338 K\"). Use temperature_target_type for qualitative targets.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
+    has_target_temperature: Optional[list[Temperature]] = Field(default=[], description="""The numeric target temperature of a TemperatureChangeStep (e.g. \"65 °C\", \"338 K\"). Use temperature_target_type for qualitative targets.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
          'is_a': 'has_temperature',
          'recommended': True} })
     temperature_target_type: Optional[TemperatureTargetTypeEnum] = Field(default=None, description="""Qualitative temperature target for a TemperatureChangeStep, used when a numeric temperature value is unavailable. Mutually exclusive with has_target_temperature.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep']} })
-    uses_microwave: Optional[bool] = Field(default=None, description="""Whether a microwave was used in a TemperatureChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep']} })
+    heating_process: Optional[HeatingProcessEnum] = Field(default=None, description="""The heating or cooling process used in a TemperatureChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep']} })
     has_heat_ramp: Optional[list[HeatRamp]] = Field(default=[], description="""The rate of temperature increase in a TemperatureChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
+         'is_a': 'has_quantitative_attribute',
+         'recommended': True,
+         'slot_uri': 'SIO:000008'} })
+    has_microwave_power: Optional[list[MicrowavePower]] = Field(default=[], description="""The microwave power applied in a TemperatureChangeStep (only when heating_process is Microwave).""", json_schema_extra = { "linkml_meta": {'domain_of': ['TemperatureChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -11474,11 +11534,11 @@ class TemperatureChangeStep(LabSynthesisStep):
 
 class AtmosphereChangeStep(LabSynthesisStep):
     """
-    A step that sets the atmosphere of the reaction vessel (SetAtmosphere action).
+    A step that modifies the atmosphere of the reaction vessel (ChangeAtmosphere action). This is a support action — its effect persists until the next AtmosphereChangeStep.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
 
-    has_atmosphere_type: Optional[AtmosphereTypeEnum] = Field(default=None, description="""The type of atmosphere set in an AtmosphereChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep']} })
+    has_atmosphere_type: Optional[list[AtmosphereTypeEnum]] = Field(default=[], description="""The atmosphere type(s) set in an AtmosphereChangeStep. Multiple gases can be listed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep']} })
     has_pressure: Optional[list[Pressure]] = Field(default=[], description="""The slot to provide the Pressure of a MaterialEntity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Materialistic',
                        'ChemicalReaction',
                        'StirringStep',
@@ -11486,7 +11546,7 @@ class AtmosphereChangeStep(LabSynthesisStep):
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
-    has_flow_rate: Optional[list[FlowRate]] = Field(default=[], description="""The gas flow rate in an AtmosphereChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep'],
+    has_flow_rate: Optional[list[FlowRate]] = Field(default=[], description="""The gas flow rate in an AtmosphereSettingStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AtmosphereChangeStep'],
          'is_a': 'has_quantitative_attribute',
          'recommended': True,
          'slot_uri': 'SIO:000008'} })
@@ -12390,6 +12450,602 @@ class RepetitionBlock(LabSynthesisStep):
          'slot_uri': 'rdf:type'} })
 
 
+class SievingStep(LabSynthesisStep):
+    """
+    A step in which solid material is screened by particle size (Sieve action).
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    has_minimum_particle_size: Optional[list[ParticleSize]] = Field(default=[], description="""The minimum particle size passed through the sieve in a SievingStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SievingStep'],
+         'is_a': 'has_quantitative_attribute',
+         'recommended': True,
+         'slot_uri': 'SIO:000008'} })
+    has_maximum_particle_size: Optional[list[ParticleSize]] = Field(default=[], description="""The maximum particle size passed through the sieve in a SievingStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SievingStep'],
+         'is_a': 'has_quantitative_attribute',
+         'recommended': True,
+         'slot_uri': 'SIO:000008'} })
+    has_successor_step: Optional[list[str]] = Field(default=[], description="""Forward pointer from a LabSynthesisStep to the step(s) that follow it. Inverse of had_input_activity (prov:wasInformedBy). For RepetitionBlocks, the preceding step's has_successor_step points to both the RepetitionBlock and the first inner repeated step.""", json_schema_extra = { "linkml_meta": {'domain_of': ['LabSynthesisStep'], 'slot_uri': 'dcatplab:hasSuccessorStep'} })
+    id: str = Field(default=..., description="""A slot to provide an URI for an entity within this schema.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Dataset',
+                       'DefinedTerm',
+                       'Document',
+                       'Entity',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'Resource'],
+         'in_subset': ['domain_agnostic_core']} })
+    title: Optional[list[str]] = Field(default=[], description="""The slot to provide a title for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[list[str]] = Field(default=[], description="""The slot to provide a description for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:description'} })
+    other_identifier: Optional[list[Identifier]] = Field(default=[], description="""A slot to provide a secondary identifier of the EvaluatedActivity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Dataset', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'adms:identifier'} })
+    has_part: Optional[list[LabSynthesisStep]] = Field(default=[], description="""The slot to provide an Activity that is part of the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Catalogue', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:hasPart'} })
+    had_input_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was used as an input of an Activity that is to be changed, consumed or transformed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:used'} })
+    had_output_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was generated as an output of an Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:generated'} })
+    had_input_activity: Optional[LabSynthesisStep] = Field(default=None, description="""The slot to provide a previous Activity that informed the Activity by being causally via a shared participant.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasInformedBy'} })
+    carried_out_by: Optional[list[AgenticEntity]] = Field(default=[], description="""The slot to specify the AgenticEntity that played a certain part in carrying out the Activity, either via having a specific role, function or disposition that was realized in the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasAssociatedWith'} })
+    has_qualitative_attribute: Optional[list[QualitativeAttribute]] = Field(default=[], description="""The slot to relate a qualitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    has_quantitative_attribute: Optional[list[QuantitativeAttribute]] = Field(default=[], description="""The slot to relate a quantitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    part_of: Optional[list[Activity]] = Field(default=[], description="""The slot to provide an Activity of which the Activity is a part.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'inverse': 'has_part',
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:isPartOf'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
+class RecipientChangeStep(LabSynthesisStep):
+    """
+    A step that modifies the reaction vessel (ChangeRecipient action). This is a support action — its effect persists until the next RecipientChangeStep.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    has_recipient_type: Optional[RecipientTypeEnum] = Field(default=None, description="""The type of reaction vessel used in a RecipientChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RecipientChangeStep']} })
+    has_vessel_material: Optional[VesselMaterialEnum] = Field(default=None, description="""The material of the reaction vessel in a RecipientChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RecipientChangeStep']} })
+    has_vessel_volume: Optional[list[Volume]] = Field(default=[], description="""The volume capacity of the reaction vessel in a RecipientChangeStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['RecipientChangeStep'],
+         'is_a': 'has_quantitative_attribute',
+         'recommended': True,
+         'slot_uri': 'SIO:000008'} })
+    has_successor_step: Optional[list[str]] = Field(default=[], description="""Forward pointer from a LabSynthesisStep to the step(s) that follow it. Inverse of had_input_activity (prov:wasInformedBy). For RepetitionBlocks, the preceding step's has_successor_step points to both the RepetitionBlock and the first inner repeated step.""", json_schema_extra = { "linkml_meta": {'domain_of': ['LabSynthesisStep'], 'slot_uri': 'dcatplab:hasSuccessorStep'} })
+    id: str = Field(default=..., description="""A slot to provide an URI for an entity within this schema.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Dataset',
+                       'DefinedTerm',
+                       'Document',
+                       'Entity',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'Resource'],
+         'in_subset': ['domain_agnostic_core']} })
+    title: Optional[list[str]] = Field(default=[], description="""The slot to provide a title for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[list[str]] = Field(default=[], description="""The slot to provide a description for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:description'} })
+    other_identifier: Optional[list[Identifier]] = Field(default=[], description="""A slot to provide a secondary identifier of the EvaluatedActivity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Dataset', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'adms:identifier'} })
+    has_part: Optional[list[LabSynthesisStep]] = Field(default=[], description="""The slot to provide an Activity that is part of the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Catalogue', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:hasPart'} })
+    had_input_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was used as an input of an Activity that is to be changed, consumed or transformed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:used'} })
+    had_output_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was generated as an output of an Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:generated'} })
+    had_input_activity: Optional[LabSynthesisStep] = Field(default=None, description="""The slot to provide a previous Activity that informed the Activity by being causally via a shared participant.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasInformedBy'} })
+    carried_out_by: Optional[list[AgenticEntity]] = Field(default=[], description="""The slot to specify the AgenticEntity that played a certain part in carrying out the Activity, either via having a specific role, function or disposition that was realized in the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasAssociatedWith'} })
+    has_qualitative_attribute: Optional[list[QualitativeAttribute]] = Field(default=[], description="""The slot to relate a qualitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    has_quantitative_attribute: Optional[list[QuantitativeAttribute]] = Field(default=[], description="""The slot to relate a quantitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    part_of: Optional[list[Activity]] = Field(default=[], description="""The slot to provide an Activity of which the Activity is a part.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'inverse': 'has_part',
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:isPartOf'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
+class SubProductCreationStep(LabSynthesisStep):
+    """
+    A step marking the point where a by-product diverges from the main synthesis path (SubProductCreation action).
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    has_subproduct: Optional[str] = Field(default=None, description="""The by-product material created or separated in a SubProductCreationStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SubProductCreationStep'], 'slot_uri': 'RO:0002234'} })
+    has_successor_step: Optional[list[str]] = Field(default=[], description="""Forward pointer from a LabSynthesisStep to the step(s) that follow it. Inverse of had_input_activity (prov:wasInformedBy). For RepetitionBlocks, the preceding step's has_successor_step points to both the RepetitionBlock and the first inner repeated step.""", json_schema_extra = { "linkml_meta": {'domain_of': ['LabSynthesisStep'], 'slot_uri': 'dcatplab:hasSuccessorStep'} })
+    id: str = Field(default=..., description="""A slot to provide an URI for an entity within this schema.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Dataset',
+                       'DefinedTerm',
+                       'Document',
+                       'Entity',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'Resource'],
+         'in_subset': ['domain_agnostic_core']} })
+    title: Optional[list[str]] = Field(default=[], description="""The slot to provide a title for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[list[str]] = Field(default=[], description="""The slot to provide a description for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:description'} })
+    other_identifier: Optional[list[Identifier]] = Field(default=[], description="""A slot to provide a secondary identifier of the EvaluatedActivity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Dataset', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'adms:identifier'} })
+    has_part: Optional[list[LabSynthesisStep]] = Field(default=[], description="""The slot to provide an Activity that is part of the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Catalogue', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:hasPart'} })
+    had_input_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was used as an input of an Activity that is to be changed, consumed or transformed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:used'} })
+    had_output_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was generated as an output of an Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:generated'} })
+    had_input_activity: Optional[LabSynthesisStep] = Field(default=None, description="""The slot to provide a previous Activity that informed the Activity by being causally via a shared participant.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasInformedBy'} })
+    carried_out_by: Optional[list[AgenticEntity]] = Field(default=[], description="""The slot to specify the AgenticEntity that played a certain part in carrying out the Activity, either via having a specific role, function or disposition that was realized in the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasAssociatedWith'} })
+    has_qualitative_attribute: Optional[list[QualitativeAttribute]] = Field(default=[], description="""The slot to relate a qualitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    has_quantitative_attribute: Optional[list[QuantitativeAttribute]] = Field(default=[], description="""The slot to relate a quantitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    part_of: Optional[list[Activity]] = Field(default=[], description="""The slot to provide an Activity of which the Activity is a part.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'inverse': 'has_part',
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:isPartOf'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
+class ContinuousAdditionStep(LabSynthesisStep):
+    """
+    A step in which compounds enter the reaction repeatedly or continuously (ContinuousAddition action).
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    has_added_material: Optional[list[MaterialEntity]] = Field(default=[], description="""The material added in a MaterialAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MaterialAdditionStep', 'ContinuousAdditionStep'],
+         'is_a': 'had_input_entity',
+         'recommended': True,
+         'slot_uri': 'RO:0004009'} })
+    continuous_addition_type: Optional[ContinuousAdditionTypeEnum] = Field(default=None, description="""Whether the addition is continuous or delivered in discrete intervals.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ContinuousAdditionStep']} })
+    has_intermittent_amount: Optional[list[AmountOfSubstance]] = Field(default=[], description="""Amount added per interval in an intermittent ContinuousAdditionStep.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ContinuousAdditionStep'],
+         'is_a': 'has_quantitative_attribute',
+         'recommended': True,
+         'slot_uri': 'SIO:000008'} })
+    has_successor_step: Optional[list[str]] = Field(default=[], description="""Forward pointer from a LabSynthesisStep to the step(s) that follow it. Inverse of had_input_activity (prov:wasInformedBy). For RepetitionBlocks, the preceding step's has_successor_step points to both the RepetitionBlock and the first inner repeated step.""", json_schema_extra = { "linkml_meta": {'domain_of': ['LabSynthesisStep'], 'slot_uri': 'dcatplab:hasSuccessorStep'} })
+    id: str = Field(default=..., description="""A slot to provide an URI for an entity within this schema.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Dataset',
+                       'DefinedTerm',
+                       'Document',
+                       'Entity',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'Resource'],
+         'in_subset': ['domain_agnostic_core']} })
+    title: Optional[list[str]] = Field(default=[], description="""The slot to provide a title for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[list[str]] = Field(default=[], description="""The slot to provide a description for the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:description'} })
+    other_identifier: Optional[list[Identifier]] = Field(default=[], description="""A slot to provide a secondary identifier of the EvaluatedActivity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Dataset', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'adms:identifier'} })
+    has_part: Optional[list[LabSynthesisStep]] = Field(default=[], description="""The slot to provide an Activity that is part of the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Catalogue', 'Entity'],
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:hasPart'} })
+    had_input_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was used as an input of an Activity that is to be changed, consumed or transformed.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:used'} })
+    had_output_entity: Optional[list[Entity]] = Field(default=[], description="""The slot to specify the Entity that was generated as an output of an Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:generated'} })
+    had_input_activity: Optional[LabSynthesisStep] = Field(default=None, description="""The slot to provide a previous Activity that informed the Activity by being causally via a shared participant.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasInformedBy'} })
+    carried_out_by: Optional[list[AgenticEntity]] = Field(default=[], description="""The slot to specify the AgenticEntity that played a certain part in carrying out the Activity, either via having a specific role, function or disposition that was realized in the Activity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'prov:wasAssociatedWith'} })
+    has_qualitative_attribute: Optional[list[QualitativeAttribute]] = Field(default=[], description="""The slot to relate a qualitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    has_quantitative_attribute: Optional[list[QuantitativeAttribute]] = Field(default=[], description="""The slot to relate a quantitative attribute to an EvaluatedEntity, EvaluatedActivity or AgenticEntity""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'notes': ['not in DCAT-AP'],
+         'recommended': True,
+         'slot_uri': 'dcterms:relation'} })
+    part_of: Optional[list[Activity]] = Field(default=[], description="""The slot to provide an Activity of which the Activity is a part.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity', 'AgenticEntity', 'Entity'],
+         'in_subset': ['domain_agnostic_core'],
+         'inverse': 'has_part',
+         'notes': ['not in DCAT-AP'],
+         'slot_uri': 'dcterms:isPartOf'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
 class IntermediateSolution(MaterialSample):
     """
     A MaterialSample representing an intermediate product of a synthesis workflow, created by a SolutionPreparationStep. Optionally references the starting MaterialEntity from which it was prepared.
@@ -12875,7 +13531,225 @@ class FlowRate(QuantitativeAttribute):
 
 class HeatRamp(QuantitativeAttribute):
     """
-    A QuantitativeAttribute expressing the rate of temperature increase (e.g. \"5 ï¿½C/min\"). Recommended QUDT quantitykind: TemperatureRate.
+    A QuantitativeAttribute expressing the rate of temperature increase (e.g. \"5 °C/min\"). Recommended QUDT quantitykind: TemperatureRate.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'qudt:Quantity',
+         'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    title: Optional[str] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[str] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'slot_uri': 'dcterms:description'} })
+    value: float = Field(default=..., description="""The slot to provide the literal value of the QuantitativeAttribute.""", json_schema_extra = { "linkml_meta": {'domain_of': ['QualitativeAttribute', 'QuantitativeAttribute'],
+         'in_subset': ['domain_agnostic_core'],
+         'slot_uri': 'prov:value'} })
+    has_quantity_type: str = Field(default=..., description="""The type of quality that is quantifiable according to the QUDT ontology.""", json_schema_extra = { "linkml_meta": {'bindings': [{'binds_value_of': 'id',
+                       'description': 'Binds the type of a quantifiable attribute to a '
+                                      'QUDT Quantity Kind instance from the QUDT '
+                                      'Quantity Kind vocabulary.',
+                       'obligation_level': 'RECOMMENDED',
+                       'range': 'QUDTQuantityKindEnum'}],
+         'domain_of': ['QuantitativeAttribute'],
+         'slot_uri': 'qudt:hasQuantityKind'} })
+    unit: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'bindings': [{'binds_value_of': 'id',
+                       'description': 'Restricts the allowable defined terms to the '
+                                      'QUDT Unit vocabulary.',
+                       'obligation_level': 'RECOMMENDED',
+                       'range': 'QUDTUnitEnum'}],
+         'domain_of': ['QuantitativeAttribute'],
+         'recommended': True,
+         'slot_uri': 'qudt:unit'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
+class ParticleSize(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing a particle size used in a SievingStep (e.g. \"250 µm\"). Recommended QUDT quantitykind: Length.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'qudt:Quantity',
+         'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
+
+    title: Optional[str] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'DefinedTerm',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'slot_uri': 'dcterms:title'} })
+    description: Optional[str] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Activity',
+                       'AgenticEntity',
+                       'Any',
+                       'Attribution',
+                       'Catalogue',
+                       'CatalogueRecord',
+                       'ChecksumAlgorithm',
+                       'Concept',
+                       'ConceptScheme',
+                       'DataService',
+                       'Dataset',
+                       'DatasetSeries',
+                       'Distribution',
+                       'Document',
+                       'Entity',
+                       'Frequency',
+                       'Geometry',
+                       'Identifier',
+                       'LegalResource',
+                       'LicenseDocument',
+                       'LinguisticSystem',
+                       'MediaType',
+                       'MediaTypeOrExtent',
+                       'PeriodOfTime',
+                       'Plan',
+                       'Policy',
+                       'ProvenanceStatement',
+                       'QualitativeAttribute',
+                       'QuantitativeAttribute',
+                       'Resource',
+                       'RightsStatement',
+                       'Role',
+                       'Standard',
+                       'SupportiveEntity',
+                       'Surrounding',
+                       'TimeInstant'],
+         'slot_uri': 'dcterms:description'} })
+    value: float = Field(default=..., description="""The slot to provide the literal value of the QuantitativeAttribute.""", json_schema_extra = { "linkml_meta": {'domain_of': ['QualitativeAttribute', 'QuantitativeAttribute'],
+         'in_subset': ['domain_agnostic_core'],
+         'slot_uri': 'prov:value'} })
+    has_quantity_type: str = Field(default=..., description="""The type of quality that is quantifiable according to the QUDT ontology.""", json_schema_extra = { "linkml_meta": {'bindings': [{'binds_value_of': 'id',
+                       'description': 'Binds the type of a quantifiable attribute to a '
+                                      'QUDT Quantity Kind instance from the QUDT '
+                                      'Quantity Kind vocabulary.',
+                       'obligation_level': 'RECOMMENDED',
+                       'range': 'QUDTQuantityKindEnum'}],
+         'domain_of': ['QuantitativeAttribute'],
+         'slot_uri': 'qudt:hasQuantityKind'} })
+    unit: Optional[str] = Field(default=None, json_schema_extra = { "linkml_meta": {'bindings': [{'binds_value_of': 'id',
+                       'description': 'Restricts the allowable defined terms to the '
+                                      'QUDT Unit vocabulary.',
+                       'obligation_level': 'RECOMMENDED',
+                       'range': 'QUDTUnitEnum'}],
+         'domain_of': ['QuantitativeAttribute'],
+         'recommended': True,
+         'slot_uri': 'qudt:unit'} })
+    type: Optional[DefinedTerm] = Field(default=None, description="""This slot is described in more detail within the class in which it is used.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Agent', 'ClassifierMixin', 'Dataset', 'LicenseDocument'],
+         'slot_uri': 'dcterms:type'} })
+    rdf_type: Optional[DefinedTerm] = Field(default=None, description="""The slot to specify the ontology class that is instantiated by an entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ClassifierMixin'],
+         'in_subset': ['domain_agnostic_core'],
+         'recommended': True,
+         'slot_uri': 'rdf:type'} })
+
+
+class MicrowavePower(QuantitativeAttribute):
+    """
+    A QuantitativeAttribute expressing the microwave power used in a TemperatureChangeStep (e.g. \"300 W\"). Recommended QUDT quantitykind: Power.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'class_uri': 'qudt:Quantity',
          'from_schema': 'https://w3id.org/nfdi-de/dcat-ap-plus/labdata/'})
@@ -13078,8 +13952,14 @@ SeparationStep.model_rebuild()
 WashingStep.model_rebuild()
 GrindingStep.model_rebuild()
 RepetitionBlock.model_rebuild()
+SievingStep.model_rebuild()
+RecipientChangeStep.model_rebuild()
+SubProductCreationStep.model_rebuild()
+ContinuousAdditionStep.model_rebuild()
 IntermediateSolution.model_rebuild()
 Duration.model_rebuild()
 StirringSpeed.model_rebuild()
 FlowRate.model_rebuild()
 HeatRamp.model_rebuild()
+ParticleSize.model_rebuild()
+MicrowavePower.model_rebuild()
